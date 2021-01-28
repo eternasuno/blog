@@ -8,7 +8,7 @@ excerpt: "在 Debian 系统上配置 shadowsocks 客户端并开启 pac 模式"
 
 ## 安装 shadowsocks-libev
 
-我用的 Debian 可以直接用 apt 下载，其他的系统可以参考[shadowsocks-libev的文档](https://github.com/shadowsocks/shadowsocks-libev#installation)。
+Debian 可以直接用 apt 下载，其他的系统可以参考[shadowsocks-libev的文档](https://github.com/shadowsocks/shadowsocks-libev#installation)。
 
 ```bash
 sudo apt-get update 
@@ -50,7 +50,7 @@ sudo systemctl enable shadowsocks-libev-local@config
 ```bash
 # 安装privoxy
 sudo apt-get install privoxy
-# 获取 gfwlist2privoxy 脚本, 如果连接超时可以使用代理 `-x socks5://127.0.0.1:1080`
+# 获取 gfwlist2privoxy 脚本, 如果连接超时可以使用代理 -x socks5://127.0.0.1:1080
 curl -skL https://raw.github.com/zfl9/gfwlist2privoxy/master/gfwlist2privoxy -o gfwlist2privoxy
 # 生成 gfwlist.action 文件
 bash gfwlist2privoxy '127.0.0.1:1080'

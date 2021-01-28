@@ -20,9 +20,8 @@ module.exports = {
                 DEFAULT: {
                     css: {
                         a: {
-                            color: theme("colors.blue.700"),
+                            color: theme("colors.gray.700"),
                             "&:hover": {
-                                color: theme("colors.blue.700"),
                                 textDecoration: "none"
                             },
                         },
@@ -42,11 +41,7 @@ module.exports = {
                 dark: {
                     css: {
                         a: {
-                            color: theme("colors.blue.700"),
-                            "&:hover": {
-                                color: theme("colors.blue.700"),
-                                textDecoration: "none"
-                            },
+                            color: theme("colors.gray.300"),
                         },
                         blockquote: {
                             borderLeftColor: theme('colors.gray.700'),

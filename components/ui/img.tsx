@@ -11,7 +11,7 @@ const Img = ({ alt, src, title, darkMode = false }: Props) => (
     <>
         <img src={src} alt={alt}
             style={{
-                filter: `brightness(${darkMode ? 0.8 : 1})`
+                filter: `brightness(${darkMode ? 0.9 : 1})`
             }} />
         {
             title ?

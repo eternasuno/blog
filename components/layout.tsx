@@ -26,17 +26,11 @@ const Layout = ({ title, subtitle, canonical, description, children }: Props) =>
         <>
             <Meta title={title} canonical={canonical}
                 description={description} />
-            <Nav className="sticky top-0 z-10 text-gray-900 dark:text-gray-100">
-                <ul className="flex">
-                    <li>
-                        <NextLink href="/">
-                            <span className="p-2 select-none capitalize rounded cursor-pointer hover:bg-gray-600 hover:bg-opacity-25">
-                                home
-                            </span>
-                        </NextLink>
-                    </li>
-                </ul>
-                <div className="flex justify-center">
+            <Nav className="sticky top-0 z-10">
+                <NextLink className="p-2 select-none capitalize rounded cursor-pointer hover:bg-gray-600 hover:bg-opacity-25" href="/">
+                    home
+                </NextLink>
+                <div className="flex">
                     <button className="p-3 h-10 w-10 focus:outline-none rounded cursor-pointer hover:bg-gray-600 hover:bg-opacity-25"
                         onClick={() => isMounted &&
                             setTheme(theme === "light" ? "dark" : "light")}>
@@ -55,10 +49,10 @@ const Layout = ({ title, subtitle, canonical, description, children }: Props) =>
             </Nav >
             <Container className="min-h-screen">
                 <header className="pb-8 mb-8 border-b dark:border-gray-700">
-                    <h1 className="my-4 font-bold text-gray-900 dark:text-gray-100">
+                    <h1 className="tracking-tight capitalize text-3xl md:text-5xl font-bold my-4">
                         {title}
                     </h1>
-                    <p>
+                    <p className="text-gray-700 dark:text-gray-300">
                         {subtitle}
                     </p>
                 </header>
