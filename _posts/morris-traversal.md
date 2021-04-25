@@ -9,9 +9,9 @@ excerpt: Morris 遍历算法是一种不需要额外存储空间来遍历二叉�
 
 ```go
 type TreeNode struct {
-	Val int
-	Left *TreeNode
-	Right *TreeNode
+    Val int
+    Left *TreeNode
+    Right *TreeNode
 }
 ```
 
@@ -31,26 +31,26 @@ Morris 算法一般指的是二叉树的中序遍历，不过前序遍历也只�
 
 ```go
 func inOrder(root *TreeNode) {
-	for root != nil {
-		if root.Left != nil {
-			pre := root.Left
-			for pre.Right != nil && pre.Right != root {
-				// 有右子树且不指向 root，则继续向右
-				pre = pre.Right
-			}
-			if pre.Right == nil {
-				pre.Right = root
-				root = root.Left
-			} else {
-	      visit(root)
-				pre.Right = nil
-				root = root.Right
-			}	
-		} else {
-			visit(root)
-			root = root.Right
-		}
-	}
+    for root != nil {
+        if root.Left != nil {
+            pre := root.Left
+            for pre.Right != nil && pre.Right != root {
+                // 有右子树且不指向 root，则继续向右
+                pre = pre.Right
+            }
+            if pre.Right == nil {
+                pre.Right = root
+                root = root.Left
+            } else {
+                visit(root)
+                pre.Right = nil
+                root = root.Right
+            }	
+        } else {
+            visit(root)
+            root = root.Right
+        }
+    }
 }
 ```
 
@@ -70,26 +70,26 @@ func inOrder(root *TreeNode) {
 
 ```go
 func preOrder(root *TreeNode) {
-	for root != nil {
-		if root.Left != nil {
-			pre := root.Left
-			for pre.Right != nil && pre.Right != root {
-				// 有右子树且不指向 root，则继续向右
-				pre = pre.Right
-			}
-			if pre.Right == nil {
-				pre.Right = root
-				visit(root) // 这里是和中序遍历唯一的不同
-				root = root.Left
-			} else {
-				pre.Right = nil
-				root = root.Right
-			}	
-		} else {
-			visit(root)
-			root = root.Right
-		}
-	}
+    for root != nil {
+        if root.Left != nil {
+            pre := root.Left
+            for pre.Right != nil && pre.Right != root {
+                // 有右子树且不指向 root，则继续向右
+                pre = pre.Right
+            }
+            if pre.Right == nil {
+                pre.Right = root
+                visit(root) // 这里是和中序遍历唯一的不同
+                root = root.Left
+            } else {
+                pre.Right = nil
+                root = root.Right
+            }	
+        } else {
+            visit(root)
+            root = root.Right
+        }
+    }
 }
 ```
 
@@ -109,50 +109,50 @@ func preOrder(root *TreeNode) {
 
 ```go
 func postOrder(root *TreeNode) {
-	temp := &TreeNode{Left:root}
-	root = temp
-	for root != nil {
-		if root.Left != nil {
-			pre := root.Left
-			for pre.Right != nil && pre.Right != root {
-				// 有右子树且不指向 root，则继续向右
-				pre = pre.Right
-			}
-			if pre.Right == nil {
-				pre.Right = root
-				root = root.Left
-			} else {
-				pre.Right = nil
-				reverseVisit(root.Left, pre) // 逆序输出root.Left 到 pre 路径上的所有结点
-				root = root.Right
-			}
-		} else {
-			root = root.Right
-		}
-	}
+    temp := &TreeNode{Left:root}
+    root = temp
+    for root != nil {
+        if root.Left != nil {
+            pre := root.Left
+            for pre.Right != nil && pre.Right != root {
+                // 有右子树且不指向 root，则继续向右
+                pre = pre.Right
+            }
+            if pre.Right == nil {
+                pre.Right = root
+                root = root.Left
+            } else {
+                pre.Right = nil
+                reverseVisit(root.Left, pre) // 逆序输出root.Left 到 pre 路径上的所有结点
+                root = root.Right
+            }
+        } else {
+            root = root.Right
+        }
+    }
 }
 
 func reverseVisit(root *from, root *to) {
-	// 反转指针
-	reverse(from, to)
-	for p := to; p != from; p = p.Right {
-		visit(p)
-	}
-	visit(from)
-	reverse(to, from)
+    // 反转指针
+    reverse(from, to)
+    for p := to; p != from; p = p.Right {
+        visit(p)
+    }
+    visit(from)
+    reverse(to, from)
 }
 
 func reverse(root *from, root *to) {
-	if from == to {
-		return
-	}
-	p,q := from, form.Right
-	for p != to {
-		r := q.Right
-		q.Right = p
-		p = q
-		q = r
-	}
-	form.Right = nil
+    if from == to {
+        return
+    }
+    p,q := from, form.Right
+    for p != to {
+        r := q.Right
+        q.Right = p
+        p = q
+        q = r
+    }
+    form.Right = nil
 }
 ```
