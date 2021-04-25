@@ -4,18 +4,20 @@ import { vs as light, vscDarkPlus as dark } from "react-syntax-highlighter/dist/
 
 type Props = {
     value: string;
-    language: string;
+    language?: string;
     darkMode?: boolean;
 };
 
-const Code = ({ value, language, darkMode = false }: Props) => (
-    <SyntaxHighlighter
-        language={language}
-        style={darkMode ? dark : light}
-        showLineNumbers={true}
-        wrapLongLines={true}>
-        {value}
-    </SyntaxHighlighter>
-);
+const Code = ({ value, language = "", darkMode = false }: Props) => {
+    return (
+        <SyntaxHighlighter
+            language={language}
+            style={darkMode ? dark : light}
+            showLineNumbers={true}
+            wrapLongLines={true}>
+            {value}
+        </SyntaxHighlighter>
+    );
+};
 
 export default Code;

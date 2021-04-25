@@ -22,14 +22,14 @@ const Index = ({ posts }: Props) => (
 
 export default Index;
 
-export const getStaticProps = () => {
-    const posts = getPosts([
+export const getStaticProps = async () => {
+    const posts = (await getPosts([
         "slug", "readTime", "title", "date", "excerpt"
-    ]).sort((post1, post2) =>
+    ])).sort((post1, post2) =>
         post1.date > post2.date ? -1 : 1
     ) as PostProps[];
 
-    generateRssFile(posts);
+    await generateRssFile(posts);
 
     return {
         props: {

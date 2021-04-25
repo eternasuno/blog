@@ -1,6 +1,6 @@
 import React from "react";
 import Layout from "../../components/layout";
-import { MDArticle } from "../../components/md-article";
+import MDArticle from "../../components/md-article";
 import { formatDateTime } from "../../lib/datetime";
 import { getPostBySlug, getPostSlugs } from "../../lib/post";
 import { WEB_DOMAIN } from "../../lib/web.config";
@@ -24,8 +24,8 @@ const Post = ({ slug, title, date, readTime, content, excerpt }: Props) => (
 
 export default Post;
 
-export const getStaticPaths = () => {
-    const slugs = getPostSlugs();
+export const getStaticPaths = async () => {
+    const slugs = await getPostSlugs();
 
     return {
         paths: slugs.map(slug => ({
@@ -35,8 +35,8 @@ export const getStaticPaths = () => {
     };
 };
 
-export const getStaticProps = ({ params }: any) => {
-    const post = getPostBySlug(params.slug, [
+export const getStaticProps = async ({ params }: any) => {
+    const post = await getPostBySlug(params.slug, [
         "slug", "readTime", "content", "title", "date", "excerpt"
     ]);
 

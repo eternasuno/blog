@@ -1,9 +1,6 @@
 module.exports = {
+    mode: 'jit',
     darkMode: 'class',
-    future: {
-        purgeLayersByDefault: true,
-        removeDeprecatedGapUtilities: true
-    },
     plugins: [
         require('@tailwindcss/typography')
     ],
@@ -21,9 +18,6 @@ module.exports = {
                     css: {
                         a: {
                             color: theme("colors.gray.700"),
-                            "&:hover": {
-                                textDecoration: "none"
-                            },
                         },
                         'blockquote p:first-of-type::before': false,
                         'blockquote p:last-of-type::after': false,
@@ -35,6 +29,15 @@ module.exports = {
                         "code::after": false,
                         img: {
                             "margin-bottom": "0.5em"
+                        },
+                        "li[class='task-list-item']": {
+                            "&:before": {
+                                display: "none"
+                            },
+                            "input[type='checkbox']": {
+                                "margin-right": "0.7em"
+                            },
+                            "padding-left": 0
                         }
                     },
                 },
@@ -72,12 +75,8 @@ module.exports = {
                         hr: {
                             borderColor: theme('colors.gray.700')
                         },
-                        ol: {
-                            li: {
-                                '&:before': {
-                                    color: theme('colors.gray.300')
-                                }
-                            }
+                        "li::before": {
+                            color: theme('colors.gray.300')
                         },
                         strong: {
                             color: theme("colors.gray.100")
@@ -85,17 +84,8 @@ module.exports = {
                         thead: {
                             color: theme('colors.gray.100')
                         },
-                        tbody: {
-                            tr: {
-                                borderBottomColor: theme('colors.gray.700')
-                            }
-                        },
-                        ul: {
-                            li: {
-                                '&:before': {
-                                    backgroundColor: theme('colors.gray.300')
-                                }
-                            }
+                        "tbody tr": {
+                            borderBottomColor: theme('colors.gray.700')
                         }
                     }
                 },

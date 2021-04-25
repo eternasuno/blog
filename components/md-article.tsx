@@ -1,29 +1,27 @@
-import Tex from "@matejmazur/react-katex";
 import "katex/dist/katex.min.css";
 import { useTheme } from "next-themes";
 import React from "react";
 import ReactMarkdown from "react-markdown";
-import math from "remark-math";
+import rehypeKatex from 'rehype-katex';
+import gfm from 'remark-gfm';
+import remarkMath from 'remark-math';
 import Article from "./ui/article";
 import Code from "./ui/code";
 import Img from "./ui/img";
 
-const renderers = {
-    inlineMath: ({ value }: any) => <Tex math={value} />,
-    math: ({ value }: any) => <Tex block math={value} />,
-    image: ({ src, alt, title }: any) => {
-        const { theme } = useTheme();
+const components = {
+    img: ({ src, alt, title }: any) =>
+        <Img src={src} alt={alt} title={title} />,
+    pre: ({ children }: any) => <>{children}</>,
+    code: ({ className, children, inline }: any) => {
+        if (inline) {
+            return (<code>{children}</code>);
+        }
 
-        return (
-            <Img src={src} alt={alt} title={title}
-                darkMode={theme === "dark"} />
-        );
-    },
-    code: ({ value, language }: any) => {
         const { theme } = useTheme();
-
+        const language = className?.match(/language-(\w+)/)[1];
         return (
-            <Code value={value}
+            <Code value={String(children).replace(/\n$/, '')}
                 language={language}
                 darkMode={theme === "dark"} />
         );
@@ -34,10 +32,15 @@ type Props = {
     content: string;
 };
 
-export const MDArticle = ({ content }: Props) => (
+const MDArticle = ({ content }: Props) => (
     <Article>
-        <ReactMarkdown plugins={[math]} renderers={renderers}>
+        <ReactMarkdown
+            remarkPlugins={[remarkMath, gfm]}
+            rehypePlugins={[rehypeKatex]}
+            components={components}>
             {content}
         </ReactMarkdown>
     </Article>
 );
+
+export default MDArticle;

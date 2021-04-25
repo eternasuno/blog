@@ -1,4 +1,4 @@
-import fs from 'fs';
+import { promises as fsPromises } from 'fs';
 import { join } from "path";
 import { WEB_DESC, WEB_DOMAIN, WEB_TITLE } from './web.config';
 
@@ -32,8 +32,8 @@ const generateRss = (posts: Post[]): string => `
   </rss>
 `;
 
-export const generateRssFile = (posts: Post[]) => {
+export const generateRssFile = async (posts: Post[]) => {
   const rss = generateRss(posts);
 
-  fs.writeFileSync(join(process.cwd(), "public", "rss.xml"), rss);
-}; 
+  await fsPromises.writeFile(join(process.cwd(), "public", "rss.xml"), rss);
+};

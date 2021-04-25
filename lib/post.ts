@@ -1,4 +1,4 @@
-import fs from 'fs';
+import { promises as fsPromises } from 'fs';
 import matter from 'gray-matter';
 import { join } from 'path';
 import readingTime from 'reading-time';
@@ -9,14 +9,14 @@ type Items = {
 
 const postsDirectory = join(process.cwd(), '_posts');
 
-export const getPostSlugs = () => {
-    return fs.readdirSync(postsDirectory).map(fileName =>
+export const getPostSlugs = async () => {
+    return (await fsPromises.readdir(postsDirectory)).map(fileName =>
         fileName.replace(/\.md$/, '')
     );
 };
 
-export const getPostBySlug = (slug: string, fields: string[]) => {
-    const fileContents = fs.readFileSync(
+export const getPostBySlug = async (slug: string, fields: string[]) => {
+    const fileContents = await fsPromises.readFile(
         join(postsDirectory, `${slug}.md`),
         'utf8'
     );
@@ -44,11 +44,11 @@ export const getPostBySlug = (slug: string, fields: string[]) => {
     return post;
 };
 
-export const getPosts = (fields: string[]) => {
-    const slugs = getPostSlugs();
-    const posts = slugs.map(slug =>
+export const getPosts = async (fields: string[]) => {
+    const slugs = await getPostSlugs();
+    const posts = await Promise.all(slugs.map((slug: string) =>
         getPostBySlug(slug, fields)
-    );
+    ));
 
     return posts;
 };

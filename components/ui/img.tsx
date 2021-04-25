@@ -4,15 +4,11 @@ type Props = {
     alt: string;
     src: string;
     title?: string;
-    darkMode?: boolean;
 };
 
-const Img = ({ alt, src, title, darkMode = false }: Props) => (
+const Img = ({ alt, src, title }: Props) => (
     <>
-        <img src={src} alt={alt}
-            style={{
-                filter: `brightness(${darkMode ? 0.9 : 1})`
-            }} />
+        <img src={src} alt={alt} className="dark:filter dark:brightness-90" />
         {
             title ?
                 <span className="block text-center text-sm break-words">
