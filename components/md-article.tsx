@@ -1,6 +1,6 @@
 import "katex/dist/katex.min.css";
 import { useTheme } from "next-themes";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import rehypeKatex from 'rehype-katex';
 import gfm from 'remark-gfm';
@@ -19,11 +19,16 @@ const components = {
         }
 
         const { theme } = useTheme();
+        const [isMounted, setIsMounted] = useState(false);
+        useEffect(() => {
+            setIsMounted(true);
+        }, []);
+
         const language = className?.match(/language-(\w+)/)[1];
         return (
             <Code value={String(children).replace(/\n$/, '')}
                 language={language}
-                darkMode={theme === "dark"} />
+                darkMode={isMounted && theme === "dark"} />
         );
     }
 };
