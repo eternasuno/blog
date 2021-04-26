@@ -3,7 +3,7 @@ import Head from "next/head";
 type Props = {
     title: string;
     canonical: string;
-    description: string;
+    description?: string;
 };
 
 const Meta = ({ title, canonical, description }: Props) => (

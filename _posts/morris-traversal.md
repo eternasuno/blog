@@ -79,7 +79,8 @@ func preOrder(root *TreeNode) {
             }
             if pre.Right == nil {
                 pre.Right = root
-                visit(root) // 这里是和中序遍历唯一的不同
+                // 这里是和中序遍历唯一的不同
+                visit(root) 
                 root = root.Left
             } else {
                 pre.Right = nil
@@ -123,7 +124,8 @@ func postOrder(root *TreeNode) {
                 root = root.Left
             } else {
                 pre.Right = nil
-                reverseVisit(root.Left, pre) // 逆序输出root.Left 到 pre 路径上的所有结点
+                // 逆序输出 root.Left 到 pre 路径上的所有结点
+                reverseVisit(root.Left, pre)
                 root = root.Right
             }
         } else {

@@ -3,8 +3,13 @@ import matter from 'gray-matter';
 import { join } from 'path';
 import readingTime from 'reading-time';
 
-type Items = {
-    [key: string]: any;
+export type Post = {
+    slug: string;
+    title: string;
+    date: string;
+    readTime: string;
+    content: string;
+    excerpt: string;
 };
 
 const postsDirectory = join(process.cwd(), '_posts');
@@ -15,7 +20,7 @@ export const getPostSlugs = async () => {
     );
 };
 
-export const getPostBySlug = async (slug: string, fields: string[]) => {
+export const getPostBySlug = async (slug: string, needContent = true): Promise<Post> => {
     const fileContents = await fsPromises.readFile(
         join(postsDirectory, `${slug}.md`),
         'utf8'
@@ -23,31 +28,20 @@ export const getPostBySlug = async (slug: string, fields: string[]) => {
 
     const { data, content } = matter(fileContents);
 
-    const post: Items = {};
-    fields.map(field => {
-        switch (field) {
-            case "slug":
-                post[field] = slug;
-                break;
-            case "readTime":
-                post[field] = readingTime(content).text;
-                break;
-            case "content":
-                post[field] = content;
-                break;
-            default:
-                post[field] = data[field];
-                break;
-        }
-    });
-
-    return post;
+    return {
+        slug,
+        title: data["title"],
+        date: data["date"],
+        readTime: readingTime(content).text,
+        content: needContent ? content : "",
+        excerpt: data["excerpt"] || ""
+    };
 };
 
-export const getPosts = async (fields: string[]) => {
+export const getPosts = async () => {
     const slugs = await getPostSlugs();
     const posts = await Promise.all(slugs.map((slug: string) =>
-        getPostBySlug(slug, fields)
+        getPostBySlug(slug, false)
     ));
 
     return posts;

@@ -1,15 +1,12 @@
+import { InferGetStaticPropsType } from 'next';
 import React from 'react';
 import Layout from '../components/layout';
-import Post, { Props as PostProps } from '../components/post';
+import Post from '../components/post';
 import { getPosts } from '../lib/post';
 import { generateRssFile } from '../lib/rss';
 import { WEB_DESC, WEB_DOMAIN, WEB_TITLE } from '../lib/web.config';
 
-type Props = {
-    posts: PostProps[];
-};
-
-const Index = ({ posts }: Props) => (
+const Index = ({ posts }: InferGetStaticPropsType<typeof getStaticProps>) => (
     <Layout title={WEB_TITLE} canonical={WEB_DOMAIN}
         subtitle={WEB_DESC} description={WEB_DESC}>
         {
@@ -23,11 +20,9 @@ const Index = ({ posts }: Props) => (
 export default Index;
 
 export const getStaticProps = async () => {
-    const posts = (await getPosts([
-        "slug", "readTime", "title", "date", "excerpt"
-    ])).sort((post1, post2) =>
+    const posts = (await getPosts()).sort((post1, post2) =>
         post1.date > post2.date ? -1 : 1
-    ) as PostProps[];
+    );
 
     await generateRssFile(posts);
 

@@ -1,5 +1,4 @@
 ---
-published: false
 title: 使用 Sonarr 和 Jackett 实现自动下载新番
 date: '2021-01-21'
 excerpt: 在 NAS 使用 Docker 部署 Sonarr + Jackett + qbittorrent，实现自动下载新番

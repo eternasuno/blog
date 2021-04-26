@@ -1,24 +1,18 @@
+import { format, parseISO } from 'date-fns';
+import { InferGetStaticPropsType } from "next";
 import React from "react";
 import Layout from "../../components/layout";
-import MDArticle from "../../components/md-article";
-import { formatDateTime } from "../../lib/datetime";
+import MDContent from "../../components/md-content";
 import { getPostBySlug, getPostSlugs } from "../../lib/post";
 import { WEB_DOMAIN } from "../../lib/web.config";
 
-type Props = {
-    slug: string;
-    title: string;
-    date: string;
-    readTime: string;
-    content: any;
-    excerpt: string;
-};
-
-const Post = ({ slug, title, date, readTime, content, excerpt }: Props) => (
+const Post = ({ slug, title, date, readTime, content, excerpt }: InferGetStaticPropsType<typeof getStaticProps>) => (
     <Layout title={title} description={excerpt}
         canonical={`${WEB_DOMAIN}/posts/${slug}`}
-        subtitle={`${formatDateTime(date)} / ${readTime}`} >
-        <MDArticle content={content} />
+        subtitle={`${format(parseISO(date), 'LLLL    d, yyyy')} / ${readTime}`} >
+        <article className="prose dark:prose-dark max-w-none">
+            <MDContent content={content} />
+        </article>
     </Layout >
 );
 
@@ -36,9 +30,7 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps = async ({ params }: any) => {
-    const post = await getPostBySlug(params.slug, [
-        "slug", "readTime", "content", "title", "date", "excerpt"
-    ]);
+    const post = await getPostBySlug(params.slug);
 
     return {
         props: post

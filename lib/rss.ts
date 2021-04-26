@@ -1,13 +1,7 @@
 import { promises as fsPromises } from 'fs';
 import { join } from "path";
+import { Post } from './post';
 import { WEB_DESC, WEB_DOMAIN, WEB_TITLE } from './web.config';
-
-type Post = {
-  slug: string;
-  title: string;
-  date: string;
-  excerpt: string;
-};
 
 const generateRssItem = ({ slug, title, date, excerpt }: Post): string => `
   <item>
