@@ -27,8 +27,17 @@ module.exports = {
                         },
                         "code::before": false,
                         "code::after": false,
-                        img: {
-                            "margin-bottom": "0.5em"
+                        figure: {
+                            "margin-top": 0,
+                            "margin-bottom": 0
+                        },
+                        ul: {
+                            "margin-top": 0,
+                            "margin-bottom": 0
+                        },
+                        ol: {
+                            "margin-top": 0,
+                            "margin-bottom": 0
                         }
                     },
                 },

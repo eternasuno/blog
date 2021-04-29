@@ -4,7 +4,7 @@
 }
 
 .notion-to-do-item {
-    @apply flex items-center pl-[2px];
+    @apply flex items-center pl-[2px] my-2;
 }
 
 .notion-to-do-item .notion-property-checkbox {
@@ -29,6 +29,10 @@
 
 .notion-to-do-body.notion-to-do-checked  {
     @apply line-through;
+}
+
+.notion-to-do-children {
+    @apply pl-7;
 }
 
 /* callout */
@@ -82,3 +86,13 @@
 .medium-zoom-image--opened {
   @apply z-20;
 }
+
+/* indent */
+.notion-text-children {
+    @apply pl-7 flex flex-col;
+}
+
+ol > ol, ul > ul {
+     @apply pl-7;
+}
+
