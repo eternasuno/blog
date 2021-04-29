@@ -13,6 +13,9 @@
 /* Stop purging. */
 
 /* Your own custom utilities */
+@import url("https://cdn.jsdelivr.net/npm/prism-themes@1.6.0/themes/prism-vsc-dark-plus.css");
+@import url("https://cdn.jsdelivr.net/npm/katex@0.13.3/dist/katex.min.css");
+
 ::-webkit-scrollbar {
     display: none;
 }

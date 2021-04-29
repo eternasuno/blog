@@ -6,11 +6,10 @@ export type Props = {
     title: string;
     slug: string;
     date: string;
-    readTime: string;
     excerpt?: string;
 };
 
-const Post = ({ title, slug, date, readTime, excerpt }: Props) => (
+const Post = ({ title, slug, date, excerpt }: Props) => (
     <div className="pb-4 mb-4">
         <Link href={`/posts/${slug}`}>
             <a>
@@ -20,7 +19,7 @@ const Post = ({ title, slug, date, readTime, excerpt }: Props) => (
             </a>
         </Link>
         <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-            {`${format(parseISO(date), 'LLLL    d, yyyy')} / ${readTime}`}
+            {`Published at ${format(parseISO(date), 'LLLL    d, yyyy')}`}
         </p>
         <p className="text-gray-700 dark:text-gray-300">
             {excerpt}

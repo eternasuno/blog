@@ -29,15 +29,6 @@ module.exports = {
                         "code::after": false,
                         img: {
                             "margin-bottom": "0.5em"
-                        },
-                        "li[class='task-list-item']": {
-                            "&:before": {
-                                display: "none"
-                            },
-                            "input[type='checkbox']": {
-                                "margin-right": "0.7em"
-                            },
-                            "padding-left": 0
                         }
                     },
                 },

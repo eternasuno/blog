@@ -10,20 +10,17 @@
   "dependencies": {
     "classnames": "^2.2.6",
     "date-fns": "^2.16.1",
-    "gray-matter": "^4.0.3",
     "next": "latest",
     "next-pwa": "^5.2.15",
     "next-themes": "^0.0.14",
+    "node-fetch": "^3.0.0-beta.9",
+    "notion-client": "^4.4.0",
+    "notion-types": "^4.3.0",
+    "notion-utils": "^4.4.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-icons": "^4.1.0",
-    "react-markdown": "^6.0.1",
-    "react-syntax-highlighter": "^15.4.3",
-    "reading-time": "^1.2.1",
-    "rehype-katex": "^5.0.0",
-    "remark-gfm": "^1.0.0",
-    "remark-math": "^4.0.0",
-    "styled-components": "^5.2.3"
+    "react-notion-x": "^4.5.0"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.4.0",
@@ -31,7 +28,6 @@
     "@types/node": "^14.0.1",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
-    "@types/react-syntax-highlighter": "^13.5.0",
     "autoprefixer": "^10.1.0",
     "postcss": "^8.2.12",
     "tailwindcss": "^2.1.2",

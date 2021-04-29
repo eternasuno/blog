@@ -24,7 +24,7 @@ const Layout = ({ title, subtitle, canonical, description, children }: Props) =>
         <>
             <Meta title={title} canonical={canonical}
                 description={description} />
-            <nav className="w-full py-4 shadow-md backdrop-filter backdrop-blur-lg sticky top-0 z-10">
+            <nav className="w-full py-4">
                 <div className="max-w-3xl mx-auto px-4 flex justify-between items-center">
                     <Link href="/">
                         <a className="p-2 select-none capitalize rounded cursor-pointer hover:bg-gray-600 hover:bg-opacity-25" >
@@ -58,9 +58,9 @@ const Layout = ({ title, subtitle, canonical, description, children }: Props) =>
                         {subtitle}
                     </p>
                 </header>
-                <main className="pb-8 mb-8">
+                <div className="pb-8 mb-8">
                     {children}
-                </main>
+                </div>
             </div>
         </>
     );

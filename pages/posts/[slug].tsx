@@ -1,18 +1,16 @@
 import { format, parseISO } from 'date-fns';
 import { InferGetStaticPropsType } from "next";
 import React from "react";
+import Artilce from '../../components/article';
 import Layout from "../../components/layout";
-import MDContent from "../../components/md-content";
 import { getPostBySlug, getPostSlugs } from "../../lib/post";
 import { WEB_DOMAIN } from "../../lib/web.config";
 
-const Post = ({ slug, title, date, readTime, content, excerpt }: InferGetStaticPropsType<typeof getStaticProps>) => (
+const Post = ({ slug, title, date, content, excerpt }: InferGetStaticPropsType<typeof getStaticProps>) => (
     <Layout title={title} description={excerpt}
         canonical={`${WEB_DOMAIN}/posts/${slug}`}
-        subtitle={`${format(parseISO(date), 'LLLL    d, yyyy')} / ${readTime}`} >
-        <article className="prose dark:prose-dark max-w-none">
-            <MDContent content={content} />
-        </article>
+        subtitle={`Published at ${format(parseISO(date), 'LLLL    d, yyyy')}`} >
+        {content ? <Artilce content={content} /> : ""}
     </Layout >
 );
 
@@ -25,7 +23,7 @@ export const getStaticPaths = async () => {
         paths: slugs.map(slug => ({
             params: { slug }
         })),
-        fallback: false
+        fallback: true
     };
 };
 
@@ -33,6 +31,7 @@ export const getStaticProps = async ({ params }: any) => {
     const post = await getPostBySlug(params.slug);
 
     return {
-        props: post
+        props: post,
+        revalidate: 10
     };
 };

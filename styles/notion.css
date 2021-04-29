@@ -1,0 +1,84 @@
+/* todo */
+.notion-to-do {
+    @apply flex flex-col;
+}
+
+.notion-to-do-item {
+    @apply flex items-center pl-[2px];
+}
+
+.notion-to-do-item .notion-property-checkbox {
+    @apply mr-2;
+}
+
+.notion-property-checkbox-checked {
+    @apply w-4 h-4 bg-blue-500;
+}
+
+.notion-property-checkbox-checked svg {
+    @apply relative top-[1px] left-[1px] w-[14px] h-[14px] text-white fill-current;
+}
+
+.notion-property-checkbox-unchecked {
+    @apply w-4 h-4 border-[1.3px] border-solid border-black dark:border-white
+}
+
+.notion-to-do-body {
+    @apply whitespace-pre-wrap break-words;
+}
+
+.notion-to-do-body.notion-to-do-checked  {
+    @apply line-through;
+}
+
+/* callout */
+.notion-callout {
+    @apply pt-4 pr-4 pb-4 pl-4 inline-flex w-full items-center my-1 border-[1px] border-solid border-gray-500;
+}
+
+.notion-callout .notion-page-icon {
+    @apply self-start w-6 h-6 text-xl;
+}
+
+.notion-callout-text {
+    @apply ml-2 whitespace-pre-wrap break-words;
+}
+
+/* page */
+.notion-page-title {
+    @apply inline-flex;
+}
+
+.notion-page-title-icon {
+    @apply h-6 w-6 ml-[2px] mr-[6px] fill-current dark:text-white;
+}
+
+.notion-page-title-text {
+    @apply relative top-[1px] leading-5;
+}
+
+/* hash-link */
+.notion-h:hover .notion-hash-link {
+  @apply opacity-100;
+}
+
+.notion-hash-link {
+    @apply opacity-0 float-left ml-[-1.25em] fill-current dark:text-white;
+}
+
+/* medium-zoom */
+.notion-viewport {
+    @apply fixed top-0 left-0 right-0 bottom-0 z-[-1];
+}
+
+.medium-zoom-overlay {
+    @apply z-10;
+}
+
+.medium-zoom-image {
+    @apply rounded-none;
+}
+
+.medium-zoom-image--opened {
+  @apply z-20;
+}
