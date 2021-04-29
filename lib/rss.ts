@@ -13,7 +13,7 @@ const generateRssItem = ({ slug, title, date, excerpt }: Post): string => `
   </item>
 `;
 
-const generateRss = (posts: Post[]): string => `
+export const generateRss = (posts: Post[]): string => `
   <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
       <title><![CDATA[ ${WEB_TITLE} ]]></title>

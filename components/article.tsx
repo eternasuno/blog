@@ -53,13 +53,13 @@ export default Artilce;
 const mapImageUrl = (url: string, block: Block) => {
     // proxy notion image url
     if (url) {
-        const found = url.match(/https\S+?notion\-static\S+$/);
+        const found = url.match(/https:\/\/(\S+)\.amazonaws\.com\/secure\.notion-static\.com\/(\S+)\/(\S+)$/);
         if (found) {
             const table = block.parent_table === "space"
                 || block.parent_table === "collection"
                 ? "block"
                 : block.parent_table;
-            url = `/api/image/${encodeURIComponent(found[0])}?table=${table}&id=${block.id}`;
+            url = `/api/image/${found[3]}?region=${found[1]}&token=${found[2]}&table=${table}&id=${block.id}`;
         }
     }
     return url;

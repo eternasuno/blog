@@ -41,7 +41,7 @@ const Layout = ({ title, subtitle, canonical, description, children }: Props) =>
                                     <RiSunFill />
                             }
                         </button>
-                        <a href="/rss.xml" target="_blank"
+                        <a href="/feed" target="_blank"
                             rel="noopener noreferrer nofollow"
                             className="p-3 h-10 w-10 rounded cursor-pointer hover:bg-gray-600 hover:bg-opacity-25">
                             <RiRssFill />
