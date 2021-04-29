@@ -21,7 +21,7 @@ const Meta = ({ title, canonical, description }: Props) => (
         <link rel='icon' type='image/png' sizes='32x32'
             href='/images/icons/icon-32x32.png' />
         <link rel="apple-touch-icon"
-            href="/images/icons/apple-icon.png" />
+            href="/images/icons/apple-touch-icon.png" />
         <meta name="theme-color" content="#555" />
 
         <meta property="og:type" content="website" />
