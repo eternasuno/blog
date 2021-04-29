@@ -2,11 +2,11 @@ import dynamic from 'next/dynamic';
 import { Block, ExtendedRecordMap } from 'notion-types';
 import { uuidToId } from 'notion-utils';
 import React from "react";
-import { NotionRenderer } from "react-notion-x";
+import { Code, NotionRenderer } from "react-notion-x";
 
-const Code = dynamic(async () =>
-    (await import('react-notion-x')).Code
-);
+// const Code = dynamic(async () =>
+//     (await import('react-notion-x')).Code
+// );
 
 const Equation = dynamic(async () =>
     (await import('react-notion-x')).Equation,
@@ -58,7 +58,7 @@ const mapImageUrl = (url: string, block: Block) => {
                 || block.parent_table === "collection"
                 ? "block"
                 : block.parent_table;
-            url = `/api/notion-image/${encodeURIComponent(found[0])}?table=${table}&id=${block.id}&cache=v2`;
+            url = `/api/notion-image/${encodeURIComponent(found[0])}?table=${table}&id=${block.id}`;
         }
     }
     return url;

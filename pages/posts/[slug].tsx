@@ -1,18 +1,26 @@
 import { format, parseISO } from 'date-fns';
 import { InferGetStaticPropsType } from "next";
+import { useRouter } from 'next/router';
 import React from "react";
 import Artilce from '../../components/article';
 import Layout from "../../components/layout";
 import { getPostBySlug, getPostSlugs } from "../../lib/post";
 import { WEB_DOMAIN } from "../../lib/web.config";
 
-const Post = ({ slug, title, date, content, excerpt }: InferGetStaticPropsType<typeof getStaticProps>) => (
-    <Layout title={title} description={excerpt}
-        canonical={`${WEB_DOMAIN}/posts/${slug}`}
-        subtitle={`Published at ${format(parseISO(date), 'LLLL    d, yyyy')}`} >
-        {content ? <Artilce content={content} /> : ""}
-    </Layout >
-);
+const Post = ({ slug, title, date, content, excerpt }: InferGetStaticPropsType<typeof getStaticProps>) => {
+    const router = useRouter();
+    if (router.isFallback) {
+        return <div>Loading...</div>;
+    }
+
+    return (
+        <Layout title={title} description={excerpt}
+            canonical={`${WEB_DOMAIN}/posts/${slug}`}
+            subtitle={`Published at ${format(parseISO(date), 'LLLL    d, yyyy')}`} >
+            {content ? <Artilce content={content} /> : ""}
+        </Layout >
+    );
+};
 
 export default Post;
 
@@ -23,7 +31,7 @@ export const getStaticPaths = async () => {
         paths: slugs.map(slug => ({
             params: { slug }
         })),
-        fallback: "blocking"
+        fallback: true
     };
 };
 

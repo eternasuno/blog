@@ -3,8 +3,9 @@ import fetch from "node-fetch";
 import { NOTION_AUTH_TOKEN } from "../../../lib/web.config";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
-    const { path, table, id, cache } = req.query;
-    const url = `https://www.notion.so/image/${encodeURIComponent(Array.isArray(path) ? path[0] : path)}?table=${table}&id=${id}&cache=${cache}`;
+    const { path, table, id } = req.query;
+    console.log(path, table, id);
+    const url = `https://www.notion.so/image/${encodeURIComponent(Array.isArray(path) ? path[0] : path)}?table=${table}&id=${id}&cache=v2`;
 
     const response = await fetch(url, {
         headers: {
