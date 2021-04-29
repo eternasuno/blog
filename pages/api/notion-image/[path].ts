@@ -11,5 +11,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             cookie: `token_v2=${NOTION_AUTH_TOKEN}`
         }
     });
+    console.log(response);
     res.status(200).send(response.body);
 };

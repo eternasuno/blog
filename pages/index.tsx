@@ -24,8 +24,7 @@ export const getStaticProps = async () => {
         post1.date > post2.date ? -1 : 1
     );
 
-    // await generateRssFile(posts);
-    generateRssFile(posts);
+    await generateRssFile(posts);
 
     return {
         props: {
