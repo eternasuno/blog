@@ -23,7 +23,7 @@ export const getStaticPaths = async () => {
         paths: slugs.map(slug => ({
             params: { slug }
         })),
-        fallback: true
+        fallback: "blocking"
     };
 };
 
