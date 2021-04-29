@@ -3,7 +3,6 @@ import React from 'react';
 import Layout from '../components/layout';
 import Post from '../components/post';
 import { getPosts } from '../lib/post';
-import { generateRssFile } from '../lib/rss';
 import { WEB_DESC, WEB_DOMAIN, WEB_TITLE } from '../lib/web.config';
 
 const Index = ({ posts }: InferGetStaticPropsType<typeof getStaticProps>) => (
@@ -26,8 +25,8 @@ export const getStaticProps = async () => {
 
     return {
         props: {
-            posts,
-            revalidate: 10
-        }
+            posts
+        },
+        revalidate: 10
     };
 };
