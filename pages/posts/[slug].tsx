@@ -16,7 +16,7 @@ const Post = ({ slug, title, date, content, excerpt }: InferGetStaticPropsType<t
     return (
         <Layout title={title} description={excerpt}
             canonical={`${WEB_DOMAIN}/posts/${slug}`}
-            subtitle={`Published at ${format(parseISO(date), 'LLLL    d, yyyy')}`} >
+            subtitle={format(parseISO(date), 'LLLL    d, yyyy')} >
             {content ? <Artilce content={content} /> : ""}
         </Layout >
     );

@@ -1,4 +1,4 @@
-import { Serializable } from 'node:child_process';
+import { Serializable } from 'child_process';
 import { NotionAPI } from 'notion-client';
 import { Block, CollectionPropertySchemaMap, ExtendedRecordMap } from 'notion-types';
 import { getDateValue, getTextContent, idToUuid, uuidToId } from 'notion-utils';
@@ -60,21 +60,20 @@ const getRecordMap = async (pageId: string) => {
 const getAllProperties = (block: Block, schema: CollectionPropertySchemaMap) => {
     const item: Item = { slug: uuidToId(block.id) };
     const properties = block.properties as any;
-    for (let key in schema) {
-        if (schema[key].type) {
-            switch (schema[key].type) {
-                case "date":
-                    item[schema[key].name] = getDateValue(properties[key])?.start_date || "";
-                    break;
-                // case "select":
-                case "multi_select":
-                    item[schema[key].name] = getTextContent(properties[key]).split(",");
-                    break;
-                default:
-                    item[schema[key].name] = getTextContent(properties[key]);
-                    break;
-            }
+    for (const key in schema) {
+        // if (schema[key].type) {
+        switch (schema[key].type) {
+            case "date":
+                item[schema[key].name] = getDateValue(properties[key])?.start_date || "";
+                break;
+            case "multi_select":
+                item[schema[key].name] = getTextContent(properties[key]).split(",");
+                break;
+            default:
+                item[schema[key].name] = getTextContent(properties[key]);
+                break;
         }
+        // }
     }
     return item;
 };

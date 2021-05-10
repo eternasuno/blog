@@ -10,18 +10,20 @@ export type Props = {
 };
 
 const Post = ({ title, slug, date, excerpt }: Props) => (
-    <div className="pb-4 mb-4">
-        <Link href={`/posts/${slug}`}>
-            <a>
-                <h2 className="text-lg md:text-2xl font-medium tracking-tight capitalize mb-2">
-                    {title}
-                </h2>
-            </a>
-        </Link>
-        <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-            {`Published at ${format(parseISO(date), 'LLLL    d, yyyy')}`}
+    <div className="mb-6 md:mb-8">
+        <p className="flex flex-col justify-between md:flex-row md:items-baseline">
+            <Link href={`/posts/${slug}`}>
+                <a>
+                    <h2 className="mb-2 md:mr-8 text-lg md:text-2xl font-medium tracking-tight capitalize break-all">
+                        {title}
+                    </h2>
+                </a>
+            </Link>
+            <time className="flex-shrink-0 text-gray-600 dark:text-gray-400">
+                {format(parseISO(date), 'LLLL    d, yyyy')}
+            </time>
         </p>
-        <p className="text-gray-700 dark:text-gray-300">
+        <p className="hidden md:block leading-8 text-gray-700 dark:text-gray-300">
             {excerpt}
         </p>
     </div>

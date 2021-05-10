@@ -24,15 +24,15 @@ const Layout = ({ title, subtitle, canonical, description, children }: Props) =>
         <>
             <Meta title={title} canonical={canonical}
                 description={description} />
-            <nav className="w-full py-4">
-                <div className="max-w-3xl mx-auto px-4 flex justify-between items-center">
+            <div className="max-w-3xl mx-auto px-4">
+                <nav className="py-4 flex justify-between items-center">
                     <Link href="/">
                         <a className="p-2 select-none capitalize rounded cursor-pointer hover:bg-gray-600 hover:bg-opacity-25" >
                             home
                         </a>
                     </Link>
                     <div className="flex">
-                        <button className="p-3 h-10 w-10 focus:outline-none rounded cursor-pointer hover:bg-gray-600 hover:bg-opacity-25"
+                        <button aria-label="darkMode" className="p-3 h-10 w-10 focus:outline-none rounded cursor-pointer hover:bg-gray-600 hover:bg-opacity-25"
                             onClick={() => isMounted &&
                                 setTheme(theme === "light" ? "dark" : "light")}>
                             {
@@ -41,26 +41,29 @@ const Layout = ({ title, subtitle, canonical, description, children }: Props) =>
                                     <RiSunFill />
                             }
                         </button>
-                        <a href="/feed" target="_blank"
+                        <a href="/feed" aria-label="rss" target="_blank"
                             rel="noopener noreferrer nofollow"
                             className="p-3 h-10 w-10 rounded cursor-pointer hover:bg-gray-600 hover:bg-opacity-25">
                             <RiRssFill />
                         </a>
                     </div>
+                </nav>
+                <div className="min-h-screen">
+                    <header className="pb-8 mb-8 border-b dark:border-gray-700">
+                        <h1 className="tracking-tight capitalize text-3xl md:text-5xl font-bold my-4">
+                            {title}
+                        </h1>
+                        <p className="text-gray-700 dark:text-gray-300">
+                            {subtitle}
+                        </p>
+                    </header>
+                    <div className="pb-8">
+                        {children}
+                    </div>
                 </div>
-            </nav>
-            <div className="max-w-3xl mx-auto px-4">
-                <header className="pb-8 mb-8 border-b dark:border-gray-700">
-                    <h1 className="tracking-tight capitalize text-3xl md:text-5xl font-bold my-4">
-                        {title}
-                    </h1>
-                    <p className="text-gray-700 dark:text-gray-300">
-                        {subtitle}
-                    </p>
-                </header>
-                <div className="pb-8 mb-8">
-                    {children}
-                </div>
+                <footer className="mt-4 py-4 border-t dark:border-gray-700">
+                    <p>EternaSuno © 2020-{new Date().getFullYear()}</p>
+                </footer>
             </div>
         </>
     );

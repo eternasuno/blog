@@ -2,12 +2,7 @@ import dynamic from 'next/dynamic';
 import { Block, ExtendedRecordMap } from 'notion-types';
 import { uuidToId } from 'notion-utils';
 import React from "react";
-import { NotionRenderer } from "react-notion-x";
-
-const Code = dynamic(async () =>
-    (await import('react-notion-x')).Code,
-    { ssr: false }
-);
+import { NotionRenderer, Code } from "react-notion-x";
 
 const Equation = dynamic(async () =>
     (await import('react-notion-x')).Equation,
