@@ -70,7 +70,15 @@
 }
 
 .notion-hash-link {
-    @apply opacity-0 float-left ml-[-1.25em] fill-current dark:text-white;
+    @apply opacity-0 float-left ml-[-0.75em] md:ml-[-1.25em] fill-current dark:text-white;
+}
+
+.notion-h {
+    @apply relative;
+}
+
+.notion-header-anchor {
+    @apply absolute top-[-10vh];
 }
 
 /* medium-zoom */
