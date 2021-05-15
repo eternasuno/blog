@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import fetch from "node-fetch";
-import { NOTION_AUTH_TOKEN } from "../../../lib/web.config";
+import BLOG from "../../../blog.config";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
     const { name, region, token, table, id } = req.query;
@@ -9,7 +9,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
     const response = await fetch(url, {
         headers: {
-            cookie: `token_v2=${NOTION_AUTH_TOKEN}`
+            cookie: `token_v2=${BLOG.notion.authToken}`
         }
     });
 

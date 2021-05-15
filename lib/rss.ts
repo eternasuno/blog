@@ -1,26 +1,26 @@
 import { promises as fsPromises } from 'fs';
 import { join } from "path";
 import { Post } from './post';
-import { WEB_DESC, WEB_DOMAIN, WEB_TITLE } from './web.config';
+import BLOG from "../blog.config";
 
 const generateRssItem = ({ slug, title, date, excerpt }: Post): string => `
   <item>
-    <guid>${WEB_DOMAIN}/posts/${slug}</guid>
+    <guid>${BLOG.domain}/posts/${slug}</guid>
     <title><![CDATA[ ${title} ]]></title>
-    <link>${WEB_DOMAIN}/posts/${slug}</link>
+    <link>${BLOG.domain}/posts/${slug}</link>
     <description><![CDATA[ ${excerpt} ]]></description>
     <pubDate>${new Date(date).toUTCString()}</pubDate>
   </item>
 `;
 
-export const generateRss = (posts: Post[]): string => `
+const generateRss = (posts: Post[]): string => `
   <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-      <title><![CDATA[ ${WEB_TITLE} ]]></title>
-      <link>${WEB_DOMAIN}</link>
-      <description><![CDATA[ ${WEB_DESC} ]]></description>
+      <title><![CDATA[ ${BLOG.title} ]]></title>
+      <link>${BLOG.domain}</link>
+      <description><![CDATA[ ${BLOG.description} ]]></description>
       <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
-      <atom:link href="${WEB_DOMAIN}/rss.xml" rel="self" type="application/rss+xml"/>
+      <atom:link href="${BLOG.domain}/rss.xml" rel="self" type="application/rss+xml"/>
       ${posts.map(generateRssItem).join('')}
     </channel>
   </rss>
@@ -28,6 +28,5 @@ export const generateRss = (posts: Post[]): string => `
 
 export const generateRssFile = async (posts: Post[]) => {
   const rss = generateRss(posts);
-
   await fsPromises.writeFile(join(process.cwd(), "public", "rss.xml"), rss);
 };

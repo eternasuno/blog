@@ -1,24 +1,20 @@
-import { format, parseISO } from 'date-fns';
 import { InferGetStaticPropsType } from "next";
-import { useRouter } from 'next/router';
 import React from "react";
-import Artilce from '../../components/article';
-import Layout from "../../components/layout";
+import Article from "../../components/organisms/article";
+import Meta from "../../components/organisms/meta";
+import Nav from "../../components/organisms/nav";
+import StickyHeaderContent from "../../components/templates/sticky-header-content";
 import { getPostBySlug, getPostSlugs } from "../../lib/post";
-import { WEB_DOMAIN } from "../../lib/web.config";
 
-const Post = ({ slug, title, date, content, excerpt }: InferGetStaticPropsType<typeof getStaticProps>) => {
-    const router = useRouter();
-    if (router.isFallback) {
-        return <div>Loading...</div>;
-    }
-
+const Post = ({ lastPost, nextPost, post, content }: InferGetStaticPropsType<typeof getStaticProps>) => {
     return (
-        <Layout title={title} description={excerpt}
-            canonical={`${WEB_DOMAIN}/posts/${slug}`}
-            subtitle={format(parseISO(date), 'LLLL    d, yyyy')} >
-            {content ? <Artilce content={content} /> : ""}
-        </Layout >
+        <>
+            <Meta title={post.title} description={post.excerpt} canonical={`posts/${post.slug}`} />
+            <StickyHeaderContent header={<Nav />} content={
+                <Article lastPost={lastPost} nextPost={nextPost}
+                    post={post} content={content} />
+            } />
+        </>
     );
 };
 
@@ -31,15 +27,14 @@ export const getStaticPaths = async () => {
         paths: slugs.map(slug => ({
             params: { slug }
         })),
-        fallback: true
+        fallback: false
     };
 };
 
 export const getStaticProps = async ({ params }: any) => {
-    const post = await getPostBySlug(params.slug);
+    const props = await getPostBySlug(params.slug);
 
     return {
-        props: post,
-        revalidate: 10
+        props
     };
 };

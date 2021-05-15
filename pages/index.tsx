@@ -1,19 +1,24 @@
 import { InferGetStaticPropsType } from 'next';
 import React from 'react';
-import Layout from '../components/layout';
-import Post from '../components/post';
+import BLOG from "../blog.config";
+import BlogTitle from '../components/organisms/blog-title';
+import ListPosts from '../components/organisms/list-posts';
+import Meta from '../components/organisms/meta';
+import Nav from '../components/organisms/nav';
+import StickyHeaderContent from '../components/templates/sticky-header-content';
 import { getPosts } from '../lib/post';
-import { WEB_DESC, WEB_DOMAIN, WEB_TITLE } from '../lib/web.config';
+import { generateRssFile } from '../lib/rss';
 
 const Index = ({ posts }: InferGetStaticPropsType<typeof getStaticProps>) => (
-    <Layout title={WEB_TITLE} canonical={WEB_DOMAIN}
-        subtitle={WEB_DESC} description={WEB_DESC}>
-        {
-            posts.map((post) => (
-                <Post key={post.slug} {...post} />
-            ))
-        }
-    </Layout>
+    <>
+        <Meta title={BLOG.title} description={BLOG.description} />
+        <StickyHeaderContent header={<Nav />} content={
+            <>
+                <BlogTitle />
+                <ListPosts posts={posts} />
+            </>
+        } />
+    </>
 );
 
 export default Index;
@@ -23,10 +28,11 @@ export const getStaticProps = async () => {
         post1.date > post2.date ? -1 : 1
     );
 
+    await generateRssFile(posts);
+
     return {
         props: {
             posts
-        },
-        revalidate: 10
+        }
     };
 };
