@@ -22,8 +22,9 @@ module.exports = {
                         'blockquote p:first-of-type::before': false,
                         'blockquote p:last-of-type::after': false,
                         color: theme("colors.gray.700"),
-                        code: {
+                        pre: {
                             color: theme("colors.gray.700"),
+                            backgroundColor: "#FAF8F5",
                         },
                         "code::before": false,
                         "code::after": false,
@@ -51,8 +52,9 @@ module.exports = {
                             color: theme('colors.gray.300')
                         },
                         color: theme("colors.gray.300"),
-                        code: {
-                            color: theme("colors.gray.300")
+                        pre: {
+                            color: theme("colors.gray.300"),
+                            backgroundColor: "#1D262F",
                         },
                         h1: {
                             color: theme("colors.gray.100")

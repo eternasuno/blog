@@ -4,8 +4,7 @@ import React from "react";
 import { NotionRenderer } from "react-notion-x";
 
 const Code = dynamic(async () =>
-    import('./code'),
-    { ssr: false }
+    (await import('./code'))
 );
 
 const Equation = dynamic(async () =>

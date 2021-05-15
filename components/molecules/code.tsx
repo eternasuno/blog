@@ -1,6 +1,5 @@
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { duotoneLight as light, duotoneSea as dark } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import useDarkMode from '../../lib/hooks/useDarkMode';
+import { vscDarkPlus as style } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 
 type Props = {
     code: string;
@@ -8,10 +7,11 @@ type Props = {
 };
 
 const Code = ({ code, language }: Props) => {
-    const { isDarkMode } = useDarkMode();
+    language = language.toLowerCase();
+
     return (
-        <SyntaxHighlighter language={language.toLowerCase()}
-            style={isDarkMode ? dark : light}
+        <SyntaxHighlighter language={language}
+            style={style}
             showLineNumbers wrapLongLines >
             {code}
         </SyntaxHighlighter>

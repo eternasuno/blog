@@ -18,7 +18,7 @@ const Article = ({ lastPost, nextPost, post, content }: Props) => {
             <div className="flex flex-col xl:flex-row mb-8">
                 <NotionContent content={content} />
                 <Pagination lastPost={lastPost} nextPost={nextPost}
-                    className="xl:w-2/5 xl:order-first xl:mr-6" />
+                    className="xl:min-w-[20%] xl:order-first xl:mr-6" />
             </div>
         </article>
     );

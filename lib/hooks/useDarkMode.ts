@@ -1,15 +1,11 @@
 import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
+import useMounted from "./useMounted";
 
 const useDarkMode = () => {
-    const { theme, setTheme } = useTheme();
-    const [isMounted, setIsMounted] = useState(false);
+    const { theme, systemTheme, setTheme } = useTheme();
+    const { isMounted } = useMounted();
 
-    useEffect(() => {
-        setIsMounted(true);
-    }, []);
-
-    const isDarkMode = isMounted && theme === "dark";
+    const isDarkMode = isMounted && (theme === "dark" || (theme == "system" && systemTheme === "dark"));
 
     const switchDarkMode = () => isMounted &&
         setTheme(theme === "light" ? "dark" : "light");

@@ -6,7 +6,7 @@ const BlogTitle = () => {
             <h1 className="font-extrabold tracking-tight capitalize text-3xl md:text-6xl">
                 {BLOG.title}
             </h1>
-            <p className="text-gray-500">
+            <p className="text-gray-500 dark:text-gray-400">
                 {BLOG.description}
             </p>
         </div>
