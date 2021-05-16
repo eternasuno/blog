@@ -22,8 +22,7 @@
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-icons": "^4.1.0",
-    "react-notion-x": "^4.6.0",
-    "react-syntax-highlighter": "^15.4.3"
+    "react-notion-x": "^4.6.0"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.4.0",
@@ -33,7 +32,6 @@
     "@types/pinyin": "^2.8.2",
     "@types/react": "^17.0.5",
     "@types/react-dom": "^17.0.0",
-    "@types/react-syntax-highlighter": "^13.5.0",
     "autoprefixer": "^10.1.0",
     "postcss": "^8.2.14",
     "tailwindcss": "^2.1.2",
