@@ -18,6 +18,7 @@
     "notion-types": "^4.3.0",
     "notion-utils": "^4.6.0",
     "pinyin": "^2.10.2",
+    "prism-react-renderer": "^1.2.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-icons": "^4.1.0",
