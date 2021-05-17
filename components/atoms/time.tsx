@@ -1,4 +1,4 @@
-import { format as formatDate, formatISO, parseISO } from 'date-fns';
+import { format as formatDate, formatISO, parseISO } from "date-fns";
 
 type Props = {
     dateTime: string;

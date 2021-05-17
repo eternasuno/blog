@@ -1,4 +1,4 @@
-import Highlight, { defaultProps, Language } from "prism-react-renderer";
+import Highlight, { Language, Prism } from "prism-react-renderer";
 import dark from "prism-react-renderer/themes/vsDark";
 
 type Props = {
@@ -7,13 +7,13 @@ type Props = {
 };
 
 const Code = ({ code, language }: Props) => {
-    language = language.toLowerCase();
-
     return (
-        <Highlight {...defaultProps} theme={dark} code={code} language={language as Language}>
+        <Highlight Prism={Prism} code={code}
+            theme={dark}
+            language={language.toLowerCase() as Language}>
             {({ style, tokens, getLineProps, getTokenProps }) => (
-                <pre className={"text-left mx-4 my-0 p-2"}
-                    style={style}>
+                <pre style={style}
+                    className="text-left mx-4 my-0 p-2 whitespace-pre-wrap">
                     {tokens.map((line, i) => (
                         <div key={i} {...getLineProps({ line, key: i })} className="table-row">
                             <span className="table-cell text-right pr-4

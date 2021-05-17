@@ -1,7 +1,7 @@
-import { Serializable } from 'child_process';
-import { NotionAPI } from 'notion-client';
-import { Block, CollectionPropertySchemaMap, ExtendedRecordMap } from 'notion-types';
-import { getDateValue, getTextContent, idToUuid, uuidToId } from 'notion-utils';
+import { Serializable } from "child_process";
+import { NotionAPI } from "notion-client";
+import { Block, CollectionPropertySchemaMap, ExtendedRecordMap } from "notion-types";
+import { getDateValue, getTextContent, idToUuid, uuidToId } from "notion-utils";
 import pinyin from "pinyin";
 import BLOG from "../blog.config";
 

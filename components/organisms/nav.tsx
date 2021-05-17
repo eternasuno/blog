@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 import DarkModeButton from "../molecules/darkMode-button";
-import HomeButton from '../molecules/home-button';
+import HomeButton from "../molecules/home-button";
 import RssButton from "../molecules/rss-button";
 
 const Nav = () => {

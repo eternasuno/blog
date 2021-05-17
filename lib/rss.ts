@@ -1,6 +1,6 @@
-import { promises as fsPromises } from 'fs';
+import { promises as fsPromises } from "fs";
 import { join } from "path";
-import { Post } from './post';
+import { Post } from "./post";
 import BLOG from "../blog.config";
 
 const generateRssItem = ({ slug, title, date, excerpt }: Post): string => `
@@ -21,7 +21,7 @@ const generateRss = (posts: Post[]): string => `
       <description><![CDATA[ ${BLOG.description} ]]></description>
       <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
       <atom:link href="${BLOG.domain}/rss.xml" rel="self" type="application/rss+xml"/>
-      ${posts.map(generateRssItem).join('')}
+      ${posts.map(generateRssItem).join("")}
     </channel>
   </rss>
 `;

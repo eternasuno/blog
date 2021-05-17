@@ -1,8 +1,8 @@
-import React from 'react';
-import BlogTitle from '../components/organisms/blog-title';
-import Meta from '../components/organisms/meta';
-import Nav from '../components/organisms/nav';
-import StickyHeaderContent from '../components/templates/sticky-header-content';
+import React from "react";
+import BlogTitle from "../components/organisms/blog-title";
+import Meta from "../components/organisms/meta";
+import Nav from "../components/organisms/nav";
+import StickyHeaderContent from "../components/templates/sticky-header-content";
 
 const NotFound = () => (
     <>

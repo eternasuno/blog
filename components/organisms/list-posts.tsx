@@ -1,6 +1,6 @@
 import React from "react";
 import { Post } from "../../lib/post";
-import Time from '../atoms/time';
+import Time from "../atoms/time";
 import TitleLink from "../molecules/title-link";
 
 type Props = {

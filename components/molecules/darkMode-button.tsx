@@ -1,5 +1,5 @@
-import React from 'react';
-import { RiMoonFill, RiSunFill } from 'react-icons/ri';
+import React from "react";
+import { RiMoonFill, RiSunFill } from "react-icons/ri";
 import useDarkMode from "../../lib/hooks/useDarkMode";
 import Rectangle from "../atoms/rectangle";
 
