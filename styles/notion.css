@@ -22,7 +22,7 @@
 }
 
 .notion-property-checkbox-unchecked {
-    @apply w-4 h-4 border-[1.3px] border-solid border-black dark:border-white
+    @apply w-4 h-4 border-[1.3px] border-solid border-black;
 }
 
 .notion-to-do-body {
@@ -39,8 +39,7 @@
 
 /* callout */
 .notion-callout {
-    @apply mt-4 p-4 w-full inline-flex items-center font-mono;
-    @apply border border-solid dark:border-gray-700 bg-gray-100 dark:bg-gray-800;
+    @apply mt-4 p-4 w-full inline-flex items-center font-mono bg-gray-100;
 }
 
 .notion-callout .notion-page-icon {
@@ -57,7 +56,7 @@
 }
 
 .notion-page-title-icon {
-    @apply h-6 w-6 ml-[2px] mr-[6px] fill-current dark:text-white;
+    @apply h-6 w-6 ml-[2px] mr-[6px] fill-current text-black;
 }
 
 .notion-page-title-text {
@@ -70,7 +69,7 @@
 }
 
 .notion-hash-link {
-    @apply opacity-0 float-left ml-[-0.75em] md:ml-[-1.25em] fill-current dark:text-white;
+    @apply opacity-0 float-left ml-[-0.75em] md:ml-[-1.25em] fill-current text-black;
 }
 
 .notion-h {

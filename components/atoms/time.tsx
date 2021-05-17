@@ -8,7 +8,7 @@ type Props = {
 const Time = ({ dateTime, format = "LLLL    d, yyyy" }: Props) => {
     const date = parseISO(dateTime);
     return (
-        <time dateTime={formatISO(date)} className={"text-sm md:text-base text-gray-500 dark:text-gray-400"}>
+        <time dateTime={formatISO(date)} className="text-sm md:text-base text-gray-600">
             {formatDate(date, format)}
         </time>
     );

@@ -13,10 +13,10 @@ const Index = ({ posts }: InferGetStaticPropsType<typeof getStaticProps>) => (
     <>
         <Meta title={BLOG.title} description={BLOG.description} />
         <StickyHeaderContent header={<Nav />} content={
-            <>
+            <div className="divide-y divide-gray-200 dark:divide-gray-700">
                 <BlogTitle />
                 <ListPosts posts={posts} />
-            </>
+            </div>
         } />
     </>
 );

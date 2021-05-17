@@ -39,7 +39,7 @@ const NotionContent = ({ content }: Props) => {
                 equation: Equation
             }}
             mapImageUrl={mapImageUrl}
-            className="prose dark:prose-dark max-w-none border-b py-8 dark:border-gray-700"
+            className="prose max-w-none py-8"
         />
     );
 };

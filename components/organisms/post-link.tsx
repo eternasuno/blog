@@ -10,7 +10,7 @@ type Props = {
 const PostLink = ({ heading, post }: Props) => {
     return post ? (
         <div>
-            <h2 className="text-xs tracking-wide uppercase text-gray-500 dark:text-gray-400">
+            <h2 className="text-xs tracking-wide uppercase text-gray-600">
                 {heading}
             </h2>
             <TitleLink href={`/posts/${post.slug}`} title={post.title} />

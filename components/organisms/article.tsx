@@ -13,9 +13,9 @@ type Props = {
 
 const Article = ({ lastPost, nextPost, post, content }: Props) => {
     return (
-        <article>
+        <article className="divide-y divide-gray-200 dark:divide-gray-700">
             <PostTitle title={post.title} date={post.date} />
-            <div className="flex flex-col xl:flex-row mb-8">
+            <div className="flex flex-col xl:flex-row divide-y xl:divide-y-0 divide-gray-200 dark:divide-gray-700">
                 <NotionContent content={content} />
                 <Pagination lastPost={lastPost} nextPost={nextPost}
                     className="xl:min-w-[20%] xl:order-first xl:mr-6" />

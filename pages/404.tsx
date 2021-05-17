@@ -8,12 +8,14 @@ const NotFound = () => (
     <>
         <Meta title="404 - Not Found" canonical="404" />
         <StickyHeaderContent header={<Nav />} content={
-            <>
+            <div className="divide-y divide-gray-200 dark:divide-gray-700">
                 <BlogTitle />
-                <h2 className="mx-auto my-32 text-center font-bold capitalize text-2xl md:text-5xl">
-                    404 - Not Found
-                </h2>
-            </>
+                <div>
+                    <h2 className="mx-auto my-32 text-center font-bold capitalize text-2xl md:text-5xl">
+                        404 - Not Found
+                    </h2>
+                </div>
+            </div>
         } />
     </>
 );
