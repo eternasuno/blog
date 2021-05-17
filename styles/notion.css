@@ -39,7 +39,7 @@
 
 /* callout */
 .notion-callout {
-    @apply my-1 p-4 w-full inline-flex items-center font-mono;
+    @apply mt-4 p-4 w-full inline-flex items-center font-mono;
     @apply border border-solid dark:border-gray-700 bg-gray-100 dark:bg-gray-800;
 }
 
@@ -99,6 +99,14 @@
 }
 
 /* indent */
+.notion-text {
+    @apply mt-4;
+}
+
+.notion-viewport + * {
+    @apply mt-0;
+}
+
 .notion-text-children {
     @apply pl-7 flex flex-col;
 }
