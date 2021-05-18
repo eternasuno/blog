@@ -18,7 +18,7 @@ const Pagination = ({ lastPost, nextPost, className }: Props) => {
                 <PostLink heading="Next Article" post={nextPost} />
                 <PostLink heading="Previous Article" post={lastPost} />
             </div>
-            <div className="py-8">
+            <div className="py-8 mr-8">
                 <Link href="/">
                     ← Back to the blog
                 </Link>

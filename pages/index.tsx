@@ -5,19 +5,17 @@ import BlogTitle from "../components/organisms/blog-title";
 import ListPosts from "../components/organisms/list-posts";
 import Meta from "../components/organisms/meta";
 import Nav from "../components/organisms/nav";
-import StickyHeaderContent from "../components/templates/sticky-header-content";
+import BlogTemplate from "../components/templates/blog-template";
 import { getPosts } from "../lib/post";
 import { generateRssFile } from "../lib/rss";
 
 const Index = ({ posts }: InferGetStaticPropsType<typeof getStaticProps>) => (
     <>
         <Meta title={BLOG.title} description={BLOG.description} />
-        <StickyHeaderContent header={<Nav />} content={
-            <div className="divide-y divide-gray-200 dark:divide-gray-700">
-                <BlogTitle />
-                <ListPosts posts={posts} />
-            </div>
-        } />
+        <BlogTemplate nav={<Nav />}
+            header={<BlogTitle />}
+            content={<ListPosts posts={posts} />}
+        />
     </>
 );
 

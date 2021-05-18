@@ -99,7 +99,7 @@
 
 /* indent */
 .notion-text {
-    @apply mt-4;
+    @apply my-5;
 }
 
 .notion-viewport + * {
