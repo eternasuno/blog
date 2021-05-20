@@ -23,6 +23,7 @@ module.exports = {
             }
         },
         nightwind: {
+            transitionDuration: "500ms",
             typography: true
         },
     },
