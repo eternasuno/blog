@@ -99,6 +99,7 @@
 
 /* indent */
 .notion-text {
+    word-break: break-word;
     @apply my-5;
 }
 
@@ -128,4 +129,10 @@ ol > ol, ul > ul {
 .notion-blue,
 .notion-blue_co {
     @apply text-blue-500;
+}
+
+/* code */
+.notion code::before,
+.notion code::after {
+    content: none;
 }

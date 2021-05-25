@@ -10,18 +10,6 @@ module.exports = {
         "./pages/**/*.tsx"
     ],
     theme: {
-        extend: {
-            typography: {
-                DEFAULT: {
-                    css: {
-                        "blockquote p:first-of-type::before": false,
-                        "blockquote p:last-of-type::after": false,
-                        "code::before": false,
-                        "code::after": false
-                    }
-                }
-            }
-        },
         nightwind: {
             transitionDuration: "500ms",
             typography: true

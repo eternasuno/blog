@@ -12,8 +12,8 @@ const Code = ({ code, language }: Props) => {
             theme={dark}
             language={language.toLowerCase() as Language}>
             {({ style, tokens, getLineProps, getTokenProps }) => (
-                <pre style={style}
-                    className="text-left mx-4 my-0 p-2 whitespace-pre-wrap">
+                <pre
+                    style={{ tabSize: 4, whiteSpace: "pre-wrap", wordBreak: "break-word", ...style }}>
                     {tokens.map((line, i) => (
                         <div key={i} {...getLineProps({ line, key: i })} className="table-row">
                             <span className="table-cell text-right pr-4

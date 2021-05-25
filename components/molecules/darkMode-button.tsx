@@ -31,119 +31,53 @@ const DarkModeButton = () => {
             </Rectangle>
             <style jsx>{`
                 .day {
-                    animation: day 0.5s forwards;
+                    transform: rotate(90deg);
+                    transition-property: transform;
+                    transition-duration: 0.5s;
                 }
-
-                @keyframes day {
-                    from {
-                        transform: rotate(40deg);
-                    }
-
-                    to {
-                        transform: rotate(90deg);
-                    }
-                }
-
+                
                 .day .sun {
-                    animation: day-sun 0.5s forwards;
-                }
-
-                @keyframes day-sun {
-                    from {
-                        r: 9;
-                    }
-
-                    to {
-                        r: 5;
-                    }
+                    r: 5;
+                    transition-property: r;
+                    transition-duration: 0.5s;
                 }
 
                 .day .sun-shine {
-                    animation: day-sun-shine 0.5s forwards;
-                }
-
-                @keyframes day-sun-shine {
-                    from {
-                        opacity: 0;
-                    }
-
-                    to {
-                        opacity: 100;
-                    }
+                    opacity: 100;
+                    transition-property: opacity;
+                    transition-duration: 0.5s;
                 }
 
                 .day .moon {
-                    animation: day-moon 0.5s forwards;
-                }
-
-                @keyframes day-moon {
-                    from {
-                        cx: 50%;
-                        cy: 23%
-                    }
-
-                    to {
-                        cx: 100%;
-                        cy: 0%
-                    }
+                    cx: 100%;
+                    cy: 0%;
+                    transition-property: cx, cy;
+                    transition-duration: 0.5s, 0.5s;
                 }
 
                 .night {
-                    animation: night 0.5s forwards;
-                }
-
-                @keyframes night {
-                    from {
-                        transform: rotate(90deg);
-                    }
-
-                    to {
-                        transform: rotate(40deg);
-                    }
+                    transform: rotate(40deg);
+                    transition-property: transform;
+                    transition-duration: 0.5s;
                 }
 
                 .night .sun {
-                    animation: night-sun 0.5s forwards;
-                }
-
-                @keyframes night-sun {
-                    from {
-                        r: 5;
-                    }
-
-                    to {
-                        r: 9;
-                    }
+                    r: 10;
+                    transition-property: r;
+                    transition-duration: 0.5s;
                 }
 
                 .night .sun-shine {
-                    animation: night-sun-shine 0.5s forwards;
-                }
-
-                @keyframes night-sun-shine {
-                    from {
-                        opacity: 100;
-                    }
-
-                    to {
-                        opacity: 0;
-                    }
+                    opacity: 0;
+                    transition-property: opacity;
+                    transition-duration: 0.5s;
                 }
 
                 .night .moon {
-                    animation: night-moon 0.5s forwards;
-                }
-
-                @keyframes night-moon {
-                    from {
-                        cx: 100%;
-                        cy: 0%;
-                    }
-
-                    to {
-                        cx: 50%;
-                        cy: 23%
-                    }
+                    cx: 50%;
+                    cy: 23%;
+                    transition-property: cx, cy;
+                    transition-duration: 0.5s, 0.5s;
                 }
             `}</style>
         </button>
