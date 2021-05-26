@@ -17,7 +17,7 @@ const DarkModeButton = () => {
                             <circle className="moon" r="9" strokeWidth="0" fill="black" />
                         </mask>
                     </defs>
-                    <circle className="sun" cx="12" cy="12" mask="url(#mask)" />
+                    <circle className="sun" cx="12" cy="12" r="5" mask="url(#mask)" />
                     <path className="sun-shine" strokeWidth="2" strokeLinecap="round" strokeDasharray="16"
                         d="M 12 3 L 12 1
                            M 18.36 5.64 L 19.78 4.22
