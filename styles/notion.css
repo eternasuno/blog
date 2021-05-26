@@ -26,7 +26,8 @@
 }
 
 .notion-to-do-body {
-    @apply whitespace-pre-wrap break-words;
+    word-break: break-word;
+    @apply whitespace-pre-wrap;
 }
 
 .notion-to-do-body.notion-to-do-checked  {
@@ -47,7 +48,8 @@
 }
 
 .notion-callout-text {
-    @apply ml-4 whitespace-pre-wrap break-words;
+    word-break: break-word;
+    @apply ml-4 whitespace-pre-wrap;
 }
 
 /* page */
@@ -135,4 +137,42 @@ ol > ol, ul > ul {
 .notion code::before,
 .notion code::after {
     content: none;
+}
+
+/* image */
+.notion img {
+    @apply my-0;
+}
+
+/* notion-bookmark */
+.notion-bookmark {
+    @apply flex flex-col md:flex-row overflow-hidden select-none border rounded;
+}
+
+a.notion-bookmark {
+    @apply no-underline;
+}
+
+.notion-bookmark > div:first-child {
+    @apply p-4 text-left text-xs break-words whitespace-pre-wrap space-y-2;
+}
+
+.notion-bookmark-description {
+    @apply opacity-80;
+}
+
+.notion-bookmark-link {
+    @apply flex space-x-2;
+}
+
+.notion-bookmark-link > img {
+    @apply w-4 h-4 dark:bg-white;
+}
+
+.notion-bookmark-image {
+    @apply order-first md:order-last md:max-w-[40%] md:min-w-[40%];
+}
+
+.notion-bookmark-image img {
+    @apply rounded-t md:rounded-t-none md:rounded-r w-full h-full;
 }
