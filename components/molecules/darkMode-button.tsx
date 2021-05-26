@@ -17,8 +17,8 @@ const DarkModeButton = () => {
                             <circle className="moon" r="9" strokeWidth="0" fill="black" />
                         </mask>
                     </defs>
-                    <circle className="sun" cx="12" cy="12" r="5" mask="url(#mask)" />
-                    <path className="sun-shine" strokeWidth="2" strokeLinecap="round" strokeDasharray="16"
+                    <circle className="sun" cx="12" cy="12" r={isDarkMode ? "9" : "5"} mask="url(#mask)" />
+                    <path className="sun-shine" strokeWidth="2" strokeLinecap="round"
                         d="M 12 3 L 12 1
                            M 18.36 5.64 L 19.78 4.22
                            M 21 12 L 23 12
@@ -31,119 +31,51 @@ const DarkModeButton = () => {
             </Rectangle>
             <style jsx>{`
                 .day {
-                    animation: day 0.5s forwards;
+                    transform: rotate(90deg);
+                    transition-property: transform;
+                    transition-duration: 0.5s;
                 }
-
-                @keyframes day {
-                    from {
-                        transform: rotate(40deg);
-                    }
-
-                    to {
-                        transform: rotate(90deg);
-                    }
-                }
-
+                
                 .day .sun {
-                    animation: day-sun 0.5s forwards;
-                }
-
-                @keyframes day-sun {
-                    from {
-                        r: 9;
-                    }
-
-                    to {
-                        r: 5;
-                    }
+                    transition-property: r;
+                    transition-duration: 0.5s;
                 }
 
                 .day .sun-shine {
-                    animation: day-sun-shine 0.5s forwards;
-                }
-
-                @keyframes day-sun-shine {
-                    from {
-                        opacity: 0;
-                    }
-
-                    to {
-                        opacity: 100;
-                    }
+                    opacity: 100;
+                    transition-property: opacity;
+                    transition-duration: 0.5s;
                 }
 
                 .day .moon {
-                    animation: day-moon 0.5s forwards;
-                }
-
-                @keyframes day-moon {
-                    from {
-                        cx: 50%;
-                        cy: 23%
-                    }
-
-                    to {
-                        cx: 100%;
-                        cy: 0%
-                    }
+                    cx: 100%;
+                    cy: 0%;
+                    transition-property: cx, cy;
+                    transition-duration: 0.5s, 0.5s;
                 }
 
                 .night {
-                    animation: night 0.5s forwards;
-                }
-
-                @keyframes night {
-                    from {
-                        transform: rotate(90deg);
-                    }
-
-                    to {
-                        transform: rotate(40deg);
-                    }
+                    transform: rotate(40deg);
+                    transition-property: transform;
+                    transition-duration: 0.5s;
                 }
 
                 .night .sun {
-                    animation: night-sun 0.5s forwards;
-                }
-
-                @keyframes night-sun {
-                    from {
-                        r: 5;
-                    }
-
-                    to {
-                        r: 9;
-                    }
+                    transition-property: r;
+                    transition-duration: 0.5s;
                 }
 
                 .night .sun-shine {
-                    animation: night-sun-shine 0.5s forwards;
-                }
-
-                @keyframes night-sun-shine {
-                    from {
-                        opacity: 100;
-                    }
-
-                    to {
-                        opacity: 0;
-                    }
+                    opacity: 0;
+                    transition-property: opacity;
+                    transition-duration: 0.5s;
                 }
 
                 .night .moon {
-                    animation: night-moon 0.5s forwards;
-                }
-
-                @keyframes night-moon {
-                    from {
-                        cx: 100%;
-                        cy: 0%;
-                    }
-
-                    to {
-                        cx: 50%;
-                        cy: 23%
-                    }
+                    cx: 50%;
+                    cy: 23%;
+                    transition-property: cx, cy;
+                    transition-duration: 0.5s, 0.5s;
                 }
             `}</style>
         </button>
