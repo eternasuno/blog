@@ -9,8 +9,8 @@ type Props = {
 };
 
 const Meta = ({ title, canonical = "", description, children }: Props) => {
-    const cardUrl = `https://cards.microlink.io/?preset=article&image=${BLOG.og.bgImage}&caption=${BLOG.description}&headline=${title}&date=`;
-    const ogImgUrl = `https://i.microlink.io/${encodeURIComponent(cardUrl)}`;
+    const cardUrl = `https://cards.microlink.io/?preset=adobe&border=5px&gradient=linear-gradient%28to+right%2C%2334d399%2C+%233b82f6%29&title=${title}`;
+    const image = `https://i.microlink.io/${encodeURIComponent(cardUrl)}`;
 
     return (
         <Head>
@@ -30,14 +30,14 @@ const Meta = ({ title, canonical = "", description, children }: Props) => {
             <meta property="og:type" content="website" />
             <meta property="og:title" content={title} />
             <meta property="og:description" content={description} />
-            <meta property="og:image" content={ogImgUrl} />
+            <meta property="og:image" content={image} />
 
             <meta name="twitter:card" content="summary_large_image" />
             <meta property="twitter:domain" content={BLOG.domain} />
             <meta property="twitter:url" content={`${BLOG.domain}/${canonical}`} />
             <meta name="twitter:title" content={title} />
             <meta name="twitter:description" content={description} />
-            <meta name="twitter:image" content={ogImgUrl} />
+            <meta name="twitter:image" content={image} />
 
             <link rel="canonical" href={`${BLOG.domain}/${canonical}`} />
             <link rel="alternate" title="RSS feed"
