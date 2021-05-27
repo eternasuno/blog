@@ -26,11 +26,18 @@ const Meta = ({ title, canonical = "", description, children }: Props) => {
             <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
             <meta name="theme-color" content="#555" />
 
+            <meta property="og:url" content={`${BLOG.domain}/${canonical}`} />
             <meta property="og:type" content="website" />
             <meta property="og:title" content={title} />
-            <meta property="og:url" content={`${BLOG.domain}/${canonical}`} />
-            <meta property="og:image" content={ogImgUrl} />
             <meta property="og:description" content={description} />
+            <meta property="og:image" content={ogImgUrl} />
+
+            <meta name="twitter:card" content="summary_large_image" />
+            <meta property="twitter:domain" content={BLOG.domain} />
+            <meta property="twitter:url" content={`${BLOG.domain}/${canonical}`} />
+            <meta name="twitter:title" content={title} />
+            <meta name="twitter:description" content={description} />
+            <meta name="twitter:image" content={ogImgUrl} />
 
             <link rel="canonical" href={`${BLOG.domain}/${canonical}`} />
             <link rel="alternate" title="RSS feed"
