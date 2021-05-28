@@ -43,6 +43,8 @@ const Meta = ({ title, canonical = "", description, children }: Props) => {
             <link rel="alternate" title="RSS feed"
                 type="application/rss+xml" href="/rss.xml" />
 
+            <script async src="https://cdn.splitbee.io/sb.js" />
+
             {children}
         </Head>
     );
