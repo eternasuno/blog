@@ -83,18 +83,20 @@ const getRecordMap = async (pageId: string) => {
 const getAllProperties = (block: Block, schema: CollectionPropertySchemaMap) => {
     const item: Item = { pageId: uuidToId(block.id) };
     const properties = block.properties as any;
-    for (const key in schema) {
-        if (schema[key].type) {
-            switch (schema[key].type) {
-                case "date":
-                    item[schema[key].name] = getDateValue(properties[key])?.start_date || "";
-                    break;
-                case "multi_select":
-                    item[schema[key].name] = getTextContent(properties[key]).split(",");
-                    break;
-                default:
-                    item[schema[key].name] = getTextContent(properties[key]);
-                    break;
+    if (properties) {
+        for (const key in schema) {
+            if (schema[key].type) {
+                switch (schema[key].type) {
+                    case "date":
+                        item[schema[key].name] = getDateValue(properties[key])?.start_date || "";
+                        break;
+                    case "multi_select":
+                        item[schema[key].name] = getTextContent(properties[key]).split(",");
+                        break;
+                    default:
+                        item[schema[key].name] = getTextContent(properties[key]);
+                        break;
+                }
             }
         }
     }
