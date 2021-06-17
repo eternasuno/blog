@@ -1,5 +1,3 @@
-@import url("https://cdn.jsdelivr.net/npm/katex@0.13.3/dist/katex.min.css");
-
 /* todo */
 .notion-to-do {
     @apply flex flex-col;
@@ -63,6 +61,15 @@
 
 .notion-page-title-text {
     @apply relative top-[1px] leading-5;
+}
+
+/* heading text */
+.notion-h2 {
+    @apply text-2xl md:text-4xl;
+}
+
+.notion-h3 {
+    @apply text-xl md:text-3xl;
 }
 
 /* hash-link */
