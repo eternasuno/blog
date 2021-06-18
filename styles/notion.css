@@ -132,7 +132,7 @@ ol > ol, ul > ul {
 
 /* equation */
 .notion-equation {
-    @apply cursor-text outline-none;
+    @apply pointer-events-none;
 }
 
 .notion-equation:focus {
