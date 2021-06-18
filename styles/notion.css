@@ -80,7 +80,7 @@ h3.notion-h3 {
 }
 
 .notion-hash-link {
-    @apply opacity-0 float-left ml-[-0.75em] md:ml-[-1.25em] fill-current text-black;
+    @apply opacity-0 float-left ml-[-0.75em] fill-current text-black;
 }
 
 .notion-h {
@@ -88,7 +88,7 @@ h3.notion-h3 {
 }
 
 .notion-header-anchor {
-    @apply absolute top-[-20vh];
+    @apply absolute top-[-30vh];
 }
 
 /* medium-zoom */
@@ -115,7 +115,7 @@ h3.notion-h3 {
 }
 
 .notion-viewport + * {
-    @apply mt-0;
+    @apply mt-0 !important;
 }
 
 .notion-text-children {
@@ -132,7 +132,12 @@ ol > ol, ul > ul {
 
 /* equation */
 .notion-equation {
-    @apply cursor-text;
+    @apply cursor-text outline-none;
+}
+
+.notion-equation:focus {
+    -webkit-tap-highlight-color:rgba(0,0,0,0);
+    -webkit-user-modify:read-write-plaintext-only; 
 }
 
 /* color */
