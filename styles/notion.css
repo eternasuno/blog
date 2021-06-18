@@ -135,11 +135,6 @@ ol > ol, ul > ul {
     @apply pointer-events-none;
 }
 
-.notion-equation:focus {
-    -webkit-tap-highlight-color:rgba(0,0,0,0);
-    -webkit-user-modify:read-write-plaintext-only; 
-}
-
 /* color */
 .notion-red,
 .notion-red_co {
