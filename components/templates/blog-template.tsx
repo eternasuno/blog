@@ -1,20 +1,17 @@
 import React from "react";
 import Container from "../atoms/container";
-import StickyHeader from "../molecules/sticky-header";
+import StickyHeader from "../organisms/sticky-header";
 
 type Props = {
-    nav: React.ReactNode;
     header: React.ReactNode;
     content: React.ReactNode;
 };
 
-const BlogTemplate = ({ nav, header, content }: Props) => {
+const BlogTemplate = ({ header, content }: Props) => {
     return (
         <>
-            <StickyHeader>
-                {nav}
-            </StickyHeader>
-            <Container className="divide-y divide-gray-200 dark:divide-gray-700">
+            <StickyHeader />
+            <Container className="divide-y divide-gray-200">
                 {header}
                 {content}
             </Container>

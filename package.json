@@ -25,16 +25,16 @@
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.4.1",
-    "@types/node": "^15.12.2",
+    "@types/node": "^15.12.3",
     "@types/node-fetch": "^2.5.10",
     "@types/pinyin": "^2.8.2",
     "@types/react": "^17.0.11",
-    "@types/react-dom": "^17.0.7",
+    "@types/react-dom": "^17.0.8",
     "autoprefixer": "^10.2.6",
     "nightwind": "^1.1.11",
     "postcss": "^8.3.5",
-    "tailwindcss": "^2.1.4",
-    "typescript": "^4.3.3"
+    "tailwindcss": "^2.2.0",
+    "typescript": "^4.3.4"
   },
   "license": "MIT"
 }

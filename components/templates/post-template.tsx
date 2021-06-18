@@ -1,22 +1,19 @@
 import React from "react";
 import Container from "../atoms/container";
-import StickyHeader from "../molecules/sticky-header";
+import StickyHeader from "../organisms/sticky-header";
 
 type Props = {
-    nav: React.ReactNode;
     header: React.ReactNode;
     content: React.ReactNode;
     pagination: React.ReactNode;
 };
 
-const PostTemplate = ({ nav, header, content, pagination }: Props) => {
+const PostTemplate = ({ header, content, pagination }: Props) => {
     return (
         <>
-            <StickyHeader>
-                {nav}
-            </StickyHeader>
+            <StickyHeader />
             <Container
-                className="grid grid-flow-row-dense xl:grid-cols-4 divide-y divide-gray-200 dark:divide-gray-700">
+                className="grid grid-flow-row-dense xl:grid-cols-4 divide-y divide-gray-200">
                 <div className="xl:col-span-full">
                     {header}
                 </div>

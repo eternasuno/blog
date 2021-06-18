@@ -4,7 +4,6 @@ import BLOG from "../blog.config";
 import BlogTitle from "../components/organisms/blog-title";
 import ListPosts from "../components/organisms/list-posts";
 import Meta from "../components/organisms/meta";
-import Nav from "../components/organisms/nav";
 import BlogTemplate from "../components/templates/blog-template";
 import { getPosts } from "../lib/post";
 import { generateRssFile } from "../lib/rss";
@@ -12,8 +11,7 @@ import { generateRssFile } from "../lib/rss";
 const Index = ({ posts }: InferGetStaticPropsType<typeof getStaticProps>) => (
     <>
         <Meta title={BLOG.title} description={BLOG.description} />
-        <BlogTemplate nav={<Nav />}
-            header={<BlogTitle />}
+        <BlogTemplate header={<BlogTitle />}
             content={<ListPosts posts={posts} />}
         />
     </>

@@ -11,7 +11,10 @@ module.exports = {
     ],
     theme: {
         nightwind: {
-            transitionDuration: "500ms",
+            colorClasses: [
+                "divide"
+            ],
+            transitionDuration: false,
             typography: true
         },
     },

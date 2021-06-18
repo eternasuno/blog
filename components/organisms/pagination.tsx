@@ -12,7 +12,7 @@ type Props = {
 
 const Pagination = ({ lastPost, nextPost, className }: Props) => {
     return (
-        <div className={cn("text-sm font-medium leading-5 divide-y divide-gray-200 dark:divide-gray-700",
+        <div className={cn("text-sm font-medium leading-5 divide-y divide-gray-200",
             className)}>
             <div className="space-y-8 py-8">
                 <PostLink heading="Next Article" post={nextPost} />

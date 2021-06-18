@@ -9,7 +9,7 @@ type Props = {
 
 const ListPosts = ({ posts }: Props) => {
     return (
-        <ol className="divide-y divide-gray-200 dark:divide-gray-700">
+        <ol className="divide-y divide-gray-200">
             {posts.map(({ slug, date, title, excerpt }) => (
                 <li key={slug}
                     className="py-6 md:py-12 flex flex-col md:flex-row md:items-baseline">
