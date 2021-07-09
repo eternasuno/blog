@@ -10,31 +10,31 @@
   "dependencies": {
     "classnames": "^2.3.1",
     "date-fns": "^2.22.1",
-    "next": "^11.0.0",
-    "next-pwa": "^5.2.21",
-    "next-themes": "^0.0.14",
+    "next": "^11.0.1",
+    "next-pwa": "^5.2.23",
+    "next-themes": "^0.0.15",
     "node-fetch": "^2.6.1",
-    "notion-client": "^4.6.4",
-    "notion-types": "^4.6.4",
-    "notion-utils": "^4.6.4",
+    "notion-client": "^4.7.6",
+    "notion-types": "^4.7.6",
+    "notion-utils": "^4.7.6",
     "pinyin": "^2.10.2",
     "prism-react-renderer": "^1.2.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-notion-x": "^4.7.2"
+    "react-notion-x": "^4.7.7"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.4.1",
-    "@types/node": "^15.12.3",
-    "@types/node-fetch": "^2.5.10",
-    "@types/pinyin": "^2.8.2",
-    "@types/react": "^17.0.11",
-    "@types/react-dom": "^17.0.8",
+    "@types/node": "^16.3.0",
+    "@types/node-fetch": "^2.5.11",
+    "@types/pinyin": "^2.8.3",
+    "@types/react": "^17.0.14",
+    "@types/react-dom": "^17.0.9",
     "autoprefixer": "^10.2.6",
-    "nightwind": "^1.1.11",
+    "nightwind": "^1.1.12",
     "postcss": "^8.3.5",
-    "tailwindcss": "^2.2.0",
-    "typescript": "^4.3.4"
+    "tailwindcss": "^2.2.4",
+    "typescript": "^4.3.5"
   },
   "license": "MIT"
 }
