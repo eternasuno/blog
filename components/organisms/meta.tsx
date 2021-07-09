@@ -42,7 +42,6 @@ const Meta = ({ title, canonical = "", description, children }: Props) => {
                 type="application/rss+xml" href="/rss.xml" />
 
             <link rel="preconnect" href="https://cdn.jsdelivr.net" />
-            <script async src="https://cdn.splitbee.io/sb.js" />
 
             {children}
         </Head>
