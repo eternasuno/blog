@@ -14,7 +14,7 @@ module.exports = {
             colorClasses: [
                 "divide"
             ],
-            transitionDuration: false,
+            transitionDuration: "500ms",
             typography: true
         },
     },
