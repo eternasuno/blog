@@ -75,16 +75,8 @@ h3.notion-h3 {
 }
 
 /* hash-link */
-.notion-h:hover .notion-hash-link {
-    @apply opacity-100;
-}
-
 .notion-hash-link {
-    @apply opacity-0 float-left ml-[-0.75em] fill-current text-black;
-}
-
-.notion-h {
-    @apply relative;
+    @apply hidden;
 }
 
 .notion-header-anchor {

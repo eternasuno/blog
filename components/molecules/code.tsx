@@ -17,7 +17,7 @@ const Code = ({ code, language }: Props) => {
                     {tokens.map((line, i) => (
                         <div key={i} {...getLineProps({ line, key: i })} className="table-row">
                             <span className="table-cell text-right pr-4
-                             select-none opacity-50">
+                             select-none opacity-50 min-w-[3em]">
                                 {i + 1}
                             </span>
                             <span className="table-cell">
