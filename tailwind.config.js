@@ -11,6 +11,9 @@ module.exports = {
     ],
     theme: {
         nightwind: {
+            colors: {
+                white: "#21252B"
+            },
             colorClasses: [
                 "divide"
             ],

@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  blog:
+    image: node:14-bullseye
+    network_mode: "host"
+    working_dir: /blog
+    ports:
+      - 3000:3000
+    volumes:
+      - ../:/blog:cached
+      - node_modules_14:/blog/node_modules
+    tty: true
+
+volumes: 
+  node_modules_14:
+    external: true

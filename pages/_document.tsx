@@ -6,7 +6,7 @@ export default class MyDocument extends Document {
         return (
             <Html lang="zh-cmn-Hans">
                 <Head />
-                <body className="nightwind min-h-screen">
+                <body className="nightwind min-h-screen bg-white">
                     <Main />
                     <NextScript />
                 </body>
