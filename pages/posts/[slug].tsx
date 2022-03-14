@@ -1,21 +1,30 @@
 import { InferGetStaticPropsType } from "next";
-import React from "react";
 import NotionContent from "../../components/molecules/notion-content";
-import Meta from "../../components/organisms/meta";
 import Pagination from "../../components/organisms/pagination";
-import PostTitle from "../../components/organisms/post-title";
-import PostTemplate from "../../components/templates/post-template";
+import BlogTemplate from "../../components/templates/blog-template";
 import { getPostBySlug, getPostSlugs } from "../../lib/post";
 
-const Post = ({ lastPost, nextPost, post, content }: InferGetStaticPropsType<typeof getStaticProps>) => {
+const Post = ({
+    lastPost,
+    nextPost,
+    post,
+    content
+}: InferGetStaticPropsType<typeof getStaticProps>) => {
     return (
-        <>
-            <Meta title={post.title} description={post.excerpt} canonical={`posts/${post.slug}`} />
-            <PostTemplate header={<PostTitle title={post.title} date={post.date} />}
-                content={<NotionContent content={content} />}
-                pagination={<Pagination lastPost={lastPost} nextPost={nextPost} />}
-            />
-        </>
+        <BlogTemplate
+            title={post.title}
+            description={post.excerpt}
+            dateTime={post.date}
+            canonical={`posts/${post.slug}`}>
+            <div className="flex flex-col xl:flex-row">
+                <NotionContent content={content} />
+                <Pagination
+                    lastPost={lastPost}
+                    nextPost={nextPost}
+                    className="xl:order-first xl:mr-4 xl:max-w-[16rem] xl:flex-[0_0_20%]"
+                />
+            </div>
+        </BlogTemplate>
     );
 };
 
@@ -25,7 +34,7 @@ export const getStaticPaths = async () => {
     const slugs = await getPostSlugs();
 
     return {
-        paths: slugs.map(slug => ({
+        paths: slugs.map((slug) => ({
             params: { slug }
         })),
         fallback: false

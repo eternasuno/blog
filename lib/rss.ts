@@ -20,13 +20,15 @@ const generateRss = (posts: Post[]): string => `
       <link>${BLOG.domain}</link>
       <description><![CDATA[ ${BLOG.description} ]]></description>
       <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
-      <atom:link href="${BLOG.domain}/rss.xml" rel="self" type="application/rss+xml"/>
+      <atom:link href="${
+          BLOG.domain
+      }/rss.xml" rel="self" type="application/rss+xml"/>
       ${posts.map(generateRssItem).join("")}
     </channel>
   </rss>
 `;
 
 export const generateRssFile = async (posts: Post[]) => {
-  const rss = generateRss(posts);
-  await fsPromises.writeFile(join(process.cwd(), "public", "rss.xml"), rss);
+    const rss = generateRss(posts);
+    await fsPromises.writeFile(join(process.cwd(), "public", "rss.xml"), rss);
 };

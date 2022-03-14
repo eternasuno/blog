@@ -4,14 +4,15 @@ import { AnchorHTMLAttributes, DetailedHTMLProps } from "react";
 type Props = {
     href: string;
     children: React.ReactNode;
-} & DetailedHTMLProps<AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>;
+} & DetailedHTMLProps<
+    AnchorHTMLAttributes<HTMLAnchorElement>,
+    HTMLAnchorElement
+>;
 
 const Link = ({ href, children, ...rest }: Props) => {
     return (
         <NextLink href={href}>
-            <a {...rest}>
-                {children}
-            </a>
+            <a {...rest}>{children}</a>
         </NextLink>
     );
 };

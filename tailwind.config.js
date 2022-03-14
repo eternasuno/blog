@@ -1,25 +1,9 @@
 module.exports = {
-    mode: "jit",
     darkMode: "class",
-    plugins: [
-        require("nightwind"),
-        require("@tailwindcss/typography")
+    plugins: [require("@tailwindcss/typography")],
+    content: [
+        "./pages/**/*.{js,ts,jsx,tsx}",
+        "./components/**/*.{js,ts,jsx,tsx}"
     ],
-    purge: [
-        "./components/**/*.tsx",
-        "./pages/**/*.tsx"
-    ],
-    theme: {
-        nightwind: {
-            colors: {
-                white: "#21252B"
-            },
-            colorClasses: [
-                "divide"
-            ],
-            transitionDuration: false,
-            typography: true
-        },
-    },
-    variants: {}
+    theme: {}
 };

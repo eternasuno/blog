@@ -7,7 +7,7 @@ type Props = {
 
 const Container = ({ children, className }: Props) => {
     return (
-        <div className={cn("max-w-3xl xl:max-w-5xl mx-auto px-4", className)}>
+        <div className={cn("mx-auto max-w-3xl px-4 xl:max-w-5xl", className)}>
             {children}
         </div>
     );

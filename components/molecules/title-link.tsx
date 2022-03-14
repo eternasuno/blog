@@ -1,15 +1,15 @@
-import React from "react";
+import CapitalizeSpan from "../atoms/capitalize-span";
 import Link from "../atoms/link";
 
 type Props = {
+    slug: string;
     title: string;
-    href: string;
 };
 
-const TitleLink = ({ title, href }: Props) => {
+const TitleLink = ({ slug, title }: Props) => {
     return (
-        <Link href={href} className="tracking-tight capitalize">
-            {title}
+        <Link href={slug}>
+            <CapitalizeSpan>{title}</CapitalizeSpan>
         </Link>
     );
 };

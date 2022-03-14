@@ -1,6 +1,10 @@
 import { Serializable } from "child_process";
 import { NotionAPI } from "notion-client";
-import { Block, CollectionPropertySchemaMap, ExtendedRecordMap } from "notion-types";
+import {
+    Block,
+    CollectionPropertySchemaMap,
+    ExtendedRecordMap
+} from "notion-types";
 import { getDateValue, getTextContent, idToUuid, uuidToId } from "notion-utils";
 import pinyin from "pinyin";
 import BLOG from "../blog.config";
@@ -18,8 +22,9 @@ export type Content = ExtendedRecordMap;
 
 export const getPosts = async () => {
     const recordMap = await getRecordMap(BLOG.notion.pageId);
-    if (recordMap.block[idToUuid(BLOG.notion.pageId)].value.type !== "collection_view_page") {
-        console.info(`pageId "${BLOG.notion.pageId}" is not a database`);
+    const block = recordMap.block[idToUuid(BLOG.notion.pageId)].value;
+    if (block.type !== "collection_view_page") {
+        console.info(`page "${BLOG.notion.pageId}" is not a database`);
         return [];
     }
 
@@ -33,18 +38,19 @@ export const getPosts = async () => {
                 return getAllProperties(block, schema);
             }
         })
-        .filter(item => item && item["status"] === "Published")
-        .map(item => item && addSlugToItem(item)) as Post[];
+        .filter((item) => item && item["status"] === "Published")
+        .map((item) => item && addSlugToItem(item))
+        .sort((item1, item2) =>
+            item1!["date"] > item2!["date"] ? -1 : 1
+        ) as Post[];
 };
 
 export const getPostSlugs = async () => {
-    return (await getPosts()).map(post => post && post.slug);
+    return (await getPosts()).map((post) => post && post.slug);
 };
 
 export const getPostBySlug = async (slug: string) => {
-    const posts = (await getPosts()).sort((post1, post2) =>
-        post1.date > post2.date ? -1 : 1
-    );
+    const posts = await getPosts();
     const index = posts.findIndex((post) => post.slug === slug);
     const content = await getRecordMap(posts[index].pageId);
     return {
@@ -55,22 +61,22 @@ export const getPostBySlug = async (slug: string) => {
     };
 };
 
+type Item = {
+    [key: string]: Serializable;
+};
+
 const addSlugToItem = (item: Item) => {
     item["slug"] = pinyin(String(item["title"]), {
         heteronym: true,
         segment: true,
         style: pinyin.STYLE_NORMAL
     })
-        .map(item => item[0])
+        .map((item) => item[0])
         .join("-")
         .toLowerCase()
         .replace(/[^a-z0-9\-]/g, "-")
-        .replace(/\-+/g, "-");
+        .replace(/\-{2,}/g, "-");
     return item;
-};
-
-type Item = {
-    [key: string]: Serializable;
 };
 
 const getRecordMap = async (pageId: string) => {
@@ -80,21 +86,29 @@ const getRecordMap = async (pageId: string) => {
     return await notion.getPage(pageId);
 };
 
-const getAllProperties = (block: Block, schema: CollectionPropertySchemaMap) => {
+const getAllProperties = (
+    block: Block,
+    schema: CollectionPropertySchemaMap
+) => {
     const item: Item = { pageId: uuidToId(block.id) };
-    const properties = block.properties as any;
+    const properties = block.properties;
     if (properties) {
         for (const key in schema) {
             if (schema[key].type) {
                 switch (schema[key].type) {
                     case "date":
-                        item[schema[key].name] = getDateValue(properties[key])?.start_date || "";
+                        item[schema[key].name] =
+                            getDateValue(properties[key])?.start_date || "";
                         break;
                     case "multi_select":
-                        item[schema[key].name] = getTextContent(properties[key]).split(",");
+                        item[schema[key].name] = getTextContent(
+                            properties[key]
+                        ).split(",");
                         break;
                     default:
-                        item[schema[key].name] = getTextContent(properties[key]);
+                        item[schema[key].name] = getTextContent(
+                            properties[key]
+                        );
                         break;
                 }
             }

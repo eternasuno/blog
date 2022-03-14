@@ -1,5 +1,3 @@
-@import url("https://cdn.jsdelivr.net/npm/katex@0.13.3/dist/katex.min.css");
-
 /* todo */
 .notion-to-do {
     @apply flex flex-col;
@@ -40,7 +38,7 @@
 
 /* callout */
 .notion-callout {
-    @apply mt-4 p-4 w-full inline-flex items-center font-mono bg-gray-50;
+    @apply mt-4 p-4 w-full inline-flex items-center font-mono bg-slate-50 dark:bg-slate-800;
 }
 
 .notion-callout .notion-page-icon {

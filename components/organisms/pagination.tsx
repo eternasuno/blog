@@ -1,8 +1,7 @@
 import cn from "classnames";
-import React from "react";
 import { Post } from "../../lib/post";
-import Link from "../atoms/link";
-import PostLink from "./post-link";
+import PostLink from "../molecules/post-link";
+import TitleLink from "../molecules/title-link";
 
 type Props = {
     lastPost: Post | null;
@@ -12,16 +11,13 @@ type Props = {
 
 const Pagination = ({ lastPost, nextPost, className }: Props) => {
     return (
-        <div className={cn("text-sm font-medium leading-5 divide-y divide-gray-200",
-            className)}>
+        <div className={cn("text-sm font-medium leading-5", className)}>
             <div className="space-y-8 py-8">
                 <PostLink heading="Next Article" post={nextPost} />
                 <PostLink heading="Previous Article" post={lastPost} />
             </div>
-            <div className="py-8 mr-8">
-                <Link href="/">
-                    ← Back to the blog
-                </Link>
+            <div className="py-8">
+                <TitleLink slug="/" title="← Back to the blog" />
             </div>
         </div>
     );

@@ -1,19 +1,40 @@
-import React from "react";
+import BLOG from "../../blog.config";
 import Container from "../atoms/container";
+import Meta from "../organisms/meta";
 import StickyHeader from "../organisms/sticky-header";
+import Title from "../organisms/title";
 
 type Props = {
-    header: React.ReactNode;
-    content: React.ReactNode;
+    title: string;
+    canonical: string;
+    dateTime?: string;
+    description?: string;
+    children?: React.ReactNode;
 };
 
-const BlogTemplate = ({ header, content }: Props) => {
+const BlogTemplate = ({
+    title,
+    description,
+    dateTime,
+    canonical,
+    children
+}: Props) => {
     return (
         <>
+            <Meta
+                title={title}
+                description={description}
+                domain={BLOG.domain}
+                canonical={`${BLOG.domain}/${canonical}`}
+            />
             <StickyHeader />
-            <Container className="divide-y divide-gray-200">
-                {header}
-                {content}
+            <Container>
+                <Title
+                    title={title}
+                    description={description}
+                    dateTime={dateTime}
+                />
+                <section className="py-4 md:py-16">{children}</section>
             </Container>
         </>
     );
