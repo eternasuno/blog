@@ -2,23 +2,15 @@ import BLOG from "../../blog.config";
 import Container from "../atoms/container";
 import Meta from "../organisms/meta";
 import StickyHeader from "../organisms/sticky-header";
-import Title from "../organisms/title";
 
 type Props = {
     title: string;
     canonical: string;
-    dateTime?: string;
     description?: string;
-    children?: React.ReactNode;
+    children: React.ReactNode;
 };
 
-const BlogTemplate = ({
-    title,
-    description,
-    dateTime,
-    canonical,
-    children
-}: Props) => {
+const BlogTemplate = ({ title, description, canonical, children }: Props) => {
     return (
         <>
             <Meta
@@ -28,14 +20,7 @@ const BlogTemplate = ({
                 canonical={`${BLOG.domain}/${canonical}`}
             />
             <StickyHeader />
-            <Container>
-                <Title
-                    title={title}
-                    description={description}
-                    dateTime={dateTime}
-                />
-                <section className="py-4 md:py-16">{children}</section>
-            </Container>
+            <Container>{children}</Container>
         </>
     );
 };

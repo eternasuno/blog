@@ -1,6 +1,6 @@
 import { InferGetStaticPropsType } from "next";
-import NotionContent from "../../components/molecules/notion-content";
-import Pagination from "../../components/organisms/pagination";
+import PostContent from "../../components/organisms/post-content";
+import PostTitle from "../../components/organisms/post-title";
 import BlogTemplate from "../../components/templates/blog-template";
 import { getPostBySlug, getPostSlugs } from "../../lib/post";
 
@@ -14,16 +14,13 @@ const Post = ({
         <BlogTemplate
             title={post.title}
             description={post.excerpt}
-            dateTime={post.date}
             canonical={`posts/${post.slug}`}>
-            <div className="flex flex-col xl:flex-row">
-                <NotionContent content={content} />
-                <Pagination
-                    lastPost={lastPost}
-                    nextPost={nextPost}
-                    className="xl:order-first xl:mr-4 xl:max-w-[16rem] xl:flex-[0_0_20%]"
-                />
-            </div>
+            <PostTitle title={post.title} dateTime={post.date} />
+            <PostContent
+                content={content}
+                lastPost={lastPost}
+                nextPost={nextPost}
+            />
         </BlogTemplate>
     );
 };

@@ -1,7 +1,7 @@
 import cn from "classnames";
 import { Post } from "../../lib/post";
-import PostLink from "../molecules/post-link";
-import TitleLink from "../molecules/title-link";
+import PostLink from "./post-link";
+import TitleLink from "./title-link";
 
 type Props = {
     lastPost: Post | null;
