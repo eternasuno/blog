@@ -7,7 +7,11 @@ type Props = {
 
 const Prose = ({ className, children }: Props) => {
     return (
-        <div className={cn("prose max-w-none dark:prose-invert", className)}>
+        <div
+            className={cn(
+                "prose prose-slate max-w-none dark:prose-invert",
+                className
+            )}>
             {children}
         </div>
     );
