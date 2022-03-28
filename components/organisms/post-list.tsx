@@ -11,7 +11,7 @@ type Props = {
 const PostList = ({ posts }: Props) => {
     return (
         <Content>
-            <ol className="space-y-4 md:space-y-16">
+            <ol className="space-y-8 pb-8 md:space-y-16">
                 {posts.map(({ slug, date, title, excerpt }) => (
                     <li key={slug} className="flex flex-col md:flex-row">
                         <Time className="md:min-w-[25%]" dateTime={date} />
