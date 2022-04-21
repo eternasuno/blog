@@ -1,10 +1,6 @@
 import dynamic from "next/dynamic";
-import { ReactElement } from "react";
 import ReactMarkdown from "react-markdown";
 import { PhotoProvider } from "react-photo-view";
-import rehypeKatex from "rehype-katex";
-import remarkGfm from "remark-gfm";
-import remarkMath from "remark-math";
 import Prose from "../atoms/prose";
 
 const Code = dynamic(async () => await import("./code"), { ssr: false });
@@ -72,8 +68,9 @@ const MdContent = ({ content, className }: Props) => {
                             // },
                         }
                     }
-                    remarkPlugins={[remarkGfm, remarkMath]}
-                    rehypePlugins={[rehypeKatex]}>
+                    // remarkPlugins={[remarkGfm, remarkMath]}
+                    // rehypePlugins={[rehypeKatex]}
+                >
                     {content}
                 </ReactMarkdown>
             </PhotoProvider>
