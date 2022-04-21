@@ -6,12 +6,13 @@ import rehypeKatex from "rehype-katex";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
 import Prose from "../atoms/prose";
+import ResponsiveImg from "../atoms/responsive-img";
 
 const Code = dynamic(async () => await import("./code"), { ssr: false });
 
-const Image = dynamic(async () => await import("../atoms/responsive-img"), {
-    ssr: false,
-});
+// const Image = dynamic(async () => await import("../atoms/responsive-img"), {
+//     ssr: false,
+// });
 
 // const PhotoProvider = dynamic(
 //     async () => (await import("react-photo-view")).PhotoProvider,
@@ -55,7 +56,7 @@ const MdContent = ({ content, className }: Props) => {
                                 return (
                                     <PhotoView src={imgSrc}>
                                         <span>
-                                            <Image
+                                            <ResponsiveImg
                                                 width={16}
                                                 height={9}
                                                 src={imgSrc}
