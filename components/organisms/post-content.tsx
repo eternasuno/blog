@@ -12,7 +12,7 @@ type Props = {
 const PostContent = ({ content, lastPost, nextPost }: Props) => {
     return (
         <Content className="flex flex-col xl:flex-row">
-            <MdContent content={content} />
+            {/* <MdContent content={content} /> */}
             <Pagination
                 lastPost={lastPost}
                 nextPost={nextPost}
