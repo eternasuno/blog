@@ -33,43 +33,45 @@ const MdContent = ({ content, className }: Props) => {
         <Prose className={className}>
             <PhotoProvider>
                 <ReactMarkdown
-                    components={{
-                        pre: ({ children }) => {
-                            const codeElement = children[0] as ReactElement;
-                            const { className, children: code } =
-                                codeElement.props;
-                            const match = /language-(\w+)/.exec(
-                                className || ""
-                            );
-                            return (
-                                <Code
-                                    language={match ? match[1] : "markup"}
-                                    code={String(code).replace(/\n$/, "")}
-                                />
-                            );
-                        },
-                        // img: ({ src, alt, title }) => {
-                        //     if (src) {
-                        //         const match = /..\/public(.+)/.exec(src);
-                        //         const imgSrc = match ? match[1] : src;
-                        //         return (
-                        //             <PhotoView src={imgSrc}>
-                        //                 <span>
-                        //                     <ResponsiveImg
-                        //                         width={16}
-                        //                         height={9}
-                        //                         src={imgSrc}
-                        //                         alt={alt}
-                        //                         title={title}
-                        //                     />
-                        //                 </span>
-                        //             </PhotoView>
-                        //         );
-                        //     } else {
-                        //         return <></>;
-                        //     }
-                        // },
-                    }}
+                    components={
+                        {
+                            // pre: ({ children }) => {
+                            //     const codeElement = children[0] as ReactElement;
+                            //     const { className, children: code } =
+                            //         codeElement.props;
+                            //     const match = /language-(\w+)/.exec(
+                            //         className || ""
+                            //     );
+                            //     return (
+                            //         <Code
+                            //             language={match ? match[1] : "markup"}
+                            //             code={String(code).replace(/\n$/, "")}
+                            //         />
+                            //     );
+                            // },
+                            // img: ({ src, alt, title }) => {
+                            //     if (src) {
+                            //         const match = /..\/public(.+)/.exec(src);
+                            //         const imgSrc = match ? match[1] : src;
+                            //         return (
+                            //             <PhotoView src={imgSrc}>
+                            //                 <span>
+                            //                     <ResponsiveImg
+                            //                         width={16}
+                            //                         height={9}
+                            //                         src={imgSrc}
+                            //                         alt={alt}
+                            //                         title={title}
+                            //                     />
+                            //                 </span>
+                            //             </PhotoView>
+                            //         );
+                            //     } else {
+                            //         return <></>;
+                            //     }
+                            // },
+                        }
+                    }
                     remarkPlugins={[remarkGfm, remarkMath]}
                     rehypePlugins={[rehypeKatex]}>
                     {content}
