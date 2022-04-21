@@ -1,4 +1,4 @@
-import CapitalizeSpan from "../atoms/capitalize-span";
+import Capitalize from "../atoms/capitalize";
 import Link from "../atoms/link";
 
 type Props = {
@@ -9,7 +9,7 @@ type Props = {
 const TitleLink = ({ slug, title }: Props) => {
     return (
         <Link href={slug}>
-            <CapitalizeSpan>{title}</CapitalizeSpan>
+            <Capitalize>{title}</Capitalize>
         </Link>
     );
 };

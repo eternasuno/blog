@@ -1,4 +1,4 @@
-import CapitalizeSpan from "../atoms/capitalize-span";
+import Capitalize from "../atoms/capitalize";
 import Title from "../atoms/title";
 import Time from "../molecules/time";
 
@@ -12,7 +12,7 @@ const PostTitle = ({ title, dateTime }: Props) => {
         <Title className="text-center">
             <Time dateTime={dateTime} format="EEEE,  LLLL    d,  yyyy" />
             <h1 className="text-3xl font-extrabold md:text-6xl">
-                <CapitalizeSpan>{title}</CapitalizeSpan>
+                <Capitalize>{title}</Capitalize>
             </h1>
         </Title>
     );

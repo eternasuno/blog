@@ -1,11 +1,10 @@
-import { ExtendedRecordMap } from "notion-types";
 import { Post } from "../../lib/post";
 import Content from "../atoms/content";
-import NotionContent from "../molecules/notion-content";
+import MdContent from "../molecules/md-content";
 import Pagination from "../molecules/pagination";
 
 type Props = {
-    content: ExtendedRecordMap;
+    content: string;
     lastPost: Post | null;
     nextPost: Post | null;
 };
@@ -13,7 +12,7 @@ type Props = {
 const PostContent = ({ content, lastPost, nextPost }: Props) => {
     return (
         <Content className="flex flex-col xl:flex-row">
-            <NotionContent content={content} />
+            <MdContent content={content} />
             <Pagination
                 lastPost={lastPost}
                 nextPost={nextPost}

@@ -5,7 +5,7 @@ type Props = {
     className?: string;
 };
 
-const CapitalizeSpan = ({ children, className }: Props) => {
+const Capitalize = ({ children, className }: Props) => {
     return (
         <span className={cn("capitalize tracking-tight", className)}>
             {children}
@@ -13,4 +13,4 @@ const CapitalizeSpan = ({ children, className }: Props) => {
     );
 };
 
-export default CapitalizeSpan;
+export default Capitalize;

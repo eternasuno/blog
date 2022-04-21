@@ -2,13 +2,12 @@ import { InferGetStaticPropsType } from "next";
 import PostContent from "../../components/organisms/post-content";
 import PostTitle from "../../components/organisms/post-title";
 import BlogTemplate from "../../components/templates/blog-template";
-import { getPostBySlug, getPostSlugs } from "../../lib/post";
+import { getPostBySlug, getPostSlugs, getRelatedPost } from "../../lib/post";
 
 const Post = ({
     lastPost,
     nextPost,
     post,
-    content
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
     return (
         <BlogTemplate
@@ -17,7 +16,7 @@ const Post = ({
             canonical={`posts/${post.slug}`}>
             <PostTitle title={post.title} dateTime={post.date} />
             <PostContent
-                content={content}
+                content={post.content}
                 lastPost={lastPost}
                 nextPost={nextPost}
             />
@@ -32,16 +31,28 @@ export const getStaticPaths = async () => {
 
     return {
         paths: slugs.map((slug) => ({
-            params: { slug }
+            params: { slug },
         })),
-        fallback: false
+        fallback: false,
     };
 };
 
 export const getStaticProps = async ({ params }: any) => {
-    const props = await getPostBySlug(params.slug);
+    const { slug } = params;
+    const post = await getPostBySlug(slug, [
+        "slug",
+        "title",
+        "date",
+        "excerpt",
+        "content",
+    ]);
+    const { lastPost, nextPost } = await getRelatedPost(slug);
 
     return {
-        props
+        props: {
+            post,
+            lastPost,
+            nextPost,
+        },
     };
 };

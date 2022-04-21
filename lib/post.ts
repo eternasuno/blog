@@ -1,118 +1,63 @@
-import { Serializable } from "child_process";
-import { NotionAPI } from "notion-client";
-import {
-    Block,
-    CollectionPropertySchemaMap,
-    ExtendedRecordMap
-} from "notion-types";
-import { getDateValue, getTextContent, idToUuid, uuidToId } from "notion-utils";
-import pinyin from "pinyin";
-import BLOG from "../blog.config";
+import { promises as fs } from "fs";
+import matter from "gray-matter";
+import { join } from "path";
+
+const postsDirectory = join(process.cwd(), "posts");
+
+type Field = "slug" | "title" | "date" | "excerpt" | "content";
+
+type Items = {
+    [key in Field]?: string;
+};
 
 export type Post = {
-    pageId: string;
     slug: string;
     title: string;
     date: string;
-    tags: string[];
-    excerpt?: string;
-};
-
-export type Content = ExtendedRecordMap;
-
-export const getPosts = async () => {
-    const recordMap = await getRecordMap(BLOG.notion.pageId);
-    const block = recordMap.block[idToUuid(BLOG.notion.pageId)].value;
-    if (block.type !== "collection_view_page") {
-        console.info(`page "${BLOG.notion.pageId}" is not a database`);
-        return [];
-    }
-
-    // get all properties schema
-    const schema = Object.values(recordMap.collection)[0].value?.schema;
-
-    return Object.values(recordMap.block)
-        .map(({ value: block }) => {
-            // get all page
-            if (block.type === "page") {
-                return getAllProperties(block, schema);
-            }
-        })
-        .filter((item) => item && item["status"] === "Published")
-        .map((item) => item && addSlugToItem(item))
-        .sort((item1, item2) =>
-            item1!["date"] > item2!["date"] ? -1 : 1
-        ) as Post[];
+    excerpt: string;
+    content: string;
 };
 
 export const getPostSlugs = async () => {
-    return (await getPosts()).map((post) => post && post.slug);
+    const postFiles = await fs.readdir(postsDirectory);
+    return postFiles.map((post) => post.replace(/\.md$/, ""));
 };
 
-export const getPostBySlug = async (slug: string) => {
-    const posts = await getPosts();
+export const getPostBySlug = async (slug: string, fields: Field[]) => {
+    const postPath = join(postsDirectory, `${slug}.md`);
+    const postContent = await fs.readFile(postPath, "utf-8");
+    const { data, content } = matter(postContent);
+
+    const items: Items = {};
+    fields.forEach((field) => {
+        switch (field) {
+            case "slug":
+                items["slug"] = slug;
+                break;
+            case "content":
+                items["content"] = content;
+                break;
+            default:
+                items[field] = data[field];
+                break;
+        }
+    });
+    return items as Post;
+};
+
+export const getPosts = async (fields: Field[]) => {
+    const slugs = await getPostSlugs();
+    return await Promise.all(slugs.map((slug) => getPostBySlug(slug, fields)));
+};
+
+export const getRelatedPost = async (slug: string) => {
+    const posts = (await getPosts(["slug", "title", "date"])).sort(
+        (post1, post2) => (post1.date > post2.date ? -1 : 1)
+    );
+
     const index = posts.findIndex((post) => post.slug === slug);
-    const content = await getRecordMap(posts[index].pageId);
     return {
         lastPost: index > 0 ? posts[index - 1] : null,
         nextPost: index < posts.length - 1 ? posts[index + 1] : null,
-        post: posts[index],
-        content
     };
-};
-
-type Item = {
-    [key: string]: Serializable;
-};
-
-const addSlugToItem = (item: Item) => {
-    item["slug"] = pinyin(String(item["title"]), {
-        heteronym: true,
-        segment: true,
-        style: pinyin.STYLE_NORMAL
-    })
-        .map((item) => item[0])
-        .join("-")
-        .toLowerCase()
-        .replace(/[^a-z0-9\-]/g, "-")
-        .replace(/\-{2,}/g, "-");
-    return item;
-};
-
-const getRecordMap = async (pageId: string) => {
-    const notion = new NotionAPI({
-        authToken: BLOG.notion.authToken
-    });
-    return await notion.getPage(pageId);
-};
-
-const getAllProperties = (
-    block: Block,
-    schema: CollectionPropertySchemaMap
-) => {
-    const item: Item = { pageId: uuidToId(block.id) };
-    const properties = block.properties;
-    if (properties) {
-        for (const key in schema) {
-            if (schema[key].type) {
-                switch (schema[key].type) {
-                    case "date":
-                        item[schema[key].name] =
-                            getDateValue(properties[key])?.start_date || "";
-                        break;
-                    case "multi_select":
-                        item[schema[key].name] = getTextContent(
-                            properties[key]
-                        ).split(",");
-                        break;
-                    default:
-                        item[schema[key].name] = getTextContent(
-                            properties[key]
-                        );
-                        break;
-                }
-            }
-        }
-    }
-    return item;
 };

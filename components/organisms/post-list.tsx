@@ -14,7 +14,10 @@ const PostList = ({ posts }: Props) => {
             <ol className="space-y-8 pb-8 md:space-y-16">
                 {posts.map(({ slug, date, title, excerpt }) => (
                     <li key={slug} className="flex flex-col md:flex-row">
-                        <Time className="md:min-w-[25%]" dateTime={date} />
+                        <Time
+                            className="md:mt-1 md:min-w-[20%]"
+                            dateTime={date}
+                        />
                         <div className="space-y-2 md:space-y-6">
                             <h2 className="text-lg font-semibold md:text-2xl">
                                 <TitleLink

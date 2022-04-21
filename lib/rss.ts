@@ -1,7 +1,7 @@
-import { promises as fsPromises } from "fs";
+import { promises as fs } from "fs";
 import { join } from "path";
-import { Post } from "./post";
 import BLOG from "../blog.config";
+import { Post } from "./post";
 
 const generateRssItem = ({ slug, title, date, excerpt }: Post): string => `
   <item>
@@ -30,5 +30,5 @@ const generateRss = (posts: Post[]): string => `
 
 export const generateRssFile = async (posts: Post[]) => {
     const rss = generateRss(posts);
-    await fsPromises.writeFile(join(process.cwd(), "public", "rss.xml"), rss);
+    await fs.writeFile(join(process.cwd(), "public", "rss.xml"), rss);
 };
