@@ -1,6 +1,6 @@
 import { Post } from "../../lib/post";
 import Content from "../atoms/content";
-import MdContent from "../molecules/md-content";
+import MDXContent from "../molecules/mdx-content";
 import Pagination from "../molecules/pagination";
 
 type Props = {
@@ -12,7 +12,7 @@ type Props = {
 const PostContent = ({ content, lastPost, nextPost }: Props) => {
     return (
         <Content className="flex flex-col xl:flex-row">
-            <MdContent content={content} />
+            <MDXContent content={content} />
             <Pagination
                 lastPost={lastPost}
                 nextPost={nextPost}

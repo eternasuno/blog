@@ -1,8 +1,13 @@
 import { promises as fs } from "fs";
-import matter from "gray-matter";
+import { bundleMDX } from "mdx-bundler";
 import { join } from "path";
+import rehypeKatex from "rehype-katex";
+import remarkGfm from "remark-gfm";
+import remarkMath from "remark-math";
+import { remarkMdxImages } from "remark-mdx-images";
 
-const postsDirectory = join(process.cwd(), "posts");
+const rootPath = process.cwd();
+const postsPath = join(rootPath, "data/posts");
 
 type Field = "slug" | "title" | "date" | "excerpt" | "content";
 
@@ -19,14 +24,38 @@ export type Post = {
 };
 
 export const getPostSlugs = async () => {
-    const postFiles = await fs.readdir(postsDirectory);
-    return postFiles.map((post) => post.replace(/\.md$/, ""));
+    const postFiles = await fs.readdir(postsPath);
+    return postFiles.map((post) => post.replace(/\.mdx$/, ""));
 };
 
 export const getPostBySlug = async (slug: string, fields: Field[]) => {
-    const postPath = join(postsDirectory, `${slug}.md`);
-    const postContent = await fs.readFile(postPath, "utf-8");
-    const { data, content } = matter(postContent);
+    const postPath = join(postsPath, `${slug}.mdx`);
+    const { code, frontmatter } = await bundleMDX({
+        file: postPath,
+        bundleDirectory: join(rootPath, "public/assets"),
+        bundlePath: "/assets",
+        mdxOptions: (options) => {
+            options.remarkPlugins = [
+                ...(options.remarkPlugins ?? []),
+                remarkGfm,
+                remarkMath,
+                remarkMdxImages,
+            ];
+            options.rehypePlugins = [
+                ...(options.rehypePlugins ?? []),
+                rehypeKatex,
+            ];
+            return options;
+        },
+        esbuildOptions: (options) => {
+            options.loader = {
+                ...options.loader,
+                ".png": "file",
+            };
+
+            return options;
+        },
+    });
 
     const items: Items = {};
     fields.forEach((field) => {
@@ -35,10 +64,10 @@ export const getPostBySlug = async (slug: string, fields: Field[]) => {
                 items["slug"] = slug;
                 break;
             case "content":
-                items["content"] = content;
+                items["content"] = code;
                 break;
             default:
-                items[field] = data[field];
+                items[field] = frontmatter[field];
                 break;
         }
     });
