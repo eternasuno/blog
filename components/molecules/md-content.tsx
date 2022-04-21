@@ -1,6 +1,7 @@
 import dynamic from "next/dynamic";
 import { ReactElement } from "react";
 import ReactMarkdown from "react-markdown";
+import { PhotoProvider, PhotoView } from "react-photo-view";
 import rehypeKatex from "rehype-katex";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
@@ -12,15 +13,15 @@ const Image = dynamic(async () => await import("../atoms/responsive-img"), {
     ssr: false,
 });
 
-const PhotoProvider = dynamic(
-    async () => (await import("react-photo-view")).PhotoProvider,
-    { ssr: false }
-);
+// const PhotoProvider = dynamic(
+//     async () => (await import("react-photo-view")).PhotoProvider,
+//     { ssr: false }
+// );
 
-const PhotoView = dynamic(
-    async () => (await import("react-photo-view")).PhotoView,
-    { ssr: false }
-);
+// const PhotoView = dynamic(
+//     async () => (await import("react-photo-view")).PhotoView,
+//     { ssr: false }
+// );
 
 type Props = {
     content: string;
