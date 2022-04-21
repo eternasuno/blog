@@ -1,14 +1,13 @@
+import dynamic from "next/dynamic";
 import { ReactElement } from "react";
 import ReactMarkdown from "react-markdown";
-import { PhotoProvider, PhotoView } from "react-photo-view";
+import { PhotoProvider } from "react-photo-view";
 import rehypeKatex from "rehype-katex";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
 import Prose from "../atoms/prose";
-import ResponsiveImg from "../atoms/responsive-img";
-import Code from "./code";
 
-// const Code = dynamic(async () => await import("./code"), { ssr: false });
+const Code = dynamic(async () => await import("./code"), { ssr: false });
 
 // const Image = dynamic(async () => await import("../atoms/responsive-img"), {
 //     ssr: false,
@@ -49,27 +48,27 @@ const MdContent = ({ content, className }: Props) => {
                                 />
                             );
                         },
-                        img: ({ src, alt, title }) => {
-                            if (src) {
-                                const match = /..\/public(.+)/.exec(src);
-                                const imgSrc = match ? match[1] : src;
-                                return (
-                                    <PhotoView src={imgSrc}>
-                                        <span>
-                                            <ResponsiveImg
-                                                width={16}
-                                                height={9}
-                                                src={imgSrc}
-                                                alt={alt}
-                                                title={title}
-                                            />
-                                        </span>
-                                    </PhotoView>
-                                );
-                            } else {
-                                return <></>;
-                            }
-                        },
+                        // img: ({ src, alt, title }) => {
+                        //     if (src) {
+                        //         const match = /..\/public(.+)/.exec(src);
+                        //         const imgSrc = match ? match[1] : src;
+                        //         return (
+                        //             <PhotoView src={imgSrc}>
+                        //                 <span>
+                        //                     <ResponsiveImg
+                        //                         width={16}
+                        //                         height={9}
+                        //                         src={imgSrc}
+                        //                         alt={alt}
+                        //                         title={title}
+                        //                     />
+                        //                 </span>
+                        //             </PhotoView>
+                        //         );
+                        //     } else {
+                        //         return <></>;
+                        //     }
+                        // },
                     }}
                     remarkPlugins={[remarkGfm, remarkMath]}
                     rehypePlugins={[rehypeKatex]}>
