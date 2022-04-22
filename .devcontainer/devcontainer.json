@@ -19,8 +19,7 @@
         "bradlc.vscode-tailwindcss",
         "esbenp.prettier-vscode",
         "csstools.postcss",
-        "GitHub.copilot",
-        "silvenon.mdx"
+        "GitHub.copilot"
     ],
     // Use 'forwardPorts' to make a list of ports inside the container available locally.
     // "forwardPorts": [],

@@ -12,37 +12,26 @@ const Code = ({ code, language }: Props) => {
     const { theme } = useTheme();
     return (
         <Highlight
-            {...{ Prism, code }}
+            code={code}
+            Prism={Prism}
             theme={theme == "light" ? light : dark}
             language={language.toLowerCase() as Language}>
-            {({ style, tokens, getLineProps, getTokenProps }) => (
+            {({ className, style, tokens, getLineProps, getTokenProps }) => (
                 <pre
                     style={{
                         tabSize: 4,
                         whiteSpace: "pre-wrap",
                         wordBreak: "break-word",
                         ...style,
-                    }}>
-                    <code>
+                    }}
+                    className={className}>
+                    <code className={className}>
                         {tokens.map((line, i) => (
-                            <p
-                                key={i}
-                                {...getLineProps({ line, key: i })}
-                                className="table-row">
-                                <span
-                                    className="table-cell min-w-[3em] select-none
-                             pr-4 text-right opacity-50">
-                                    {i + 1}
-                                </span>
-                                <span className="table-cell">
-                                    {line.map((token, key) => (
-                                        <span
-                                            key={key}
-                                            {...getTokenProps({ token, key })}
-                                        />
-                                    ))}
-                                </span>
-                            </p>
+                            <div {...getLineProps({ line, key: i })}>
+                                {line.map((token, key) => (
+                                    <span {...getTokenProps({ token, key })} />
+                                ))}
+                            </div>
                         ))}
                     </code>
                 </pre>
