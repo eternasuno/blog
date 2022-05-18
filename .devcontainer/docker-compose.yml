@@ -7,7 +7,7 @@ services:
         working_dir: /workspace
         environment:
             - PUID=1000
-            - PGID=100
+            - PGID=1000
             - TZ=Asia/Shanghai
         volumes:
             - ../:/workspace:cached
