@@ -32,8 +32,6 @@ export const getPostBySlug = async (slug: string, fields: Field[]) => {
     const postPath = join(postsPath, `${slug}.mdx`);
     const { code, frontmatter } = await bundleMDX({
         file: postPath,
-        bundleDirectory: join(rootPath, "public/assets"),
-        bundlePath: "/assets",
         mdxOptions: (options) => {
             options.remarkPlugins = [
                 ...(options.remarkPlugins ?? []),
@@ -51,7 +49,13 @@ export const getPostBySlug = async (slug: string, fields: Field[]) => {
             options.loader = {
                 ...options.loader,
                 ".png": "file",
+                ".jpg": "file",
+                ".jpeg": "file",
             };
+
+            options.outdir = join(rootPath, "public/assets");
+            options.publicPath = "/assets";
+            options.write = true;
 
             return options;
         },
