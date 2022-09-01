@@ -1,8 +1,8 @@
 {
   "name": "EternaSuno's Blog",
   "short_name": "ES Blog",
-  "theme_color": "#555",
-  "background_color": "#fff",
+  "theme_color": "currentcolor",
+  "background_color": "currentcolor",
   "display": "standalone",
   "orientation": "any",
   "scope": "/",
