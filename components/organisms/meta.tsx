@@ -20,7 +20,7 @@ const Meta = ({ title, domain, canonical, description }: Props) => {
                 content="width=device-width, initial-scale=1.0"
             />
 
-            <meta name="theme-color" content="#282b34" />
+            <meta name="theme-color" content="currentcolor" />
 
             <meta name="description" content={description} />
 
