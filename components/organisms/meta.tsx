@@ -20,16 +20,7 @@ const Meta = ({ title, domain, canonical, description }: Props) => {
                 content="width=device-width, initial-scale=1.0"
             />
 
-            <meta
-                name="theme-color"
-                media="(prefers-color-scheme: light)"
-                content="#e5e7eb"
-            />
-            <meta
-                name="theme-color"
-                media="(prefers-color-scheme: dark)"
-                content="#282b34"
-            />
+            <meta name="theme-color" content="currentcolor" />
 
             <meta name="description" content={description} />
 
