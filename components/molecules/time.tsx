@@ -7,15 +7,13 @@ type Props = {
     format?: string;
 };
 
-const Time = ({ className, dateTime, format = "LLLL    d, yyyy" }: Props) => {
+const Time = ({ className, dateTime, format = "LLLL d, yyyy" }: Props) => {
     const date = parseISO(dateTime);
     return (
         <time
             dateTime={formatISO(date, { representation: "date" })}
-            className={cn(
-                "text-sm text-slate-700 dark:text-slate-300 md:text-base",
-                className
-            )}>
+            className={cn("italic", className)}
+        >
             {formatDate(date, format)}
         </time>
     );

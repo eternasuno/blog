@@ -1,15 +1,13 @@
-import BlogTitle from "../components/organisms/blog-title";
+import PageTitle from "../components/molecules/page-title";
 import BlogTemplate from "../components/templates/blog-template";
 
 const NotFound = () => (
     <BlogTemplate
         title="404 - Not Found"
         description="Not Found"
-        canonical="404">
-        <BlogTitle
-            title="404 - Not Found"
-            description="Sorry, the page does not exist!"
-        />
+        canonical="404"
+    >
+        <PageTitle>Page Not Found</PageTitle>
     </BlogTemplate>
 );
 

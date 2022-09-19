@@ -1,7 +1,13 @@
 import { promises as fs } from "fs";
 import { join } from "path";
 import BLOG from "../blog.config";
-import { Post } from "./post";
+
+type Post = {
+    slug: string;
+    title: string;
+    date: string;
+    excerpt: string;
+};
 
 const generateRssItem = ({ slug, title, date, excerpt }: Post): string => `
   <item>

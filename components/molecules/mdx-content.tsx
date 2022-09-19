@@ -6,7 +6,7 @@ import Prose from "../atoms/prose";
 const Code = dynamic(async () => await import("./code"), { ssr: false });
 
 const Image = dynamic(async () => await import("../atoms/responsive-img"), {
-    ssr: false,
+    ssr: false
 });
 
 const PhotoProvider = dynamic(
@@ -64,7 +64,7 @@ const MDXContent = ({ content, className }: Props) => {
                             } else {
                                 return <></>;
                             }
-                        },
+                        }
                     }}
                 />
             </PhotoProvider>

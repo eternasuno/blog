@@ -14,28 +14,24 @@ const Meta = ({ title, domain, canonical, description }: Props) => {
     return (
         <Head>
             <meta charSet="utf-8" />
+
             <meta
                 name="viewport"
                 content="width=device-width, initial-scale=1.0"
             />
-            <meta name="theme-color" content="currentcolor" />
-            <meta name="description" content={description} />
-            <title>{title}</title>
 
-            <link rel="manifest" href="/site.webmanifest" />
-            <link
-                rel="icon"
-                type="image/png"
-                sizes="16x16"
-                href="/icons/icon-16x16.png"
+            <meta
+                name="theme-color"
+                media="(prefers-color-scheme: light)"
+                content="#e5e7eb"
             />
-            <link
-                rel="icon"
-                type="image/png"
-                sizes="32x32"
-                href="/icons/icon-32x32.png"
+            <meta
+                name="theme-color"
+                media="(prefers-color-scheme: dark)"
+                content="#282b34"
             />
-            <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+
+            <meta name="description" content={description} />
 
             <meta property="og:url" content={canonical} />
             <meta property="og:type" content="website" />
@@ -50,7 +46,26 @@ const Meta = ({ title, domain, canonical, description }: Props) => {
             <meta name="twitter:description" content={description} />
             <meta name="twitter:image" content={image} />
 
+            <title>{title}</title>
+
+            <link rel="manifest" href="/site.webmanifest" />
+
+            <link
+                rel="icon"
+                type="image/png"
+                sizes="16x16"
+                href="/icons/icon-16x16.png"
+            />
+            <link
+                rel="icon"
+                type="image/png"
+                sizes="32x32"
+                href="/icons/icon-32x32.png"
+            />
+            <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+
             <link rel="canonical" href={canonical} />
+
             <link
                 rel="alternate"
                 title="RSS feed"

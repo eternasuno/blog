@@ -11,7 +11,8 @@ const Rectangle = ({ children, className }: Props) => {
             className={cn(
                 "block cursor-pointer rounded hover:bg-slate-600/25",
                 className
-            )}>
+            )}
+        >
             {children}
         </span>
     );

@@ -1,25 +1,25 @@
 import cn from "classnames";
-import { Post } from "../../lib/post";
-import PostLink from "./post-link";
-import TitleLink from "./title-link";
+import Link from "../atoms/link";
 
 type Props = {
-    lastPost: Post | null;
-    nextPost: Post | null;
+    href: string;
+    title: string;
+    subTitle: string;
     className?: string;
 };
 
-const Pagination = ({ lastPost, nextPost, className }: Props) => {
+const Pagination = ({ href, title, subTitle, className }: Props) => {
     return (
-        <div className={cn("text-sm font-medium leading-5", className)}>
-            <div className="space-y-8 py-8">
-                <PostLink heading="Next Article" post={nextPost} />
-                <PostLink heading="Previous Article" post={lastPost} />
-            </div>
-            <div className="py-8">
-                <TitleLink slug="/" title="← Back to the blog" />
-            </div>
-        </div>
+        <Link
+            className={cn(
+                "rounded border-[1px] border-solid p-2 lg:space-y-4 lg:p-4",
+                className
+            )}
+            href={href}
+        >
+            <small className="text-xs lg:text-sm">{subTitle}</small>
+            <p className="text-sm lg:text-base">{title}</p>
+        </Link>
     );
 };
 

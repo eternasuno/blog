@@ -1,12 +1,21 @@
 version: "3"
 
 services:
-    workspace:
-        image: node:16-bullseye
-        network_mode: "host"
-        working_dir: /workspace
-        environment:
-            - TZ=Asia/Shanghai
+    blog:
+        build:
+            context: .
+            dockerfile: Dockerfile
+            args:
+                - TZ
+                - NODE_VERSION
+        image: node:${NODE_VERSION:-lts}
         volumes:
-            - ../:/workspace:cached
+            - ..:/blog:cached
+            - pnpm_store:/opt/pnpm/store
+        working_dir: /next
         tty: true
+        restart: unless-stopped
+
+volumes:
+    pnpm_store:
+        external: true

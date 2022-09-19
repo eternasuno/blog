@@ -1,16 +1,18 @@
+import cn from "classnames";
 import Capitalize from "../atoms/capitalize";
 import Link from "../atoms/link";
 
 type Props = {
-    slug: string;
+    href: string;
     title: string;
+    className?: string;
 };
 
-const TitleLink = ({ slug, title }: Props) => {
+const TitleLink = ({ href, title, className }: Props) => {
     return (
-        <Link href={slug}>
-            <Capitalize>{title}</Capitalize>
-        </Link>
+        <Capitalize className={cn("underline", className)}>
+            <Link href={href}>{title}</Link>
+        </Capitalize>
     );
 };
 
