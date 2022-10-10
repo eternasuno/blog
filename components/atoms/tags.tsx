@@ -11,11 +11,7 @@ const Tags = ({ className, tags }: Props) => {
         <div className={cn("flex flex-wrap gap-x-4", className)}>
             {tags &&
                 tags.map((tag, index) => (
-                    <Link
-                        key={index}
-                        className="hover:text-sky-600/75"
-                        href={`/tags/${tag}`}
-                    >
+                    <Link key={index} href={`/tags/${tag}`}>
                         <span>#{tag}</span>
                     </Link>
                 ))}

@@ -1,31 +1,18 @@
-import BLOG from "../../blog.config";
 import Capitalize from "../atoms/capitalize";
-import Container from "../atoms/container";
-import SlopingLine from "../atoms/sloping-line";
 import Nav, { Item as NavItem } from "./Nav";
 
 type Props = {
     title: string;
     navItems: NavItem[];
-    description?: string;
 };
 
-const Header = ({ title, navItems, description }: Props) => {
+const Header = ({ title, navItems }: Props) => {
     return (
-        <header className="space-y-8">
-            <h1 className="mt-12 text-center text-4xl font-extrabold lg:text-6xl">
-                <Capitalize>{title}</Capitalize>
-            </h1>
+        <header className="mt-8 flex flex-col space-y-8 lg:flex-row lg:justify-between lg:space-y-0">
+            <Capitalize className="text-center text-4xl font-extrabold">
+                {title}
+            </Capitalize>
             <Nav items={navItems} />
-            {description && (
-                <>
-                    <SlopingLine />
-                    <p className="before:mr-2 before:content-['★']">
-                        <em className="italic">{BLOG.description}</em>
-                    </p>
-                </>
-            )}
-            <SlopingLine />
         </header>
     );
 };

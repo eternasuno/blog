@@ -15,7 +15,7 @@ type Props = {
 
 const Nav = ({ items }: Props) => {
     return (
-        <nav className="flex flex-wrap justify-center lg:space-x-4">
+        <nav className="flex flex-wrap justify-center lg:gap-4">
             {items.map((item, index) => (
                 <Link href={item.href} key={index}>
                     <Rectangle className="select-none p-2">

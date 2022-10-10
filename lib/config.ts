@@ -21,7 +21,8 @@ const BLOG = {
     og: {
         bgImage:
             "https://images.unsplash.com/photo-1509223740887-8ab81082b074?w=1050&q=80"
-    }
+    },
+    is_dev: process.env.NODE_ENV === "development"
 };
 
 export default BLOG;

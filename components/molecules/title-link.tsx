@@ -10,7 +10,7 @@ type Props = {
 
 const TitleLink = ({ href, title, className }: Props) => {
     return (
-        <Capitalize className={cn("underline", className)}>
+        <Capitalize>
             <Link href={href}>{title}</Link>
         </Capitalize>
     );

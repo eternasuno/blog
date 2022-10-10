@@ -1,7 +1,8 @@
 import { InferGetStaticPropsType } from "next";
+import Capitalize from "../../components/atoms/capitalize";
+import Link from "../../components/atoms/link";
 import PageTitle from "../../components/molecules/page-title";
 import Time from "../../components/molecules/time";
-import TitleLink from "../../components/molecules/title-link";
 import BlogTemplate from "../../components/templates/blog-template";
 import { getPostsByTag, getPostTags } from "../../lib/post";
 
@@ -25,7 +26,9 @@ const Tag = ({
             <ol className="pl-8">
                 {posts.map(({ slug, title, date }, index) => (
                     <li className="list-disc" key={index}>
-                        <TitleLink href={`/posts/${slug}`} title={title} />
+                        <Capitalize>
+                            <Link href={`/posts/${slug}`}>{title}</Link>
+                        </Capitalize>
                         <Time
                             dateTime={date}
                             format="dd LLL yyyy"

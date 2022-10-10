@@ -5,6 +5,7 @@ import rehypeKatex from "rehype-katex";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
 import remarkMdxImages from "remark-mdx-images";
+import BLOG from "./config";
 
 type Items = {
     ["slug"]?: string;
@@ -15,14 +16,13 @@ type Items = {
     ["content"]?: string;
 };
 
-const IS_DEV = process.env.NODE_ENV === "development";
 const ROOT_PATH = process.cwd();
 const POST_PATH = join(ROOT_PATH, "data/posts");
 
 export const getPostSlugs = async () => {
     const postFiles = await fs.readdir(POST_PATH);
     return postFiles
-        .filter(post => IS_DEV || post.lastIndexOf(".draft.mdx") < 0)
+        .filter(post => BLOG.is_dev || post.lastIndexOf(".draft.mdx") < 0)
         .map(post => post.replace(/\.mdx$/, ""));
 };
 

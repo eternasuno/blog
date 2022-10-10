@@ -8,7 +8,7 @@ type Props = {
 
 const PageTitle = ({ children, className }: Props) => {
     return (
-        <h1 className={cn("my-4 text-4xl", className)}>
+        <h1 className={cn("mb-4 text-4xl font-bold", className)}>
             <Capitalize>{children}</Capitalize>
         </h1>
     );

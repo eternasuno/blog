@@ -1,9 +1,10 @@
+import Capitalize from "../atoms/capitalize";
 import Link from "../atoms/link";
 import Prose from "../atoms/prose";
+import Tags from "../atoms/tags";
 import Time from "../molecules/time";
-import TitleLink from "../molecules/title-link";
 
-export type Post = {
+type Props = {
     slug: string;
     title: string;
     date: string;
@@ -11,29 +12,23 @@ export type Post = {
     excerpt: string;
 };
 
-type Props = {
-    posts: Post[];
-};
-
-const PostItem = ({ posts }: Props) => {
+const PostItem = ({ slug, title, date, tags, excerpt }: Props) => {
     return (
-        <ol>
-            {posts.map(({ slug, title, date, tags, excerpt }, index) => (
-                <li key={index}>
-                    <h2 className="underline">
+        <article className="flex flex-col gap-2 lg:flex-row lg:gap-8">
+            <Time
+                className="min-w-[10rem] text-sm text-slate-700 dark:text-slate-400"
+                dateTime={date}
+            />
+            <div className="space-y-2">
+                <h1 className="text-lg font-bold">
+                    <Capitalize>
                         <Link href={`/posts/${slug}`}>{title}</Link>
-                    </h2>
-                    <Time dateTime={date} />
-                    <div>
-                        <Prose>{excerpt}</Prose>
-                    </div>
-                    {tags &&
-                        tags.map((tag, index) => (
-                            <span key={index}>{tag}</span>
-                        ))}
-                </li>
-            ))}
-        </ol>
+                    </Capitalize>
+                </h1>
+                <Prose>{excerpt}</Prose>
+                <Tags tags={tags} />
+            </div>
+        </article>
     );
 };
 
