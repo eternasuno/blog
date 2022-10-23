@@ -1,7 +1,6 @@
 import { InferGetStaticPropsType } from "next";
 import Capitalize from "../../components/atoms/capitalize";
 import Link from "../../components/atoms/link";
-import PageTitle from "../../components/molecules/page-title";
 import Time from "../../components/molecules/time";
 import BlogTemplate from "../../components/templates/blog-template";
 import { getPostsByTag, getPostTags } from "../../lib/post";

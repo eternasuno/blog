@@ -1,5 +1,4 @@
 import { InferGetStaticPropsType } from "next";
-import PageTitle from "../../components/molecules/page-title";
 import Time from "../../components/molecules/time";
 import TitleLink from "../../components/molecules/title-link";
 import BlogTemplate from "../../components/templates/blog-template";

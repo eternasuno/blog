@@ -1,5 +1,4 @@
 import { InferGetStaticPropsType } from "next";
-import PageTitle from "../../components/molecules/page-title";
 import Tags from "../../components/atoms/tags";
 import BlogTemplate from "../../components/templates/blog-template";
 import { getPostTags } from "../../lib/post";
