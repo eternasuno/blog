@@ -22,7 +22,6 @@ const Tag = ({
             description={`Tagged "${tag}"`}
             canonical={`tags/${tag}`}
         >
-            <PageTitle>{`Tagged "${tag}"`}</PageTitle>
             <ol className="pl-8">
                 {posts.map(({ slug, title, date }, index) => (
                     <li className="list-disc" key={index}>

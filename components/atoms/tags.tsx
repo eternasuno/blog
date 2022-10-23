@@ -1,5 +1,6 @@
 import cn from "classnames";
 import Link from "./link";
+import Rectangle from "./rectangle";
 
 type Props = {
     className?: string;
@@ -12,7 +13,9 @@ const Tags = ({ className, tags }: Props) => {
             {tags &&
                 tags.map((tag, index) => (
                     <Link key={index} href={`/tags/${tag}`}>
-                        <span>#{tag}</span>
+                        <Rectangle className="select-none p-2">
+                            #{tag}
+                        </Rectangle>
                     </Link>
                 ))}
         </div>

@@ -1,15 +1,15 @@
-import Document, { Head, Html, Main, NextScript } from "next/document";
+import { Html, Head, Main, NextScript } from "next/document";
 
-export default class MyDocument extends Document {
-    render() {
-        return (
-            <Html lang="en">
-                <Head />
-                <body className="dark:bg-[#282b34] dark:text-slate-200">
-                    <Main />
-                    <NextScript />
-                </body>
-            </Html>
-        );
-    }
-}
+const Document = () => {
+    return (
+        <Html lang="en">
+            <Head />
+            <body>
+                <Main />
+                <NextScript />
+            </body>
+        </Html>
+    );
+};
+
+export default Document;

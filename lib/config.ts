@@ -8,15 +8,15 @@ const BLOG = {
         {
             href: "/",
             title: "home"
-        },
-        {
-            href: "/tags",
-            title: "tags"
-        },
-        {
-            href: "/posts",
-            title: "archive"
         }
+        // {
+        //     href: "/tags",
+        //     title: "tags"
+        // },
+        // {
+        //     href: "/posts",
+        //     title: "archive"
+        // }
     ],
     og: {
         bgImage:

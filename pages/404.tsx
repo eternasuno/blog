@@ -7,8 +7,8 @@ const NotFound = () => (
         description="Not Found"
         canonical="404"
     >
-        <div className="flex max-h-full min-h-[16rem] flex-col">
-            <div className="m-auto flex items-center justify-center gap-4 text-base lg:text-2xl">
+        <div className="absolute top-0 left-0 -z-10 flex h-full w-full flex-col">
+            <div className="m-auto flex select-none items-center justify-center gap-4 text-base lg:text-2xl">
                 <h1>404</h1>
                 <h2 className="border-l-2 border-solid pl-4">
                     This page could not be found

@@ -1,15 +1,12 @@
 import { InferGetStaticPropsType } from "next";
 import MDXContent from "../../components/molecules/mdx-content";
-import PageTitle from "../../components/molecules/page-title";
 import Pagination from "../../components/molecules/pagination";
-import Time from "../../components/molecules/time";
 import BlogTemplate from "../../components/templates/blog-template";
 import { getPostBySlug, getPostSlugs, getRelatedPost } from "../../lib/post";
 
 type Post = {
     slug: string;
     title: string;
-    date: string;
     excerpt: string;
     content: string;
 };
@@ -30,12 +27,6 @@ const Slug = ({
             description={post.excerpt}
             canonical={`posts/${post.slug}`}
         >
-            <div className="mb-8 text-center">
-                <PageTitle>{post.title}</PageTitle>
-                <p className="text-sm text-slate-700 dark:text-slate-400">
-                    Written on <Time dateTime={post.date} />
-                </p>
-            </div>
             <MDXContent content={post.content} />
             <div className="mt-16 flex flex-col justify-between gap-4 lg:flex-row lg:gap-8">
                 <Pagination

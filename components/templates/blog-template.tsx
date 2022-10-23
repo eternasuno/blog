@@ -1,7 +1,7 @@
 import BLOG from "../../lib/config";
-import Container from "../atoms/container";
 import Footer from "../organisms/footer";
 import Header from "../organisms/header";
+import Main from "../organisms/main";
 import Meta from "../organisms/meta";
 
 type Props = {
@@ -18,17 +18,19 @@ const BlogTemplate = ({
     children
 }: Props) => {
     return (
-        <Container className="flex min-h-screen flex-col flex-nowrap justify-between gap-16">
+        <div className="flex min-h-screen flex-col justify-between dark:bg-[#282b34] dark:text-slate-200">
             <Meta
                 title={title}
                 description={description}
                 domain={BLOG.domain}
                 canonical={`${BLOG.domain}/${canonical}`}
             />
-            <Header title={BLOG.title} navItems={BLOG.routers} />
-            <main className="grow lg:mx-16">{children}</main>
-            <Footer author={BLOG.author} since={BLOG.since} />
-        </Container>
+            <Header routes={BLOG.routers} />
+            <Main title={title} className="grow">
+                {children}
+            </Main>
+            <Footer author={BLOG.author} since={BLOG.since} className="mt-8" />
+        </div>
     );
 };
 

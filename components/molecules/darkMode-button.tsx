@@ -2,7 +2,11 @@ import { useTheme } from "next-themes";
 import { useState, useEffect } from "react";
 import Rectangle from "../atoms/rectangle";
 
-const DarkModeButton = () => {
+type Props = {
+    className?: string;
+};
+
+const DarkModeButton = ({ className }: Props) => {
     const [isMounted, setIsMounted] = useState(false);
 
     useEffect(() => {
@@ -11,7 +15,9 @@ const DarkModeButton = () => {
 
     const { theme, systemTheme, setTheme } = useTheme();
 
-    const isDarkMode = (isMounted && theme === "dark") || (theme === "system" && systemTheme === "dark");
+    const isDarkMode =
+        (isMounted && theme === "dark") ||
+        (theme === "system" && systemTheme === "dark");
 
     const switchDarkMode = () => {
         if (isMounted) {
@@ -20,11 +26,22 @@ const DarkModeButton = () => {
     };
 
     return (
-        <button type="button" className="focus:outline-none" aria-label="darkMode" onClick={switchDarkMode}>
-            <Rectangle className="h-10 w-10 p-3 lg:h-11 lg:w-11">
-                <svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor">
+        <button
+            type="button"
+            className="focus:outline-none"
+            aria-label="darkMode"
+            onClick={switchDarkMode}
+        >
+            <Rectangle className={className}>
+                <svg
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    stroke="currentColor"
+                >
                     <g
-                        transform={isDarkMode ? "rotate(40,12,12)" : "rotate(90,12,12)"}
+                        transform={
+                            isDarkMode ? "rotate(40,12,12)" : "rotate(90,12,12)"
+                        }
                         style={{
                             transitionProperty: "transform",
                             transitionDuration: "0.5s"
@@ -32,7 +49,13 @@ const DarkModeButton = () => {
                     >
                         <defs>
                             <mask id="mask">
-                                <rect x="0" y="0" width="100%" height="100%" fill="white" />
+                                <rect
+                                    x="0"
+                                    y="0"
+                                    width="100%"
+                                    height="100%"
+                                    fill="white"
+                                />
                                 <circle
                                     strokeWidth="0"
                                     fill="black"

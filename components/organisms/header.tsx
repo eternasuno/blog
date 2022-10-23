@@ -1,18 +1,37 @@
 import Capitalize from "../atoms/capitalize";
-import Nav, { Item as NavItem } from "./Nav";
+import Container from "../atoms/container";
+import Link from "../atoms/link";
+import DarkModeButton from "../molecules/darkMode-button";
+import RssLinkButton from "../molecules/rss-button";
 
-type Props = {
+type Route = {
+    href: string;
     title: string;
-    navItems: NavItem[];
 };
 
-const Header = ({ title, navItems }: Props) => {
+type Props = {
+    routes: Route[];
+};
+
+const Header = ({ routes }: Props) => {
     return (
-        <header className="mt-8 flex flex-col space-y-8 lg:flex-row lg:justify-between lg:space-y-0">
-            <Capitalize className="text-center text-4xl font-extrabold">
-                {title}
-            </Capitalize>
-            <Nav items={navItems} />
+        <header className="sticky top-0 backdrop-blur">
+            <Container className="flex items-center justify-between">
+                <nav className="flex cursor-pointer select-none font-bold lg:gap-4 lg:text-xl">
+                    {routes.map(({ href, title }, index) => (
+                        <Link href={href} key={index}>
+                            <Capitalize>{title}</Capitalize>
+                        </Link>
+                    ))}
+                </nav>
+                <div className="flex lg:gap-4">
+                    <DarkModeButton className="h-10 w-10 p-3 lg:h-11 lg:w-11" />
+                    <RssLinkButton
+                        href="/rss.xml"
+                        className="h-10 w-10 p-3 lg:h-11 lg:w-11"
+                    />
+                </div>
+            </Container>
         </header>
     );
 };

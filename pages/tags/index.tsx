@@ -10,8 +10,7 @@ const Index = ({ tags }: InferGetStaticPropsType<typeof getStaticProps>) => (
         description="Browse by tag"
         canonical="/tags"
     >
-        <PageTitle>all tags</PageTitle>
-        <Tags className="px-4" tags={tags} />
+        <Tags className="text-lg" tags={tags} />
     </BlogTemplate>
 );
 

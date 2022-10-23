@@ -13,8 +13,6 @@ type Post = {
 
 const Index = ({ posts }: InferGetStaticPropsType<typeof getStaticProps>) => (
     <BlogTemplate title="All tags" description="All tags" canonical="/tags">
-        <PageTitle>The archive</PageTitle>
-        <p className="my-6">{`Showing all ${posts.length} posts.`}</p>
         <ol className="space-y-2 pl-8">
             {posts.map(({ slug, title, date }, index) => (
                 <li className="list-disc" key={index}>
