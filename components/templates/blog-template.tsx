@@ -8,7 +8,7 @@ type Props = {
     title?: string;
     canonical?: string;
     description?: string;
-    children: React.ReactNode;
+    children?: React.ReactNode;
 };
 
 const BlogTemplate = ({
