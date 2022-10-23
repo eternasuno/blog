@@ -12,7 +12,7 @@ const Footer = ({ author, since, className }: Props) => {
     return (
         <footer
             className={cn(
-                "text-center text-xs text-zinc-400 dark:text-zinc-500",
+                "text-center text-xs text-zinc-600 dark:text-zinc-400",
                 className
             )}
         >

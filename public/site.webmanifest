@@ -2,6 +2,8 @@
   "name": "EternaSuno's Blog",
   "short_name": "ES Blog",
   "display": "standalone",
+  "background_color":"#282b34",
+  "theme_color":"#282b34",
   "orientation": "any",
   "scope": "/",
   "start_url": "/",

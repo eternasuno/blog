@@ -18,7 +18,7 @@ const BlogTemplate = ({
     children
 }: Props) => {
     return (
-        <div className="flex min-h-screen flex-col justify-between dark:bg-[#282b34] dark:text-slate-200">
+        <div className="flex min-h-screen max-w-full flex-col justify-between dark:bg-[#282b34] dark:text-slate-200">
             <Meta
                 title={title}
                 description={description}
