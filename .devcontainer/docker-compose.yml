@@ -1,7 +1,7 @@
 version: "3"
 
 services:
-    blog:
+    node:
         build:
             context: .
             dockerfile: Dockerfile
@@ -10,9 +10,9 @@ services:
                 - NODE_VERSION
         image: node:${NODE_VERSION:-lts}
         volumes:
-            - ..:/blog:cached
+            - ..:/node:cached
             - pnpm_store:/opt/pnpm/store
-        working_dir: /next
+        working_dir: /node
         tty: true
         restart: unless-stopped
 

@@ -1,7 +1,7 @@
 import { InferGetStaticPropsType } from "next";
 import Capitalize from "../components/atoms/capitalize";
 import Link from "../components/atoms/link";
-import Prose from "../components/atoms/prose";
+import MDContent from "../components/molecules/md-content";
 import Time from "../components/molecules/time";
 import BlogTemplate from "../components/templates/blog-template";
 import BLOG from "../lib/config";
@@ -13,6 +13,7 @@ type Post = {
     title: string;
     date: string;
     excerpt: string;
+    content: string;
 };
 
 const Index = ({ posts }: InferGetStaticPropsType<typeof getStaticProps>) => {
@@ -29,12 +30,10 @@ const Index = ({ posts }: InferGetStaticPropsType<typeof getStaticProps>) => {
                             <div className="space-y-2">
                                 <h2 className="text-lg font-bold">
                                     <Capitalize>
-                                        <Link href={`/posts/${slug}`}>
-                                            {title}
-                                        </Link>
+                                        <Link href={`/posts/${slug}`}>{title}</Link>
                                     </Capitalize>
                                 </h2>
-                                <Prose>{excerpt}</Prose>
+                                <MDContent markdown={excerpt} />
                             </div>
                         </article>
                     </li>
@@ -47,9 +46,7 @@ const Index = ({ posts }: InferGetStaticPropsType<typeof getStaticProps>) => {
 export default Index;
 
 export const getStaticProps = async () => {
-    const posts = ((await getPosts()) as Post[])
-        .sort((post1, post2) => (post1.date > post2.date ? -1 : 1))
-        .slice(0, 10);
+    const posts = (await getPosts<Post>()).slice(0, 10);
 
     BLOG.is_dev || (await generateRssFile(posts));
 

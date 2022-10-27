@@ -25,6 +25,9 @@ module.exports = {
                             "padding-right": "1rem",
                             display: "inline-block",
                         },
+                        ".math-inline svg": {
+                            display: "inline"
+                        }
                     },
                 },
             },

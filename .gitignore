@@ -44,6 +44,3 @@ yarn.lock
 # pnpm
 /.pnpm-store
 /pnpm-lock.yaml
-
-# posts assets
-/public/assets

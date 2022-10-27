@@ -1,5 +1,5 @@
 import { InferGetStaticPropsType } from "next";
-import MDXContent from "../../components/molecules/mdx-content";
+import MDContent from "../../components/molecules/md-content";
 import Pagination from "../../components/molecules/pagination";
 import BlogTemplate from "../../components/templates/blog-template";
 import { getPostBySlug, getPostSlugs, getRelatedPost } from "../../lib/post";
@@ -16,18 +16,10 @@ type RelatedPost = {
     title: string;
 };
 
-const Slug = ({
-    lastPost,
-    nextPost,
-    post
-}: InferGetStaticPropsType<typeof getStaticProps>) => {
+const Slug = ({ lastPost, nextPost, post }: InferGetStaticPropsType<typeof getStaticProps>) => {
     return (
-        <BlogTemplate
-            title={post.title}
-            description={post.excerpt}
-            canonical={`posts/${post.slug}`}
-        >
-            <MDXContent content={post.content} />
+        <BlogTemplate title={post.title} description={post.excerpt} canonical={`posts/${post.slug}`}>
+            <MDContent markdown={post.content} />
             <div className="mt-16 flex flex-col justify-between gap-4 lg:flex-row lg:gap-8">
                 <Pagination
                     title={lastPost.title}

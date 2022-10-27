@@ -1,101 +1,73 @@
-import { promises as fs } from "fs";
-import { bundleMDX } from "mdx-bundler";
-import { join } from "path";
-import rehypeKatex from "rehype-katex";
-import remarkGfm from "remark-gfm";
-import remarkMath from "remark-math";
-import remarkMdxImages from "remark-mdx-images";
+import matter from "gray-matter";
+import fetch from "node-fetch";
 import BLOG from "./config";
 
-type Items = {
-    ["slug"]?: string;
-    ["title"]?: string;
-    ["date"]?: string;
-    ["tags"]?: string[];
-    ["excerpt"]?: string;
-    ["content"]?: string;
-};
-
-const ROOT_PATH = process.cwd();
-const POST_PATH = join(ROOT_PATH, "data/posts");
-
 export const getPostSlugs = async () => {
-    const postFiles = await fs.readdir(POST_PATH);
-    return postFiles
-        .filter(post => BLOG.is_dev || post.lastIndexOf(".draft.mdx") < 0)
-        .map(post => post.replace(/\.mdx$/, ""));
-};
-
-export const getPostBySlug = async (slug: string) => {
-    const postPath = join(POST_PATH, `${slug}.mdx`);
-    const { code, frontmatter } = await bundleMDX({
-        file: postPath,
-        mdxOptions: options => {
-            options.remarkPlugins = [
-                ...(options.remarkPlugins ?? []),
-                remarkGfm,
-                remarkMath,
-                remarkMdxImages
-            ];
-            options.rehypePlugins = [
-                ...(options.rehypePlugins ?? []),
-                rehypeKatex
-            ];
-            return options;
-        },
-        esbuildOptions: options => {
-            options.loader = {
-                ...options.loader,
-                ".png": "file",
-                ".jpg": "file",
-                ".jpeg": "file"
-            };
-
-            options.outdir = join(ROOT_PATH, "public/assets");
-            options.publicPath = "/assets";
-            options.write = true;
-
-            return options;
+    const { name, owner, branch } = BLOG.repository;
+    const url = `https://api.github.com/repos/${owner}/${name}/contents?ref=${branch}`;
+    const response = await fetch(url, {
+        headers: {
+            Accept: "application/vnd.github+json"
         }
     });
+    const contents = (await response.json()) as {
+        type: string;
+        path: string;
+    }[];
 
-    return {
-        ...frontmatter,
-        slug,
-        content: code,
-        tags: frontmatter["tags"] || null
-    } as Items;
+    return contents
+        .filter(content => content.type === "file" && (BLOG.is_dev || content.path.lastIndexOf(".draft.md") < 0))
+        .map(content => content.path.replace(/\.md$/, ""));
 };
 
-export const getPosts = async () => {
+export const getPostBySlug = async <Post>(slug: string) => {
+    const { name, owner, branch } = BLOG.repository;
+    const url = `https://raw.githubusercontent.com/${owner}/${name}/${branch}/${slug}.md`;
+    const response = await fetch(url);
+    const markdown = await response.text();
+
+    const { data, excerpt, content } = matter(markdown, {
+        excerpt: true,
+        excerpt_separator: "<!-- excerpt -->"
+    });
+    const { title, date, tags } = data;
+
+    return {
+        title,
+        slug,
+        date,
+        tags: tags || null,
+        excerpt,
+        content
+    } as Post;
+};
+
+export const getPosts = async <Post>() => {
     const slugs = await getPostSlugs();
-    return await Promise.all(slugs.map(slug => getPostBySlug(slug)));
+    const posts = await Promise.all(slugs.map(slug => getPostBySlug<Post & { date: string }>(slug)));
+    return posts.sort((post1, post2) => (post1.date && post2.date && post1.date > post2.date ? -1 : 1)) as Post[];
 };
 
 export const getPostTags = async () => {
-    const posts = await getPosts();
+    const posts = await getPosts<{ tags: string[] }>();
     const postTagSet = posts.reduce((previousValue, currentValue) => {
         const tags = currentValue.tags;
-        tags && tags.forEach(tag => previousValue.add(tag));
+        tags && tags.forEach((tag: any) => previousValue.add(tag));
         return previousValue;
     }, new Set<string>());
     return Array.from(postTagSet);
 };
 
-export const getPostsByTag = async (tag: string) => {
-    const posts = (await getPosts()).sort((post1, post2) =>
-        post1.date && post2.date && post1.date > post2.date ? -1 : 1
-    );
+export const getPostsByTag = async <Post>(tag: string) => {
+    const posts = await getPosts<Post & { tags: string[] }>();
     return posts.filter(post => {
         const tags = post.tags;
         return tags && tags.includes(tag);
-    });
+    }) as Post[];
 };
 
-export const getRelatedPost = async (slug: string) => {
-    const posts = (await getPosts()).sort((post1, post2) =>
-        post1.date && post2.date && post1.date > post2.date ? -1 : 1
-    );
+export const getRelatedPost = async <Post>(slug: string) => {
+    const posts = await getPosts<Post & { slug: string }>();
     const index = posts.findIndex(post => post.slug === slug);
     return {
         lastPost: index > 0 ? posts[index - 1] : posts[posts.length - 1],

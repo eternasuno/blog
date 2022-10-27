@@ -1,7 +1,4 @@
 {
-    "files.associations": {
-        "*.mdx": "markdown"
-    },
     "[jsonc]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
