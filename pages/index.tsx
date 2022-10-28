@@ -30,7 +30,9 @@ const Index = ({ posts }: InferGetStaticPropsType<typeof getStaticProps>) => {
                             <div className="space-y-2">
                                 <h2 className="text-lg font-bold">
                                     <Capitalize>
-                                        <Link href={`/posts/${slug}`}>{title}</Link>
+                                        <Link href={`/posts/${slug}`}>
+                                            {title}
+                                        </Link>
                                     </Capitalize>
                                 </h2>
                                 <MDContent markdown={excerpt} />
@@ -46,11 +48,11 @@ const Index = ({ posts }: InferGetStaticPropsType<typeof getStaticProps>) => {
 export default Index;
 
 export const getStaticProps = async () => {
-    const posts = (await getPosts<Post>()).slice(0, 10);
+    const posts = await getPosts<Post>();
 
     BLOG.is_dev || (await generateRssFile(posts));
 
     return {
-        props: { posts }
+        props: { posts: posts.slice(0, 10) }
     };
 };

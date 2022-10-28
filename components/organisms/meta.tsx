@@ -8,8 +8,7 @@ type Props = {
 };
 
 const Meta = ({ title, domain, canonical, description }: Props) => {
-    const cardUrl = `https://cards.microlink.io/?preset=adobe&border=5px&gradient=linear-gradient%28to+right%2C%2334d399%2C+%233b82f6%29&title=${title}`;
-    const image = `https://i.microlink.io/${encodeURIComponent(cardUrl)}`;
+    const ogImg = `${domain}/api/og-image?title=${encodeURIComponent(title)}`;
 
     return (
         <Head>
@@ -20,7 +19,16 @@ const Meta = ({ title, domain, canonical, description }: Props) => {
                 content="width=device-width, initial-scale=1.0"
             />
 
-            <meta name="theme-color" content="#282b34" />
+            <meta
+                name="theme-color"
+                media="(prefers-color-scheme: light)"
+                content="white"
+            />
+            <meta
+                name="theme-color"
+                media="(prefers-color-scheme: dark)"
+                content="#282b34"
+            />
 
             <meta name="description" content={description} />
 
@@ -28,14 +36,14 @@ const Meta = ({ title, domain, canonical, description }: Props) => {
             <meta property="og:type" content="website" />
             <meta property="og:title" content={title} />
             <meta property="og:description" content={description} />
-            <meta property="og:image" content={image} />
+            <meta property="og:image" content={ogImg} />
 
             <meta name="twitter:card" content="summary_large_image" />
             <meta property="twitter:domain" content={domain} />
             <meta property="twitter:url" content={canonical} />
             <meta name="twitter:title" content={title} />
             <meta name="twitter:description" content={description} />
-            <meta name="twitter:image" content={image} />
+            <meta name="twitter:image" content={ogImg} />
 
             <title>{title}</title>
 

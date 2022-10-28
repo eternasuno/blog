@@ -16,7 +16,11 @@ export const getPostSlugs = async () => {
     }[];
 
     return contents
-        .filter(content => content.type === "file" && (BLOG.is_dev || content.path.lastIndexOf(".draft.md") < 0))
+        .filter(
+            content =>
+                content.path.lastIndexOf(".md") > 0 &&
+                (BLOG.is_dev || content.path.lastIndexOf(".draft.md") < 0)
+        )
         .map(content => content.path.replace(/\.md$/, ""));
 };
 
@@ -44,8 +48,12 @@ export const getPostBySlug = async <Post>(slug: string) => {
 
 export const getPosts = async <Post>() => {
     const slugs = await getPostSlugs();
-    const posts = await Promise.all(slugs.map(slug => getPostBySlug<Post & { date: string }>(slug)));
-    return posts.sort((post1, post2) => (post1.date && post2.date && post1.date > post2.date ? -1 : 1)) as Post[];
+    const posts = await Promise.all(
+        slugs.map(slug => getPostBySlug<Post & { date: string }>(slug))
+    );
+    return posts.sort((post1, post2) =>
+        post1.date && post2.date && post1.date > post2.date ? -1 : 1
+    ) as Post[];
 };
 
 export const getPostTags = async () => {

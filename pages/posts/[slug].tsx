@@ -16,9 +16,17 @@ type RelatedPost = {
     title: string;
 };
 
-const Slug = ({ lastPost, nextPost, post }: InferGetStaticPropsType<typeof getStaticProps>) => {
+const Slug = ({
+    lastPost,
+    nextPost,
+    post
+}: InferGetStaticPropsType<typeof getStaticProps>) => {
     return (
-        <BlogTemplate title={post.title} description={post.excerpt} canonical={`posts/${post.slug}`}>
+        <BlogTemplate
+            title={post.title}
+            description={post.excerpt}
+            canonical={`posts/${post.slug}`}
+        >
             <MDContent markdown={post.content} />
             <div className="mt-16 flex flex-col justify-between gap-4 lg:flex-row lg:gap-8">
                 <Pagination
