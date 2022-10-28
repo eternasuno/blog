@@ -8,7 +8,7 @@ type Props = {
 };
 
 const Meta = ({ title, domain, canonical, description }: Props) => {
-    const ogImg = `${domain}/api/og-image?title=${encodeURIComponent(title)}`;
+    const ogImg = `${domain}/api/og-img?title=${encodeURIComponent(title)}`;
 
     return (
         <Head>

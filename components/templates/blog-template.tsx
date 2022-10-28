@@ -14,7 +14,7 @@ type Props = {
 const BlogTemplate = ({
     title = BLOG.title,
     description = BLOG.description,
-    canonical,
+    canonical = "",
     children
 }: Props) => {
     return (
