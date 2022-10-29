@@ -1,6 +1,7 @@
 import { InferGetStaticPropsType } from "next";
 import Capitalize from "../components/atoms/capitalize";
 import Link from "../components/atoms/link";
+import Title from "../components/atoms/title";
 import MDContent from "../components/molecules/md-content";
 import Time from "../components/molecules/time";
 import BlogTemplate from "../components/templates/blog-template";
@@ -19,7 +20,10 @@ type Post = {
 const Index = ({ posts }: InferGetStaticPropsType<typeof getStaticProps>) => {
     return (
         <BlogTemplate>
-            <ol className="space-y-16">
+            <Title title={BLOG.title}>
+                <span className="italic">{BLOG.description}</span>
+            </Title>
+            <ol className="space-y-8 sm:space-y-16">
                 {posts.map(({ slug, title, date, excerpt }, index) => (
                     <li key={index}>
                         <article className="flex flex-col gap-2 lg:flex-row lg:gap-8">

@@ -1,5 +1,5 @@
-import Container from "../atoms/container";
 import cn from "classnames";
+import Container from "../atoms/container";
 
 type Props = {
     author: string;
@@ -12,11 +12,11 @@ const Footer = ({ author, since, className }: Props) => {
     return (
         <footer
             className={cn(
-                "text-center text-xs text-zinc-600 dark:text-zinc-400",
+                "text-xs text-zinc-600 dark:text-zinc-400",
                 className
             )}
         >
-            <Container>
+            <Container className="border-t-2 border-dashed border-t-zinc-300 dark:border-t-zinc-600">
                 {`© ${since}-${now.getFullYear()} ${author}, All Rights
                 Reserved.`}
             </Container>

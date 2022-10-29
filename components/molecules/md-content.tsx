@@ -1,5 +1,5 @@
 import dynamic from "next/dynamic";
-import { createElement, Fragment, useEffect, useMemo, useState } from "react";
+import { createElement, Fragment, useEffect, useState } from "react";
 import rehypeReact from "rehype-react";
 import { process } from "../../lib/markdown";
 import Prose from "../atoms/prose";
@@ -19,6 +19,45 @@ const PhotoView = dynamic(
     async () => (await import("react-photo-view")).PhotoView,
     { ssr: false }
 );
+
+type Props = {
+    markdown: string;
+    className?: string;
+};
+
+const MDContent = ({ markdown, className }: Props) => {
+    const content = useProcessor(markdown);
+
+    return (
+        <Prose className={className}>
+            <PhotoProvider>{content}</PhotoProvider>
+        </Prose>
+    );
+};
+
+export default MDContent;
+
+const useProcessor = (markdown: string) => {
+    const [Content, setContent] = useState(Fragment as any);
+
+    useEffect(() => {
+        process()
+            .use(rehypeReact, {
+                createElement,
+                Fragment,
+                components: {
+                    pre: Pre,
+                    img: Img
+                }
+            })
+            .process(markdown)
+            .then(file => {
+                setContent(file.result);
+            });
+    }, [markdown]);
+
+    return Content;
+};
 
 const Pre = ({ children }: any) => {
     const { className, children: code } = children[0].props;
@@ -50,42 +89,3 @@ const Img = ({ src, alt, title }: any) => {
         return <></>;
     }
 };
-
-const useProcessor = (markdown: string) => {
-    const [Content, setContent] = useState(Fragment as any);
-
-    useEffect(() => {
-        process()
-            .use(rehypeReact, {
-                createElement,
-                Fragment,
-                components: {
-                    pre: Pre,
-                    img: Img
-                }
-            })
-            .process(markdown)
-            .then(file => {
-                setContent(file.result);
-            });
-    }, [markdown]);
-
-    return Content;
-};
-
-type Props = {
-    markdown: string;
-    className?: string;
-};
-
-const MDContent = ({ markdown, className }: Props) => {
-    const content = useProcessor(markdown);
-
-    return (
-        <Prose className={className}>
-            <PhotoProvider>{content}</PhotoProvider>
-        </Prose>
-    );
-};
-
-export default MDContent;
