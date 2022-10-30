@@ -19,6 +19,7 @@ const CCIcons = ({
 
     return (
         <a
+            target="_blank"
             className="inline-flex gap-1"
             rel="license"
             href={href}

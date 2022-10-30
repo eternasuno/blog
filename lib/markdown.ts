@@ -19,8 +19,14 @@ export const process = () => {
             ...defaultSchema,
             attributes: {
                 ...defaultSchema.attributes,
-                div: [...(defaultSchema?.attributes?.div || []), ["className", "math", "math-display"]],
-                span: [...(defaultSchema?.attributes?.span || []), ["className", "math", "math-inline"]],
+                div: [
+                    ...(defaultSchema?.attributes?.div || []),
+                    ["className", "math", "math-display"]
+                ],
+                span: [
+                    ...(defaultSchema?.attributes?.span || []),
+                    ["className", "math", "math-inline"]
+                ],
                 code: [...(defaultSchema?.attributes?.code || []), "className"]
             }
         })
@@ -28,7 +34,15 @@ export const process = () => {
             inspectEach: ({ url, propertyName, node }) => {
                 switch (node.tagName) {
                     case "img":
-                        node.properties && propertyName && (node.properties[propertyName] = convert2CDN(url));
+                        node.properties &&
+                            propertyName &&
+                            (node.properties[propertyName] = convert2CDN(url));
+                        break;
+                    case "a":
+                        if (/^https?:\/\//.test(url)) {
+                            node.properties!["target"] = "_blank";
+                            node.properties!["rel"] = "noopener";
+                        }
                         break;
                     default:
                         break;
