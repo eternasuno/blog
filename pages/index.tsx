@@ -1,6 +1,6 @@
 import { InferGetStaticPropsType } from "next";
+import Link from "next/link";
 import Capitalize from "../components/atoms/capitalize";
-import Link from "../components/atoms/link";
 import Title from "../components/atoms/title";
 import MDContent from "../components/molecules/md-content";
 import Time from "../components/molecules/time";

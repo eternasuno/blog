@@ -1,6 +1,6 @@
 import cn from "classnames";
+import Link from "next/link";
 import Capitalize from "../atoms/capitalize";
-import Link from "../atoms/link";
 
 type Props = {
     href: string;

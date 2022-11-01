@@ -1,5 +1,5 @@
 import cn from "classnames";
-import Link from "./link";
+import Link from "next/link";
 import Rectangle from "./rectangle";
 
 type Props = {

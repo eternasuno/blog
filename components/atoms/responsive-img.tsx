@@ -31,7 +31,7 @@ const ResponsiveImg = ({ src, alt, title, width, height }: Props) => {
     return (
         <Image
             src={src}
-            alt={alt}
+            alt={alt || "image"}
             title={title}
             width={width}
             height={height}

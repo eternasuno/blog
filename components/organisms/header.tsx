@@ -1,6 +1,6 @@
+import Link from "next/link";
 import Capitalize from "../atoms/capitalize";
 import Container from "../atoms/container";
-import Link from "../atoms/link";
 import DarkModeButton from "../molecules/darkMode-button";
 import RssLinkButton from "../molecules/rss-button";
 
