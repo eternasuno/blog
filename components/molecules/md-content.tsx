@@ -73,7 +73,7 @@ const Pre = ({ children }: any) => {
 const Img = ({ src, alt, title }: any) => {
     if (src) {
         return (
-            <span>
+            <>
                 <PhotoView src={src}>
                     <Image
                         width={16}
@@ -81,11 +81,12 @@ const Img = ({ src, alt, title }: any) => {
                         src={src}
                         alt={alt}
                         title={title}
-                        className="mb-0"
                     />
                 </PhotoView>
-                <span className="mb-8 block text-center text-sm">{title}</span>
-            </span>
+                <span className="mb-8 mt-[-2rem] block text-center text-sm">
+                    {title}
+                </span>
+            </>
         );
     } else {
         return <></>;
