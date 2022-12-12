@@ -41,6 +41,7 @@ const ResponsiveImg = ({ src, alt, title, width, height }: Props) => {
             blurDataURL={`data:image/svg+xml;base64,${toBase64(
                 shimmer(width, height)
             )}`}
+            className="dark:brightness-75"
         />
     );
 };

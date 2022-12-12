@@ -15,7 +15,7 @@ type Props = {
 
 const Header = ({ routes }: Props) => {
     return (
-        <header className="sticky top-0 z-50 shadow-lg backdrop-blur">
+        <header className="sticky top-0 z-50 shadow-lg backdrop-blur dark:backdrop-blur-xl">
             <Container className="flex items-center justify-between">
                 <nav className="flex cursor-pointer select-none font-bold lg:gap-4 lg:text-xl">
                     {routes.map(({ href, title }, index) => (
