@@ -75,13 +75,15 @@ const Img = ({ src, alt, title }: any) => {
         return (
             <>
                 <PhotoView src={src}>
-                    <Image
-                        width={16}
-                        height={9}
-                        src={src}
-                        alt={alt}
-                        title={title}
-                    />
+                    <span>
+                        <Image
+                            width={16}
+                            height={9}
+                            src={src}
+                            alt={alt}
+                            title={title}
+                        />
+                    </span>
                 </PhotoView>
                 <span className="mb-8 mt-[-2rem] block text-center text-sm">
                     {title}
