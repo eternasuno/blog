@@ -1,4 +1,5 @@
 import Image from "next/image";
+import cn from "classnames";
 
 type Props = {
     src: string;
@@ -6,6 +7,7 @@ type Props = {
     height: number;
     alt?: string;
     title?: string;
+    className?: string;
 };
 
 const shimmer = (width: number, height: number) => `
@@ -27,7 +29,14 @@ const toBase64 = (str: string) =>
         ? Buffer.from(str).toString("base64")
         : window.btoa(str);
 
-const ResponsiveImg = ({ src, alt, title, width, height }: Props) => {
+const ResponsiveImg = ({
+    src,
+    alt,
+    title,
+    width,
+    height,
+    className
+}: Props) => {
     return (
         <Image
             src={src}
@@ -41,7 +50,7 @@ const ResponsiveImg = ({ src, alt, title, width, height }: Props) => {
             blurDataURL={`data:image/svg+xml;base64,${toBase64(
                 shimmer(width, height)
             )}`}
-            className="dark:brightness-75"
+            className={cn("dark:brightness-75", className)}
         />
     );
 };
