@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+::-webkit-scrollbar {
+    @apply hidden;
+}
+
+:root {
+    --shiki-color-background: hsl(230, 1%, 98%);
+    --shiki-color-text: hsl(344, 84%, 43%);
+    --shiki-token-comment: hsl(230, 6%, 44%);
+    --shiki-token-constant: hsl(35, 99%, 40%);
+    --shiki-token-function: hsl(221, 87%, 60%);
+    --shiki-token-keyword: hsl(301, 63%, 40%);
+    --shiki-token-link: hsl(198, 99%, 37%);
+    --shiki-token-parameter: hsl(344, 84%, 43%);
+    --shiki-token-punctuation: hsl(230, 8%, 24%);
+    --shiki-token-string-expression: hsl(119, 34%, 47%);
+    --shiki-token-string: hsl(119, 34%, 47%);
+}
+
+:root[data-theme='dark'] {
+    --shiki-color-background: hsl(220, 13%, 18%);
+    --shiki-color-text: hsl(5, 48%, 51%);
+    --shiki-token-comment: hsl(220, 9%, 55%);
+    --shiki-token-constant: hsl(39, 67%, 69%);
+    --shiki-token-function: hsl(207, 82%, 66%);
+    --shiki-token-keyword: hsl(286, 60%, 67%);
+    --shiki-token-link: hsl(187, 47%, 55%);
+    --shiki-token-parameter: hsl(5, 48%, 51%);
+    --shiki-token-punctuation: hsl(220, 14%, 71%);
+    --shiki-token-string-expression: hsl(95, 38%, 62%);
+    --shiki-token-string: hsl(95, 38%, 62%);
+}
+
+.prose {
+    .math-inline svg {
+        @apply inline;
+    }
+
+    pre {
+        direction: ltr;
+        tab-size: 4;
+
+        code {
+            counter-reset: line;
+
+            & > [data-line]::before {
+                counter-increment: line;
+                content: counter(line);
+                @apply mr-4 inline-block min-w-[1rem] text-right text-slate-400/50;
+            }
+        }
+    }
+}

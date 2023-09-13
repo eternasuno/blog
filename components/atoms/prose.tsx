@@ -1,19 +1,20 @@
-import cn from "classnames";
+import cn from 'classnames';
+import { DetailedHTMLProps, HTMLAttributes } from 'react';
 
-type Props = {
-    className?: string;
-    children: React.ReactNode;
-};
-
-const Prose = ({ className, children }: Props) => {
+const Prose = ({
+    className,
+    children,
+    ...rest
+}: DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>) => {
     return (
-        <div
+        <article
             className={cn(
-                "prose prose-slate max-w-none dark:prose-invert",
+                'prose max-w-none prose-figcaption:text-center prose-pre:hyphens-none prose-pre:text-left prose-pre:font-mono prose-img:w-full prose-img:shadow dark:prose-img:opacity-75 dark:prose-img:brightness-90',
                 className
-            )}>
+            )}
+            {...rest}>
             {children}
-        </div>
+        </article>
     );
 };
 

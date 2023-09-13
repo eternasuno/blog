@@ -1,21 +1,21 @@
 {
-    "image": "mcr.microsoft.com/devcontainers/base:debian",
-    "features": {
-        "ghcr.io/devcontainers/features/node": {
-            "version": "lts",
-            "nodeGypDependencies": true
-        }
-    },
     "customizations": {
         "vscode": {
             "extensions": [
+                "bradlc.vscode-tailwindcss",
+                "csstools.postcss",
                 "dbaeumer.vscode-eslint",
                 "eamodio.gitlens",
                 "esbenp.prettier-vscode",
-                "rangav.vscode-thunder-client",
-                "bradlc.vscode-tailwindcss",
-                "csstools.postcss"
+                "rangav.vscode-thunder-client"
             ]
         }
-    }
+    },
+    "features": {
+        "ghcr.io/devcontainers/features/node": {
+            "nodeGypDependencies": true,
+            "version": "lts"
+        }
+    },
+    "image": "mcr.microsoft.com/devcontainers/base:debian"
 }

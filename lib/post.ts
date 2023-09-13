@@ -1,84 +1,73 @@
-import matter from "gray-matter";
-import fetch from "node-fetch";
-import BLOG from "./config";
+import matter from 'gray-matter';
+import BLOG from './config';
+import { getCommits, getContent, getContents } from './github';
+
+export type Post = {
+    content: string;
+    date: string;
+    excerpt: string;
+    slug: string;
+    title: string;
+};
 
 export const getPostSlugs = async () => {
-    const { name, owner, branch } = BLOG.repository;
-    const url = `https://api.github.com/repos/${owner}/${name}/contents?ref=${branch}`;
-    const response = await fetch(url, {
-        headers: {
-            Accept: "application/vnd.github+json"
-        }
-    });
-    const contents = (await response.json()) as {
-        type: string;
-        path: string;
-    }[];
+    const contents = (await getContents()) as { path: string }[];
 
     return contents
         .filter(
-            content =>
-                content.path.lastIndexOf(".md") > 0 &&
-                (BLOG.is_dev || content.path.lastIndexOf(".draft.md") < 0)
+            ({ path }) =>
+                path.lastIndexOf('.md') > 0 &&
+                (BLOG.is_dev || path.lastIndexOf('.draft.md') < 0)
         )
-        .map(content => content.path.replace(/\.md$/, ""));
+        .map(({ path }) => path.replace(/\.md$/, ''));
 };
 
-export const getPostBySlug = async <Post>(slug: string) => {
-    const { name, owner, branch } = BLOG.repository;
-    const url = `https://raw.githubusercontent.com/${owner}/${name}/${branch}/${slug}.md`;
-    const response = await fetch(url);
-    const markdown = await response.text();
+export const getPostBySlug = async (slug: string) => {
+    const path = `${slug}.md`;
+    const [markdown, commits] = await Promise.all([
+        getContent(path),
+        getCommits(path),
+    ]);
 
-    const { data, excerpt, content } = matter(markdown, {
+    const {
+        data: { title },
+        excerpt,
+        content,
+    } = matter(markdown, {
         excerpt: true,
-        excerpt_separator: "<!-- excerpt -->"
+        excerpt_separator: '<!-- excerpt -->',
     });
-    const { title, date, tags } = data;
+
+    const [
+        {
+            commit: {
+                committer: { date },
+            },
+        },
+    ] = commits;
 
     return {
-        title,
-        slug,
+        content,
         date,
-        tags: tags || null,
-        excerpt,
-        content
+        excerpt: excerpt || content.split('\n').find((line) => line),
+        slug,
+        title: title || slug,
     } as Post;
 };
 
-export const getPosts = async <Post>() => {
+export const getPosts = async () => {
     const slugs = await getPostSlugs();
-    const posts = await Promise.all(
-        slugs.map(slug => getPostBySlug<Post & { date: string }>(slug))
-    );
-    return posts.sort((post1, post2) =>
-        post1.date && post2.date && post1.date > post2.date ? -1 : 1
-    ) as Post[];
+    const posts = await Promise.all(slugs.map(getPostBySlug));
+
+    return posts.sort((post1, post2) => (post1.date > post2.date ? -1 : 1));
 };
 
-export const getPostTags = async () => {
-    const posts = await getPosts<{ tags: string[] }>();
-    const postTagSet = posts.reduce((previousValue, currentValue) => {
-        const tags = currentValue.tags;
-        tags && tags.forEach((tag: any) => previousValue.add(tag));
-        return previousValue;
-    }, new Set<string>());
-    return Array.from(postTagSet);
-};
+export const getRelatedPost = async (slug: string) => {
+    const posts = await getPosts();
+    const index = posts.findIndex((post) => post.slug === slug);
 
-export const getPostsByTag = async <Post>(tag: string) => {
-    const posts = await getPosts<Post & { tags: string[] }>();
-    return posts.filter(post => {
-        const tags = post.tags;
-        return tags && tags.includes(tag);
-    }) as Post[];
-};
-
-export const getRelatedPost = async <Post>(slug: string) => {
-    const posts = await getPosts<Post & { slug: string }>();
-    const index = posts.findIndex(post => post.slug === slug);
     return {
-        lastPost: index > 0 ? posts[index - 1] : posts[posts.length - 1],
-        nextPost: index < posts.length - 1 ? posts[index + 1] : posts[0]
+        nextPost: index < posts.length - 1 ? posts[index + 1] : posts[0],
+        previousPost: index > 0 ? posts[index - 1] : posts[posts.length - 1],
     };
 };

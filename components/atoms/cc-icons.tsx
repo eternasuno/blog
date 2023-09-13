@@ -1,21 +1,21 @@
 type Props = {
-    noDerivatives?: boolean;
-    shareAlike?: boolean;
-    nonCommercial?: boolean;
     className?: string;
+    noDerivatives?: boolean;
+    nonCommercial?: boolean;
+    shareAlike?: boolean;
 };
 
 const CCIcons = ({
+    className,
     noDerivatives = false,
-    shareAlike = false,
     nonCommercial = false,
-    className
+    shareAlike = false,
 }: Props) => {
-    const href = `http://creativecommons.org/licenses/by${
-        nonCommercial ? "-nc" : ""
-    }${noDerivatives ? "-nd" : ""}${
-        !noDerivatives && shareAlike ? "-sa" : ""
-    }/4.0/`;
+    const href = `http://creativecommons.org/licenses/by${[
+        nonCommercial ? '-nc' : '',
+        noDerivatives ? '-nd' : '',
+        !noDerivatives && shareAlike ? '-sa' : '',
+    ].join('')}/4.0/`;
 
     return (
         <a
@@ -23,8 +23,7 @@ const CCIcons = ({
             className="inline-flex gap-1"
             rel="license"
             href={href}
-            title="This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License."
-        >
+            title="This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.">
             <CC className={className} />
             <BY className={className} />
             {nonCommercial && <NC className={className} />}
@@ -40,8 +39,7 @@ const CC = ({ className }: { className?: string }) => (
         <svg
             fill="currentColor"
             viewBox="5.5 -3.5 64 64"
-            enableBackground="new 5.5 -3.5 64 64"
-        >
+            enableBackground="new 5.5 -3.5 64 64">
             <g>
                 <circle fill="transparent" cx="37.785" cy="28.501" r="28.836" />
                 <path
@@ -74,8 +72,7 @@ const BY = ({ className }: { className?: string }) => (
         <svg
             fill="currentColor"
             viewBox="5.5 -3.5 64 64"
-            enableBackground="new 5.5 -3.5 64 64"
-        >
+            enableBackground="new 5.5 -3.5 64 64">
             <g>
                 <circle fill="transparent" cx="37.637" cy="28.806" r="28.276" />
                 <g>
@@ -101,8 +98,7 @@ const NC = ({ className }: { className?: string }) => (
         <svg
             fill="currentColor"
             viewBox="5.5 -3.5 64 64"
-            enableBackground="new 5.5 -3.5 64 64"
-        >
+            enableBackground="new 5.5 -3.5 64 64">
             <g>
                 <circle fill="transparent" cx="37.47" cy="28.736" r="29.471" />
                 <g>
@@ -131,8 +127,7 @@ const ND = ({ className }: { className?: string }) => (
         <svg
             fill="currentColor"
             viewBox="11 -7 64 64"
-            enableBackground="new 11 -7 64 64"
-        >
+            enableBackground="new 11 -7 64 64">
             <g>
                 <circle fill="transparent" cx="37.564" cy="28.288" r="29.013" />
                 <g>
@@ -155,8 +150,7 @@ const SA = ({ className }: { className?: string }) => (
         <svg
             fill="currentColor"
             viewBox="5.5 -3.5 64 64"
-            enableBackground="new 5.5 -3.5 64 64"
-        >
+            enableBackground="new 5.5 -3.5 64 64">
             <g>
                 <circle fill="transparent" cx="36.944" cy="28.631" r="29.105" />
                 <g>
