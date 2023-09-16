@@ -8,7 +8,7 @@ const PostList = async () => {
     const posts = await getPosts();
 
     return (
-        <ol className="divide-y">
+        <ol className="divide-y divide-base-content/20">
             {posts.map(({ slug, title, date, excerpt }) => (
                 <li
                     key={slug}

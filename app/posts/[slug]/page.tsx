@@ -3,7 +3,6 @@ import Time from '@/components/atoms/time';
 import MDProse from '@/components/molecules/md-prose';
 import Hero from '@/components/organisms/hero';
 import Pagination from '@/components/organisms/pagination';
-import BLOG from '@/lib/config';
 import { getPostBySlug, getPostSlugs } from '@/lib/post';
 import { Metadata } from 'next';
 
@@ -18,12 +17,7 @@ const page = async ({ params: { slug } }: { params: { slug: string } }) => {
                         Written on{' '}
                         <Time dateTime={post.date} format="LLLL do, yyyy" />
                     </span>
-                    <CCIcons
-                        noDerivatives={BLOG.no_derivatives}
-                        shareAlike={BLOG.share_alike}
-                        nonCommercial={BLOG.non_commercial}
-                        className="h-4 w-4"
-                    />
+                    <CCIcons className="h-4 w-4" />
                 </span>
             </Hero>
 
@@ -48,6 +42,7 @@ export const generateMetadata = async ({
     const post = await getPostBySlug(slug);
 
     return {
+        description: post.excerpt,
         title: post.title,
     } as Metadata;
 };

@@ -12,7 +12,7 @@ export const size = {
 
 export const contentType = 'image/png';
 
-const image = () =>
+const Image = () =>
     new ImageResponse(
         (
             <div tw="relative flex h-full w-full flex-col">
@@ -31,4 +31,4 @@ const image = () =>
         }
     );
 
-export default image;
+export default Image;

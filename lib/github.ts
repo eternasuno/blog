@@ -1,6 +1,8 @@
 import BLOG from './config';
 
-const { name, owner, branch, token } = BLOG.repository;
+const {
+    repository: { name, owner, branch, token },
+} = BLOG;
 
 const get = async (url: string) => {
     const response = await fetch(url, {
@@ -18,8 +20,6 @@ export const getContents = () =>
 
 export const getCommits = (path: string) =>
     get(`https://api.github.com/repos/${owner}/${name}/commits?path=${path}`);
-
-export const getUser = () => get(`https://api.github.com/users/${owner}`);
 
 export const getCDNUrl = (path: string) =>
     `https://cdn.jsdelivr.net/gh/${owner}/${name}@${branch}/${path}`;
