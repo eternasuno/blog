@@ -1,4 +1,4 @@
-import cn from "classnames";
+import cn from 'classnames';
 
 type Props = {
     children: React.ReactNode;
@@ -9,10 +9,9 @@ const Container = ({ children, className }: Props) => {
     return (
         <div
             className={cn(
-                "mx-auto w-full max-w-2xl p-4 lg:max-w-4xl 2xl:max-w-6xl",
+                'mx-auto w-full max-w-3xl px-4 sm:px-6 xl:max-w-5xl xl:px-0',
                 className
-            )}
-        >
+            )}>
             {children}
         </div>
     );

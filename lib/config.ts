@@ -1,24 +1,23 @@
-const BLOG = {
-    title: "EternaSuno's Blog",
-    author: "EternaSuno",
-    description: "World is trash, and so am I.",
-    domain: "https://eterna-suno.vercel.app",
-    since: "2020",
-    no_derivatives: false,
-    share_alike: true,
-    non_commercial: true,
-    is_dev: process.env.NODE_ENV === "development",
-    routers: [
-        {
-            href: "/",
-            title: "home"
-        }
-    ],
-    repository: {
-        name: "posts",
-        owner: "eternasuno",
-        branch: "main"
+import { env } from 'process';
+
+const assertNotNull = <T>(value: T) => {
+    if (value) {
+        return value as NonNullable<T>;
     }
+
+    throw new Error('value is empty.');
+};
+
+const BLOG = {
+    description: env.BLOG_DESCRIPTION,
+    is_dev: env.NODE_ENV === 'development',
+    repository: {
+        branch: env.GITHUB_REPO_BRANCH || 'main',
+        name: assertNotNull(env.GITHUB_REPO_NAME),
+        owner: assertNotNull(env.GITHUB_REPO_OWNER),
+        token: process.env.GITHUB_TOKEN,
+    },
+    title: env.BLOG_TITLE || `${assertNotNull(env.GITHUB_REPO_OWNER)}'s Blog`,
 };
 
 export default BLOG;
