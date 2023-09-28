@@ -2,7 +2,7 @@ import Hero from '@/components/organisms/hero';
 import PostList from '@/components/organisms/post-list';
 import BLOG from '@/lib/config';
 
-const page = () => {
+const Page = () => {
     const { title, description } = BLOG;
 
     return (
@@ -13,4 +13,4 @@ const page = () => {
     );
 };
 
-export default page;
+export default Page;

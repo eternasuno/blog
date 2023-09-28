@@ -15,7 +15,7 @@ const PostList = async () => {
                     className="w-full py-12 xl:flex xl:items-baseline">
                     <Time
                         dateTime={date}
-                        className="mb-2 block italic xl:mb-0 xl:w-1/4"
+                        className="mb-2 block xl:mb-0 xl:w-1/4"
                     />
                     <div className="space-y-6 xl:flex-1">
                         <Link href={`/posts/${slug}`}>
@@ -24,7 +24,7 @@ const PostList = async () => {
                         <MDProse className="prose-p:my-2" markdown={excerpt} />
                         <Link
                             href={`/posts/${slug}`}
-                            className="block font-medium leading-6">
+                            className="block font-medium leading-6 text-accent">
                             Read more →
                         </Link>
                     </div>

@@ -8,7 +8,7 @@ type Props = {
 const Title = ({ children, className }: Props) => (
     <div
         className={cn(
-            'font-sans font-bold capitalize tracking-tight',
+            'font-serif font-bold capitalize tracking-tight',
             className
         )}>
         {children}

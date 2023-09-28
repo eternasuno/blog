@@ -7,8 +7,8 @@ import Providers from './providers';
 
 import './global.css';
 
-const layout = ({ children }: { children: React.ReactNode }) => (
-    <html suppressHydrationWarning>
+const Layout = ({ children }: { children: React.ReactNode }) => (
+    <html lang="en" suppressHydrationWarning>
         <head />
         <body>
             <Providers>
@@ -29,10 +29,15 @@ export const metadata: Metadata = {
             'application/rss+xml': '/rss',
         },
     },
+    appleWebApp: {
+        capable: true,
+        statusBarStyle: 'black-translucent',
+        title: BLOG.title,
+    },
     description: BLOG.description,
     themeColor: [
-        { color: 'white', media: '(prefers-color-scheme: light)' },
-        { color: '#282b34', media: '(prefers-color-scheme: dark)' },
+        { color: '#F7FCFE', media: '(prefers-color-scheme: light)' },
+        { color: '#474A4D', media: '(prefers-color-scheme: dark)' },
     ],
     title: {
         default: BLOG.title,
@@ -40,4 +45,4 @@ export const metadata: Metadata = {
     },
 };
 
-export default layout;
+export default Layout;

@@ -13,13 +13,13 @@ export const size = {
 
 export const contentType = 'image/png';
 
-const image = async ({ params: { slug } }: { params: { slug: string } }) => {
+const Image = async ({ params: { slug } }: { params: { slug: string } }) => {
     const post = await getPostBySlug(slug);
 
     return new ImageResponse(
         (
-            <div tw="relative flex h-full w-full flex-col">
-                <h1 tw="m-auto font-sans text-6xl font-bold capitalize tracking-tight">
+            <div tw="relative flex h-full w-full flex-col bg-black text-white font-serif">
+                <h1 tw="m-auto text-6xl font-bold capitalize tracking-tight">
                     {post.title}
                 </h1>
                 <p tw="absolute bottom-0 right-4">
@@ -35,4 +35,4 @@ const image = async ({ params: { slug } }: { params: { slug: string } }) => {
     );
 };
 
-export default image;
+export default Image;

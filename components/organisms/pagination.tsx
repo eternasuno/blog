@@ -17,14 +17,14 @@ const Pagination = async ({ className, slug }: Props) => {
                 className="block"
                 href={`/posts/${previousPost.slug}`}
                 replace>
-                <div className="uppercase">prev</div>
+                <div className="text-xs italic text-accent">PREVIOUS</div>
                 <Title>{previousPost.title}</Title>
             </Link>
             <Link
                 className="block text-end xl:text-start"
                 href={`/posts/${nextPost.slug}`}
                 replace>
-                <div className="uppercase">next</div>
+                <div className="text-xs italic text-accent">NEXT</div>
                 <Title>{nextPost.title}</Title>
             </Link>
         </div>

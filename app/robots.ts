@@ -1,10 +1,11 @@
 import { MetadataRoute } from 'next';
 
-export default function robots(): MetadataRoute.Robots {
-    return {
+const Robots = () =>
+    ({
         rules: {
             disallow: '/',
             userAgent: '*',
         },
-    };
-}
+    }) as MetadataRoute.Robots;
+
+export default Robots;

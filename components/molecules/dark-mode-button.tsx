@@ -3,14 +3,20 @@
 import useDarkMode from '@/lib/use-dark-mode';
 import GhostButton from '../atoms/ghost-button';
 
+// eslint-disable-next-line max-lines-per-function
 const DarkModeButton = () => {
     const { isDarkMode, toggle } = useDarkMode();
 
     return (
         <GhostButton>
             {/* eslint-disable-next-line prettier/prettier */}
-            <label className="swap-rotate swap h-full place-content-stretch ">
-                <input type="checkbox" checked={isDarkMode} onChange={toggle} />
+            <label className="swap swap-rotate h-full place-content-stretch">
+                <input
+                    aria-label="switch"
+                    type="checkbox"
+                    checked={isDarkMode}
+                    onChange={toggle}
+                />
 
                 <svg
                     xmlns="http://www.w3.org/2000/svg"

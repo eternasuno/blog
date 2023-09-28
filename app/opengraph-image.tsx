@@ -15,8 +15,8 @@ export const contentType = 'image/png';
 const Image = () =>
     new ImageResponse(
         (
-            <div tw="relative flex h-full w-full flex-col">
-                <h1 tw="m-auto font-sans text-6xl font-bold capitalize tracking-tight">
+            <div tw="relative flex h-full w-full flex-col bg-black text-white font-serif">
+                <h1 tw="m-auto text-6xl font-bold capitalize tracking-tight">
                     {BLOG.title}
                 </h1>
                 <p tw="absolute bottom-0 right-4">

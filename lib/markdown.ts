@@ -1,5 +1,5 @@
 import rehypeUrlInspector from '@jsdevtools/rehype-url-inspector';
-import rehypeMathjax from 'rehype-mathjax';
+import rehypeMathjax from 'rehype-mathjax/chtml';
 import rehypePrettyCode from 'rehype-pretty-code';
 import rehypeStringify from 'rehype-stringify';
 import rehypeTitleFigure from 'rehype-title-figure';
@@ -38,7 +38,12 @@ const processor = unified()
         },
     })
     .use(rehypeTitleFigure)
-    .use(rehypeMathjax)
+    .use(rehypeMathjax, {
+        chtml: {
+            fontURL:
+                'https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2',
+        },
+    })
     .use(rehypePrettyCode, {
         defaultLang: 'plaintext',
         theme: 'css-variables',
@@ -47,10 +52,6 @@ const processor = unified()
 
 const style = `
 <style>
-    .math-inline svg {
-        display: inline;
-    }
-
     pre {
         --shiki-color-background: hsl(230, 1%, 98%);
         --shiki-color-text: hsl(344, 84%, 43%);
@@ -72,13 +73,13 @@ const style = `
 
     [data-theme='dark'] pre {
         --shiki-color-background: hsl(220, 13%, 18%);
-        --shiki-color-text: hsl(5, 48%, 51%);
-        --shiki-token-comment: hsl(220, 9%, 55%);
+        --shiki-color-text: hsl(35, 91%, 63%);
+        --shiki-token-comment: hsl(23, 13%, 80%);
         --shiki-token-constant: hsl(39, 67%, 69%);
         --shiki-token-function: hsl(207, 82%, 66%);
         --shiki-token-keyword: hsl(286, 60%, 67%);
         --shiki-token-link: hsl(187, 47%, 55%);
-        --shiki-token-parameter: hsl(5, 48%, 51%);
+        --shiki-token-parameter: hsl(35, 91%, 63%);
         --shiki-token-punctuation: hsl(220, 14%, 71%);
         --shiki-token-string-expression: hsl(95, 38%, 62%);
         --shiki-token-string: hsl(95, 38%, 62%);
