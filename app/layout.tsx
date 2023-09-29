@@ -35,6 +35,7 @@ export const metadata: Metadata = {
         title: BLOG.title,
     },
     description: BLOG.description,
+    metadataBase: new URL(`https://${BLOG.domain}`),
     themeColor: [
         { color: '#F7FCFE', media: '(prefers-color-scheme: light)' },
         { color: '#474A4D', media: '(prefers-color-scheme: dark)' },
