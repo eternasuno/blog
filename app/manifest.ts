@@ -26,7 +26,7 @@ const Manifest = () =>
                 type: 'image/png',
             },
             {
-                purpose: 'any',
+                purpose: 'maskable',
                 sizes: '1024x1024',
                 src: '/icon/1024',
                 type: 'image/png',

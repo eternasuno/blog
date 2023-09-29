@@ -16,14 +16,14 @@ module.exports = {
                 light: {
                     ...themes['[data-theme=wireframe]'],
                     accent: '#1E50A2',
-                    'base-100': '#F7FCFE',
+                    'base-100': '#FFFFFF',
                     'font-family': defaultTheme.fontFamily.sans.join(','),
                 },
             },
             {
                 dark: {
                     ...themes['[data-theme=black]'],
-                    accent: '#70F3FF',
+                    accent: '#BCE2E8',
                     'base-100': '#393F4C',
                     'font-family': defaultTheme.fontFamily.sans.join(','),
                 },

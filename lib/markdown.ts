@@ -95,6 +95,14 @@ const style = `
         opacity: 0.7;
         text-align: right;
     }
+
+    figure > img {
+        width: 100%;
+    }
+
+    figure > figcaption {
+        text-align: center;
+    }
 </style>`;
 
 export const renderToHtml = async (markdown: string) => {

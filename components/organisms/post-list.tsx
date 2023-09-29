@@ -24,7 +24,7 @@ const PostList = async () => {
                         <MDProse className="prose-p:my-2" markdown={excerpt} />
                         <Link
                             href={`/posts/${slug}`}
-                            className="block font-medium leading-6 text-accent">
+                            className="block font-serif font-medium leading-6 text-accent">
                             Read more →
                         </Link>
                     </div>
