@@ -2,7 +2,7 @@ import Container from '@/components/atoms/container';
 import Footer from '@/components/organisms/footer';
 import Nav from '@/components/organisms/nav';
 import BLOG from '@/lib/config';
-import { Metadata } from 'next';
+import { Metadata, Viewport } from 'next';
 import Providers from './providers';
 
 import './global.css';
@@ -36,14 +36,17 @@ export const metadata: Metadata = {
     },
     description: BLOG.description,
     metadataBase: new URL(`https://${BLOG.domain}`),
-    themeColor: [
-        { color: '#FFFFFF', media: '(prefers-color-scheme: light)' },
-        { color: '#393F4C', media: '(prefers-color-scheme: dark)' },
-    ],
     title: {
         default: BLOG.title,
         template: `%s | ${BLOG.title}`,
     },
+};
+
+export const viewport: Viewport = {
+    themeColor: [
+        { color: '#FFFFFF', media: '(prefers-color-scheme: light)' },
+        { color: '#393F4C', media: '(prefers-color-scheme: dark)' },
+    ],
 };
 
 export default Layout;

@@ -1,6 +1,6 @@
 import BLOG from '@/lib/config';
 import { getPostBySlug, getPostSlugs } from '@/lib/post';
-import { ImageResponse } from 'next/server';
+import { ImageResponse } from 'next/og';
 
 export const dynamicParams = false;
 
