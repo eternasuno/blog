@@ -27,7 +27,7 @@ const Icon = ({ id }: { id: string }) => {
 
     return new ImageResponse(
         (
-            <div tw="flex h-full w-full rounded-xl justify-center items-center bg-black text-[60vw] uppercase text-white">
+            <div tw="flex h-full w-full rounded-full justify-center items-center bg-black text-[60vw] uppercase text-white">
                 {BLOG.title[0]}
             </div>
         ),
