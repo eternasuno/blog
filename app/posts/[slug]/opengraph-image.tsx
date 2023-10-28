@@ -1,8 +1,6 @@
 import BLOG from '@/lib/config';
-import { getPostBySlug, getPostSlugs } from '@/lib/post';
+import { getPostBySlug } from '@/lib/post';
 import { ImageResponse } from 'next/og';
-
-export const dynamicParams = false;
 
 export const runtime = 'edge';
 
@@ -36,10 +34,5 @@ const Image = async ({ params: { slug } }: { params: { slug: string } }) => {
         }
     );
 };
-
-export const generateStaticParams = async () =>
-    (await getPostSlugs()).map((slug) => ({
-        slug,
-    }));
 
 export default Image;
