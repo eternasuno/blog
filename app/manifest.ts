@@ -3,7 +3,6 @@ import { MetadataRoute } from 'next';
 
 const Manifest = () =>
     ({
-        background_color: '#393F4C',
         description: BLOG.description,
         display: 'fullscreen',
         icons: [
@@ -39,7 +38,6 @@ const Manifest = () =>
         scope: '/',
         short_name: BLOG.title,
         start_url: '/',
-        theme_color: '#393F4C',
     }) as MetadataRoute.Manifest;
 
 export default Manifest;

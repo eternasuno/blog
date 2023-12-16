@@ -9,7 +9,7 @@ const Prose = ({
     return (
         <article
             className={cn(
-                'prose max-w-none prose-img:shadow dark:prose-img:opacity-90 dark:prose-img:brightness-90',
+                'prose max-w-none before:prose-code:content-none after:prose-code:content-none prose-img:shadow dark:prose-img:opacity-90 dark:prose-img:brightness-90',
                 className
             )}
             {...rest}>

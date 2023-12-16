@@ -5,3 +5,19 @@
 ::-webkit-scrollbar {
     @apply hidden;
 }
+
+[data-rehype-pretty-code-figure] * {
+    @apply bg-[var(--shiki-light-bg)] text-[var(--shiki-light)] dark:bg-[var(--shiki-dark-bg)] dark:text-[var(--shiki-dark)];
+}
+
+[data-rehype-pretty-code-figure] pre {
+    @apply text-start;
+    counter-reset: line;
+    direction: ltr;
+    tab-size: 4;
+}
+
+[data-rehype-pretty-code-figure] pre [data-line]::before {
+    @apply mr-4 inline-block min-w-[1rem] text-right opacity-70 content-[counter(line)];
+    counter-increment: line;
+}
