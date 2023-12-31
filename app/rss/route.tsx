@@ -4,11 +4,11 @@ import { Post, getPosts } from '@/lib/post';
 import { NextResponse } from 'next/server';
 
 export const GET = async () =>
-    new NextResponse(await generateRss(), {
-        headers: {
-            'content-type': 'text/xml',
-        },
-    });
+  new NextResponse(await generateRss(), {
+    headers: {
+      'content-type': 'text/xml',
+    },
+  });
 
 const generateRssItem = async ({ slug, title, date, content }: Post) => `
   <item>
@@ -27,13 +27,11 @@ const generateRss = async () => `
       <link>https://${BLOG.domain}</link>
       <description><![CDATA[ ${BLOG.description} ]]></description>
       <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
-      <atom:link href="https://${
-          BLOG.domain
-      }/rss.xml" rel="self" type="application/rss+xml"/>
+      <atom:link href="https://${BLOG.domain}/rss.xml" rel="self" type="application/rss+xml"/>
       ${(
-          await Promise.all(
-              (await getPosts()).map((post) => generateRssItem(post))
-          )
+        await Promise.all(
+          (await getPosts()).map((post) => generateRssItem(post)),
+        )
       ).join('')}
     </channel>
   </rss>

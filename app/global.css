@@ -11,7 +11,7 @@
 }
 
 [data-rehype-pretty-code-figure] pre {
-    @apply text-start;
+    @apply text-start ring-1 ring-neutral-content/50;
     counter-reset: line;
     direction: ltr;
     tab-size: 4;
