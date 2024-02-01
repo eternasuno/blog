@@ -24,7 +24,7 @@
     "remark-math": "^6.0.0",
     "remark-parse": "^11.0.0",
     "remark-rehype": "^11.0.0",
-    "shikiji": "0.9.15",
+    "shikiji": "0.10.2",
     "unified": "^11.0.4"
   },
   "devDependencies": {
