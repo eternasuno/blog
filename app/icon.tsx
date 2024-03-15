@@ -1,5 +1,8 @@
-import BLOG from '@/lib/config';
+import { env } from 'node:process';
+import { withoutEmpty } from '@/libs/wrapper';
 import { ImageResponse } from 'next/og';
+
+const AUTHOR = withoutEmpty(env.BLOG_AUTHOR);
 
 export const runtime = 'edge';
 
@@ -23,19 +26,16 @@ const imageMetadatas = [
 ];
 
 const Icon = ({ id }: { id: string }) => {
-  // biome-ignore lint/style/noNonNullAssertion: id is always in imageMetadatas
-  const { size } = imageMetadatas.find((data) => data.id === id)!;
+  const { size } = imageMetadatas.find((data) => data.id === id) ?? imageMetadatas[0];
 
   return new ImageResponse(
-    <div tw="flex h-full w-full rounded-full justify-center items-center bg-black text-[60vw] uppercase text-white">
-      {BLOG.title[0]}
+    <div tw="flex h-full w-full items-center justify-center rounded-full bg-black text-[60vw] text-white uppercase">
+      {AUTHOR[0]}
     </div>,
     { ...size },
   );
 };
 
-export const generateImageMetadata = () => {
-  return imageMetadatas;
-};
+export const generateImageMetadata = () => imageMetadatas;
 
 export default Icon;

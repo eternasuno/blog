@@ -1,10 +1,13 @@
-import BLOG from '@/lib/config';
-import { getPostBySlug } from '@/lib/post';
+import { env } from 'node:process';
+import { getPostBySlug } from '@/libs/post';
+import { withoutEmpty } from '@/libs/wrapper';
 import { ImageResponse } from 'next/og';
+
+const AUTHOR = withoutEmpty(env.BLOG_AUTHOR);
 
 export const runtime = 'edge';
 
-export const alt = BLOG.title;
+export const alt = `${AUTHOR}'s blog`;
 
 export const size = {
   height: 630,
@@ -14,17 +17,13 @@ export const size = {
 export const contentType = 'image/png';
 
 const Image = async ({ params: { slug } }: { params: { slug: string } }) => {
-  const post = await getPostBySlug(slug);
+  const { title } = await getPostBySlug(slug);
 
   return new ImageResponse(
-    <div tw="relative flex h-full w-full flex-col bg-black text-white font-serif">
-      <h1 tw="m-auto text-6xl font-bold capitalize tracking-tight">
-        {post.title}
-      </h1>
-      <p tw="absolute bottom-0 right-4">
-        {`Copyright © ${new Date().getFullYear()} - All right reserved by ${
-          BLOG.repository.owner
-        }`}
+    <div tw="relative flex h-full w-full flex-col bg-black font-serif text-white">
+      <h1 tw="m-auto font-bold text-6xl capitalize tracking-tight">{title}</h1>
+      <p tw="absolute right-4 bottom-0">
+        {`Copyright © ${new Date().getFullYear()} - All right reserved by ${AUTHOR}`}
       </p>
     </div>,
     {

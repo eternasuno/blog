@@ -1,39 +1,51 @@
 {
   "[javascript]": {
     "editor.codeActionsOnSave": {
-      "quickfix.biome": true,
-      "source.organizeImports.biome": true
+      "quickfix.biome": "explicit",
+      "source.organizeImports.biome": "explicit"
     },
     "editor.defaultFormatter": "biomejs.biome"
   },
   "[json]": {
     "editor.codeActionsOnSave": {
-      "quickfix.biome": true,
-      "source.organizeImports.biome": true
+      "quickfix.biome": "explicit",
+      "source.organizeImports.biome": "explicit"
     },
     "editor.defaultFormatter": "biomejs.biome"
   },
   "[jsonc]": {
     "editor.codeActionsOnSave": {
-      "quickfix.biome": true,
-      "source.organizeImports.biome": true
+      "quickfix.biome": "explicit",
+      "source.organizeImports.biome": "explicit"
     },
     "editor.defaultFormatter": "biomejs.biome"
   },
   "[typescript]": {
     "editor.codeActionsOnSave": {
-      "quickfix.biome": true,
-      "source.organizeImports.biome": true
+      "quickfix.biome": "explicit",
+      "source.organizeImports.biome": "explicit"
     },
     "editor.defaultFormatter": "biomejs.biome"
   },
   "[typescriptreact]": {
     "editor.codeActionsOnSave": {
-      "quickfix.biome": true,
-      "source.organizeImports.biome": true
+      "quickfix.biome": "explicit",
+      "source.organizeImports.biome": "explicit"
     },
     "editor.defaultFormatter": "biomejs.biome"
   },
+  "editor.quickSuggestions": {
+    "strings": "on"
+  },
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
   "tailwindCSS.classAttributes": ["class", "className", "ngClass", "tw"],
-  "tailwindCSS.emmetCompletions": true
+  "tailwindCSS.emmetCompletions": true,
+  "tailwindCSS.experimental.classRegex": [
+    "twc\\.[^`]+`([^`]*)`",
+    "twc\\(.*?\\).*?`([^`]*)",
+    ["twc\\.[^`]+\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"],
+    ["twc\\(.*?\\).*?\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
+  ]
 }

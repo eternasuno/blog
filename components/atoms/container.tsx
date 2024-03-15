@@ -1,20 +1,5 @@
-import cn from 'classnames';
+import { twc } from '@/libs/twc';
 
-type Props = {
-  children: React.ReactNode;
-  className?: string;
-};
-
-const Container = ({ children, className }: Props) => {
-  return (
-    <div
-      className={cn(
-        'container mx-auto px-4 sm:px-6 xl:max-w-5xl xl:px-0',
-        className,
-      )}>
-      {children}
-    </div>
-  );
-};
+const Container = twc.div`mx-auto max-w-6xl px-4 w-full`;
 
 export default Container;

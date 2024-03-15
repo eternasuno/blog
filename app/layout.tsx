@@ -1,45 +1,36 @@
+import { env } from 'node:process';
 import Container from '@/components/atoms/container';
 import Footer from '@/components/organisms/footer';
-import Nav from '@/components/organisms/nav';
-import BLOG from '@/lib/config';
-import { Metadata } from 'next';
-import Providers from './providers';
+import Header from '@/components/organisms/header';
+import { withoutEmpty } from '@/libs/wrapper';
+import type { Metadata } from 'next';
+import type { ReactNode } from 'react';
 
 import './global.css';
 
-const Layout = ({ children }: { children: React.ReactNode }) => (
+const AUTHOR = withoutEmpty(env.BLOG_AUTHOR);
+const DOMAIN = env.BLOG_DOMAIN || env.VERCEL_URL || `localhost:${env.PORT || 3000}`;
+
+const Layout = async ({ children }: { children: ReactNode }) => (
   <html lang="en" suppressHydrationWarning>
     <head />
-    <body>
-      <Providers>
-        <div className="flex min-h-screen flex-col">
-          <Nav />
-          <Container className="flex-1">{children}</Container>
-          <Footer />
-        </div>
-      </Providers>
+    <body className="flex min-h-screen flex-col">
+      <Header />
+      <Container asChild className="flex-grow">
+        <main>{children}</main>
+      </Container>
+      <Footer />
     </body>
   </html>
 );
 
 export const metadata: Metadata = {
-  alternates: {
-    canonical: '/',
-    types: {
-      'application/rss+xml': '/rss',
-    },
-  },
-  appleWebApp: {
-    capable: true,
-    statusBarStyle: 'black-translucent',
-    title: BLOG.title,
-  },
-  description: BLOG.description,
-  metadataBase: new URL(`https://${BLOG.domain}`),
-  title: {
-    default: BLOG.title,
-    template: `%s | ${BLOG.title}`,
-  },
+  alternates: { canonical: '/', types: { 'application/rss+xml': '/rss' } },
+  appleWebApp: { capable: true, statusBarStyle: 'black-translucent', title: AUTHOR },
+  creator: AUTHOR,
+  description: `${AUTHOR}'s blog.`,
+  metadataBase: new URL(`https://${DOMAIN}`),
+  title: { default: AUTHOR, template: `%s | ${AUTHOR}` },
 };
 
 export default Layout;

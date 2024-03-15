@@ -1,37 +1,43 @@
+import Hero from '@/components/atoms/hero';
+import Link from '@/components/atoms/link';
+import Strong from '@/components/atoms/strong';
+import Tag from '@/components/atoms/tag';
 import Time from '@/components/atoms/time';
 import MDProse from '@/components/molecules/md-prose';
-import Hero from '@/components/organisms/hero';
-import Pagination from '@/components/organisms/pagination';
-import { getPostBySlug, getPostSlugs } from '@/lib/post';
-import { Metadata } from 'next';
+import { getPostBySlug, getSlugs } from '@/libs/post';
+import type { Metadata } from 'next';
 
 export const dynamicParams = false;
 
 const Page = async ({ params: { slug } }: { params: { slug: string } }) => {
-  const post = await getPostBySlug(slug);
+  const { title, date, content, tags } = await getPostBySlug(slug);
 
   return (
     <>
-      <Hero title={post.title}>
-        <span className="inline-flex items-center gap-4">
-          <span>
-            Written on <Time dateTime={post.date} format="LLLL do, yyyy" />
-          </span>
-        </span>
+      <Hero className="space-y-2 text-center">
+        <Time className="font-serif" dateTime={date} format="EEEE, LLLL do, yyyy" />
+        <Strong asChild className="text-4xl md:text-6xl">
+          <h1>{title}</h1>
+        </Strong>
       </Hero>
 
-      <div className="flex flex-col gap-8 pb-8 pt-10 xl:flex-row xl:gap-0">
-        <MDProse className="flex-1" markdown={post.content} />
-        <Pagination slug={slug} className="xl:order-first xl:w-1/4" />
+      <div className="my-8 space-y-8 md:my-12">
+        <MDProse className="flex-1" markdown={content} />
+        <ul className="flex flex-wrap gap-2">
+          {tags.map((tag) => (
+            <li key={tag}>
+              <Tag asChild className="link-primary">
+                <Link href={`/tags/${tag}`}>{tag}</Link>
+              </Tag>
+            </li>
+          ))}
+        </ul>
       </div>
     </>
   );
 };
 
-export const generateStaticParams = async () =>
-  (await getPostSlugs()).map((slug) => ({
-    slug,
-  }));
+export const generateStaticParams = async () => (await getSlugs()).map((slug) => ({ slug }));
 
 export const generateMetadata = async ({
   params: { slug },

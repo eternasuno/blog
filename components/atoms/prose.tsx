@@ -1,21 +1,5 @@
-import cn from 'classnames';
-import { DetailedHTMLProps, HTMLAttributes } from 'react';
+import { twc } from '@/libs/twc';
 
-const Prose = ({
-  className,
-  children,
-  ...rest
-}: DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>) => {
-  return (
-    <article
-      className={cn(
-        'prose max-w-none before:prose-code:content-none after:prose-code:content-none prose-img:shadow dark:prose-img:opacity-90 dark:prose-img:brightness-90',
-        className,
-      )}
-      {...rest}>
-      {children}
-    </article>
-  );
-};
+const Prose = twc.article`prose max-w-none font-mono `;
 
 export default Prose;

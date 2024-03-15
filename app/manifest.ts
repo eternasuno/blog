@@ -1,9 +1,13 @@
-import BLOG from '@/lib/config';
-import { MetadataRoute } from 'next';
+import { env } from 'node:process';
+import { withoutEmpty } from '@/libs/wrapper';
+import type { MetadataRoute } from 'next';
+
+const AUTHOR = withoutEmpty(env.BLOG_AUTHOR);
+const TITLE = `${AUTHOR}'s blog`;
 
 const Manifest = () =>
   ({
-    description: BLOG.description,
+    description: TITLE,
     display: 'fullscreen',
     icons: [
       {
@@ -31,12 +35,12 @@ const Manifest = () =>
         type: 'image/png',
       },
     ],
-    id: BLOG.title,
-    name: BLOG.title,
+    id: TITLE,
+    name: TITLE,
     orientation: 'any',
     prefer_related_applications: false,
     scope: '/',
-    short_name: BLOG.title,
+    short_name: AUTHOR,
     start_url: '/',
   }) as MetadataRoute.Manifest;
 

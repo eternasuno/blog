@@ -1,18 +1,16 @@
 import { format as formatDate, formatISO, parseISO } from 'date-fns';
+import type { ComponentProps } from 'react';
 
-type Props = {
-  className?: string;
+type Props = ComponentProps<'time'> & {
   dateTime: string;
   format?: string;
 };
 
-const Time = ({ className, dateTime, format = 'LLLL d, yyyy' }: Props) => {
+const Time = ({ dateTime, format = 'LLLL d, yyyy', ...rest }: Props) => {
   const date = parseISO(dateTime);
 
   return (
-    <time
-      dateTime={formatISO(date, { representation: 'date' })}
-      className={className}>
+    <time {...rest} dateTime={formatISO(date)}>
       {formatDate(date, format)}
     </time>
   );

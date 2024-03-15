@@ -1,14 +1,26 @@
-import Hero from '@/components/organisms/hero';
-import PostList from '@/components/organisms/post-list';
-import BLOG from '@/lib/config';
+import Hero from '@/components/atoms/hero';
+import Strong from '@/components/atoms/strong';
+import Post from '@/components/organisms/post';
+import { getPosts } from '@/libs/post';
 
-const Page = () => {
-  const { title, description } = BLOG;
+const Page = async () => {
+  const posts = (await getPosts()).slice(0, 10);
 
   return (
     <>
-      <Hero title={title}>{description}</Hero>
-      <PostList />
+      <Hero asChild className="text-4xl md:text-6xl">
+        <Strong asChild>
+          <h1>Latest</h1>
+        </Strong>
+      </Hero>
+
+      <ol className="divide-y divide-neutral/50">
+        {posts.map((post) => (
+          <li key={post.slug}>
+            <Post {...post} />
+          </li>
+        ))}
+      </ol>
     </>
   );
 };

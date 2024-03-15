@@ -2,18 +2,27 @@
   "$schema": "https://biomejs.dev/schemas/1.4.1/schema.json",
   "formatter": {
     "enabled": true,
+    "formatWithErrors": true,
     "indentStyle": "space",
-    "formatWithErrors": true
+    "lineWidth": 95
   },
   "javascript": {
     "formatter": {
-      "quoteStyle": "single",
-      "bracketSameLine": true
+      "bracketSameLine": true,
+      "quoteStyle": "single"
     }
   },
   "linter": {
     "enabled": true,
     "rules": {
+      "nursery": {
+        "useSortedClasses": {
+          "options": {
+            "attributes": ["className", "tw"],
+            "functions": ["twc", "compose"]
+          }
+        }
+      },
       "recommended": true
     }
   },
