@@ -1,99 +1,84 @@
-// import type { Element } from 'hast';
-// import rehypeMathjax from 'rehype-mathjax/svg';
-// import rehypePrettyCode from 'rehype-pretty-code';
-// import rehypeRewrite from 'rehype-rewrite';
-// import rehypeStringify from 'rehype-stringify';
-// import remarkGfm from 'remark-gfm';
-// import remarkMath from 'remark-math';
-// import remarkParse from 'remark-parse';
-// import remarkRehype from 'remark-rehype';
-// import { unified } from 'unified';
-// import { getCDNUrl } from './github';
+import type { Element, Text } from 'hast';
+import rehypeKatex from 'rehype-katex';
+import rehypeRewrite from 'rehype-rewrite';
+import rehypeStringify from 'rehype-stringify';
+import remarkGfm from 'remark-gfm';
+import remarkMath from 'remark-math';
+import remarkParse from 'remark-parse';
+import remarkRehype from 'remark-rehype';
+import { unified } from 'unified';
+import { BASE_URL } from './config';
 
-// const absolute = (url: string) => /^https?:\/\//.test(url);
+export const createBaseProcessor = () =>
+  unified()
+    .use(remarkParse)
+    .use(remarkGfm, { singleTilde: false })
+    .use(remarkMath)
+    .use(remarkRehype)
+    .use(rehypeKatex, { output: 'mathml' });
 
-// const rewriteAnchor = (node: Element) => {
-//   const url = String(node.properties.href);
-//   if (absolute(url)) {
-//     node.properties.referrerpolicy = 'no-referrer';
-//     node.properties.rel = 'noopener';
-//     node.properties.target = '_blank';
-//   }
-// };
+export const renderToHtml = async (markdown: string) =>
+  String(
+    await createBaseProcessor()
+      .use(rehypeRewrite, {
+        rewrite: (node) => {
+          if (node.type !== 'element') {
+            return;
+          }
 
-// const rewriteImg = (node: Element, parent: Element) => {
-//   const src = String(node.properties.src);
-//   const url = absolute(src) ? src : getCDNUrl(src);
-//   const children = parent.children.filter((child) => child !== node);
+          switch (node.tagName) {
+            case 'a':
+              return rewriteAnchor(node);
+            case 'code':
+              return rewriteCode(node);
+            case 'img':
+              return rewriteImg(node);
+            default:
+              return;
+          }
+        },
+        selector: 'a,img,pre>code',
+      })
+      .use(rehypeStringify)
+      .process(markdown),
+  );
 
-//   children.push(
-//     {
-//       children: [node],
-//       properties: {
-//         href: url,
-//         referrerpolicy: 'no-referrer',
-//         rel: 'noopener',
-//         target: '_blank',
-//       },
-//       tagName: 'a',
-//       type: 'element',
-//     },
-//     {
-//       type: 'text',
-//       value: String(node.properties.alt || ''),
-//     },
-//   );
+const rewriteAnchor = (node: Element) => {
+  const { properties } = node;
+  const { href } = properties;
+  if (typeof href !== 'string') {
+    return;
+  }
 
-//   parent.children = children;
-//   parent.properties.style = `text-align: center;${parent.properties.style}`;
-//   node.properties.src = url;
-//   node.properties.style = `margin-bottom: 0;${node.properties.style}`;
-// };
+  properties.referrerpolicy = 'no-referrer';
+  properties.rel = 'noopener';
+  properties.target = '_blank';
+  properties.href = new URL(href, BASE_URL).toString();
+};
 
-// const rewriteSvg = (node: Element, parent: Element) => {
-//   if (parent.tagName === 'mjx-container') {
-//     const style = node.properties.style;
-//     node.properties.style = `display: inline-block;${style}`;
-//   }
-// };
+const rewriteImg = (node: Element) => {
+  const { properties } = node;
+  const { src } = properties;
+  if (typeof src !== 'string') {
+    return;
+  }
 
-// export const processor = unified()
-//   .use(remarkParse)
-//   .use(remarkGfm, { singleTilde: false })
-//   .use(remarkMath)
-//   .use(remarkRehype)
-//   .use(rehypeMathjax)
-//   .use(rehypePrettyCode, {
-//     defaultLang: 'plaintext',
-//     keepBackground: false,
-//     theme: {
-//       dark: 'one-dark-pro',
-//       light: 'github-light',
-//     },
-//   })
-//   .use(rehypeRewrite, {
-//     rewrite: (node, _, parent) => {
-//       if (node.type !== 'element' || parent?.type !== 'element') {
-//         return;
-//       }
+  properties.src = new URL(src.replace(/^\/public/, ''), BASE_URL).toString();
+};
 
-//       switch (node.tagName) {
-//         case 'a':
-//           rewriteAnchor(node);
-//           break;
-//         case 'img':
-//           rewriteImg(node, parent);
-//           break;
-//         case 'svg':
-//           rewriteSvg(node, parent);
-//           break;
-//         default:
-//           break;
-//       }
-//     },
-//     selector: 'a,img,svg',
-//   })
-//   .use(rehypeStringify);
+const rewriteCode = async (node: Element) => {
+  const { children, properties } = node;
+  const text = children.find(({ type }) => type === 'text');
+  if (!text) {
+    return;
+  }
 
-// export const renderToHtml = async (markdown: string) =>
-//   String(await processor.process(markdown));
+  properties.style = 'white-space: pre-wrap;overflow-wrap: break-word;';
+  const { value: code } = text as Text;
+  node.children = code
+    .split('\n')
+    .map(
+      (value) =>
+        ({ children: [{ type: 'text', value }], tagName: 'div', type: 'element' }) as Element,
+    );
+};

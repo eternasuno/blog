@@ -22,8 +22,10 @@ const Page = async ({ params: { tag } }: { params: { tag: string } }) => {
         </Strong>
         <ul className="flex flex-wrap gap-2">
           <li key="all">
-            <Tag asChild className="link-primary">
-              <Link href="/tags">All</Link>
+            <Tag asChild>
+              <Link $primary href="/tags">
+                All
+              </Link>
             </Tag>
           </li>
           {tags.map((tag) => (
@@ -31,8 +33,10 @@ const Page = async ({ params: { tag } }: { params: { tag: string } }) => {
               {currentTag === tag ? (
                 <Tag className="cursor-not-allowed bg-primary text-primary-content">{tag}</Tag>
               ) : (
-                <Tag asChild className="link-primary">
-                  <Link href={`/tags/${tag}`}>{tag}</Link>
+                <Tag asChild>
+                  <Link $primary href={`/tags/${tag}`}>
+                    {tag}
+                  </Link>
                 </Tag>
               )}
             </li>

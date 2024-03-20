@@ -1,10 +1,7 @@
-import { env } from 'node:process';
-import { withoutEmpty } from '@/libs/wrapper';
+import { AUTHOR } from '@/libs/config';
 import { getYear } from 'date-fns';
 import Container from '../atoms/container';
 import Link from '../atoms/link';
-
-const AUTHOR = withoutEmpty(env.BLOG_AUTHOR);
 
 const Footer = () => (
   <Container asChild>
@@ -13,7 +10,7 @@ const Footer = () => (
         Copyright © {getYear(new Date())} - <Link href="/">{AUTHOR}</Link>
       </span>
       <span className="grid-flow-col items-center">
-        <Link $external href="https://creativecommons.org/licenses/by-nd/4.0/?ref=chooser-v1">
+        <Link $external href="https://creativecommons.org/licenses/by-nd/4.0">
           CC BY-NC 4.0
         </Link>
         <Link $external aria-label="rss" className="leading-none" href="/rss">

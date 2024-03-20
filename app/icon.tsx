@@ -1,10 +1,5 @@
-import { env } from 'node:process';
-import { withoutEmpty } from '@/libs/wrapper';
+import { AUTHOR } from '@/libs/config';
 import { ImageResponse } from 'next/og';
-
-const AUTHOR = withoutEmpty(env.BLOG_AUTHOR);
-
-export const runtime = 'edge';
 
 const imageMetadatas = [
   {

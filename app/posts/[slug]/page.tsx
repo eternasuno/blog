@@ -26,8 +26,10 @@ const Page = async ({ params: { slug } }: { params: { slug: string } }) => {
         <ul className="flex flex-wrap gap-2">
           {tags.map((tag) => (
             <li key={tag}>
-              <Tag asChild className="link-primary">
-                <Link href={`/tags/${tag}`}>{tag}</Link>
+              <Tag asChild>
+                <Link $primary href={`/tags/${tag}`}>
+                  {tag}
+                </Link>
               </Tag>
             </li>
           ))}

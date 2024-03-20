@@ -22,8 +22,10 @@ const Page = async () => {
           </li>
           {tags.map((tag) => (
             <li key={tag}>
-              <Tag asChild className="link-primary">
-                <Link href={`/tags/${tag}`}>{tag}</Link>
+              <Tag asChild>
+                <Link $primary href={`/tags/${tag}`}>
+                  {tag}
+                </Link>
               </Tag>
             </li>
           ))}

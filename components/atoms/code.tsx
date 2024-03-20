@@ -1,4 +1,4 @@
-import { randomUUID } from 'node:crypto';
+import { randomUUID } from 'crypto';
 import { compose } from '@/libs/twc';
 import type { CSSProperties } from 'react';
 import { type BundledLanguage, type BundledTheme, codeToTokens } from 'shiki';
@@ -14,10 +14,7 @@ type Props = {
 const Code = async ({ className, code, darkTheme, lang, theme }: Props) => {
   const { tokens: lines, rootStyle } = await codeToTokens(code, {
     lang: (lang || 'text') as BundledLanguage,
-    themes: {
-      light: theme,
-      dark: darkTheme || theme,
-    },
+    themes: { light: theme, dark: darkTheme || theme },
     defaultColor: false,
   });
 
@@ -27,7 +24,6 @@ const Code = async ({ className, code, darkTheme, lang, theme }: Props) => {
         'whitespace-pre-wrap break-words bg-[--shiki-light-bg] text-[--shiki-light] dark:bg-[--shiki-dark-bg] dark:text-[--shiki-dark]',
         className,
       )}
-      data-language={lang}
       style={string2Style(rootStyle)}>
       <code>
         {lines.map((tokens, index) => (

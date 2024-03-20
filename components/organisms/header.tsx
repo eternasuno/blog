@@ -1,5 +1,4 @@
-import { env } from 'node:process';
-import { withoutEmpty } from '@/libs/wrapper';
+import { AUTHOR } from '@/libs/config';
 import Button from '../atoms/button';
 import Container from '../atoms/container';
 import Glass from '../atoms/glass';
@@ -7,8 +6,6 @@ import Link from '../atoms/link';
 import Shell from '../atoms/shell';
 import Strong from '../atoms/strong';
 import ThemeToggle from '../atoms/theme-toggle';
-
-const AUTHOR = withoutEmpty(env.BLOG_AUTHOR);
 
 const Header = () => (
   <Glass asChild>
@@ -21,11 +18,11 @@ const Header = () => (
             </Link>
           </span>
           <span>
-            <Strong asChild className="md:text-lg">
-              <Link $as="button" href="/tags">
-                tags
-              </Link>
-            </Strong>
+            <Button asChild>
+              <Strong asChild className="md:text-lg">
+                <Link href="/tags">tags</Link>
+              </Strong>
+            </Button>
             <Button asChild className="btn-square swap swap-rotate">
               <label>
                 <ThemeToggle className="hidden" />

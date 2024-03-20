@@ -1,13 +1,8 @@
-import { env } from 'node:process';
+import { AUTHOR, TITLE } from '@/libs/config';
 import { getPostBySlug } from '@/libs/post';
-import { withoutEmpty } from '@/libs/wrapper';
 import { ImageResponse } from 'next/og';
 
-const AUTHOR = withoutEmpty(env.BLOG_AUTHOR);
-
-export const runtime = 'edge';
-
-export const alt = `${AUTHOR}'s blog`;
+export const alt = TITLE;
 
 export const size = {
   height: 630,

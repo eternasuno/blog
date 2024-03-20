@@ -1,9 +1,5 @@
-import { env } from 'node:process';
-import { withoutEmpty } from '@/libs/wrapper';
+import { AUTHOR, TITLE } from '@/libs/config';
 import type { MetadataRoute } from 'next';
-
-const AUTHOR = withoutEmpty(env.BLOG_AUTHOR);
-const TITLE = `${AUTHOR}'s blog`;
 
 const Manifest = () =>
   ({

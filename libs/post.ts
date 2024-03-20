@@ -1,13 +1,10 @@
-import { promises as fs } from 'node:fs';
-import { join } from 'node:path';
-import { env } from 'node:process';
+import { promises as fs } from 'fs';
+import { join } from 'path';
 import { formatISO } from 'date-fns';
 import matter, { type GrayMatterFile } from 'gray-matter';
 import { unstable_cache } from 'next/cache';
 import { cache } from 'react';
-
-const DEV = env.NODE_ENV === 'development';
-const POST_DIR = join(process.cwd(), 'posts');
+import { DEV, POST_DIR } from './config';
 
 export type Post = {
   content: string;
@@ -36,15 +33,13 @@ export const getPostBySlug = unstable_cache(
     } = matter(fileContent, {
       // @ts-ignore
       excerpt: (file: GrayMatterFile<typeof fileContent>, { excerpt_separator }): void => {
-        if (file.content.includes(excerpt_separator)) {
-          const [excerpt] = file.content.split(excerpt_separator, 1);
+        const [excerpt, rest] = file.content.split(excerpt_separator, 2);
+        if (rest) {
           file.excerpt = excerpt;
-          file.content = file.content.replace(excerpt_separator, '');
-
-          return;
+          file.content = excerpt + rest;
+        } else {
+          file.excerpt = file.content.split('\n').find((line) => line) || file.content;
         }
-
-        file.excerpt = file.content.split('\n').find((line) => line) || file.content;
       },
       excerpt_separator: '<!-- excerpt -->',
     });
