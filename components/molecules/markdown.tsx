@@ -38,7 +38,12 @@ const Markdown = async ({ markdown }: { markdown: string }) =>
           img: ({ src, alt, title }) =>
             src ? (
               <Link $external href={src.replace(/^\/public/, '')}>
-                <Image alt={alt || 'img'} src={src.replace(/^\/public/, '')} title={title} />
+                <Image
+                  alt={alt || 'img'}
+                  className="shadow shadow-neutral dark:opacity-90 dark:brightness-90"
+                  src={src.replace(/^\/public/, '')}
+                  title={title}
+                />
                 <span className="block text-center text-base-content/50">{title}</span>
               </Link>
             ) : (
