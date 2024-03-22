@@ -1,4 +1,4 @@
-import { AUTHOR, TITLE } from '@/libs/config';
+import { CREATOR, TITLE } from '@/libs/config';
 import type { MetadataRoute } from 'next';
 
 const Manifest = () =>
@@ -36,7 +36,7 @@ const Manifest = () =>
     orientation: 'any',
     prefer_related_applications: false,
     scope: '/',
-    short_name: AUTHOR,
+    short_name: CREATOR,
     start_url: '/',
   }) as MetadataRoute.Manifest;
 

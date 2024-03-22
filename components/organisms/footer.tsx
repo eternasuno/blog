@@ -1,4 +1,4 @@
-import { AUTHOR } from '@/libs/config';
+import { CREATOR } from '@/libs/config';
 import { getYear } from 'date-fns';
 import Container from '../atoms/container';
 import Link from '../atoms/link';
@@ -7,7 +7,7 @@ const Footer = () => (
   <Container asChild>
     <footer className="footer place-items-center gap-y-2 p-4 md:justify-between">
       <span className="block">
-        Copyright © {getYear(new Date())} - <Link href="/">{AUTHOR}</Link>
+        Copyright © {getYear(new Date())} - <Link href="/">{CREATOR}</Link>
       </span>
       <span className="grid-flow-col items-center">
         <Link $external href="https://creativecommons.org/licenses/by-nd/4.0">

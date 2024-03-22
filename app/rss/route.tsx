@@ -1,4 +1,4 @@
-import { BASE_URL, DOMAIN, TITLE } from '@/libs/config';
+import { BASE_URL, HOST, TITLE } from '@/libs/config';
 import { renderToHtml } from '@/libs/markdown';
 import { type Post, getPosts } from '@/libs/post';
 import { NextResponse } from 'next/server';
@@ -25,9 +25,9 @@ const generateRss = async () => `
 
 const generateRssItem = async ({ slug, title, date, content }: Post) => `
   <item>
-    <guid>https://${DOMAIN}/posts/${slug}</guid>
+    <guid>https://${HOST}/posts/${slug}</guid>
     <title><![CDATA[ ${title} ]]></title>
-    <link>https://${DOMAIN}/posts/${slug}</link>
+    <link>https://${HOST}/posts/${slug}</link>
     <description><![CDATA[ ${await renderToHtml(content)} ]]></description>
     <pubDate>${new Date(date).toUTCString()}</pubDate>
   </item>

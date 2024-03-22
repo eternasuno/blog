@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.4.1/schema.json",
+  "$schema": "https://biomejs.dev/schemas/1.6.1/schema.json",
   "formatter": {
     "enabled": true,
     "formatWithErrors": true,
@@ -17,6 +17,7 @@
     "rules": {
       "nursery": {
         "useSortedClasses": {
+          "level": "error",
           "options": {
             "attributes": ["className", "tw"],
             "functions": ["twc", "compose"]

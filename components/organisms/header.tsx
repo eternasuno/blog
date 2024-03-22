@@ -1,4 +1,4 @@
-import { AUTHOR } from '@/libs/config';
+import { CREATOR } from '@/libs/config';
 import Button from '../atoms/button';
 import Container from '../atoms/container';
 import Glass from '../atoms/glass';
@@ -14,7 +14,7 @@ const Header = () => (
         <nav className="navbar md:py-4">
           <span className="flex-1">
             <Link href="/">
-              <Shell className="md:text-lg">cd /home/{AUTHOR}</Shell>
+              <Shell className="md:text-lg">cd /home/{CREATOR}</Shell>
             </Link>
           </span>
           <span>

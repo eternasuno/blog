@@ -1,4 +1,4 @@
-import { AUTHOR } from '@/libs/config';
+import { CREATOR } from '@/libs/config';
 import { ImageResponse } from 'next/og';
 
 const imageMetadatas = [
@@ -25,7 +25,7 @@ const Icon = ({ id }: { id: string }) => {
 
   return new ImageResponse(
     <div tw="flex h-full w-full items-center justify-center rounded-full bg-black text-[60vw] text-white uppercase">
-      {AUTHOR[0]}
+      {CREATOR[0]}
     </div>,
     { ...size },
   );

@@ -1,14 +1,28 @@
 import { join } from 'path';
+import { creator, description, host, title } from '@/contents/metadata.json';
 import { env } from 'process';
+import { withoutEmpty } from './wrapper';
+
+export const TITLE = title;
+
+export const CREATOR = creator;
+
+export const HOST = host;
+
+export const DESCRIPTION = description;
 
 export const DEV = env.NODE_ENV === 'development';
 
-export const AUTHOR = env.BLOG_AUTHOR || env.USER || 'eternasuno';
+export const BASE_URL = `${DEV ? 'http' : 'https'}://${HOST}`;
 
-export const DOMAIN = env.BLOG_DOMAIN || env.VERCEL_URL || `localhost:${env.PORT || 3000}`;
+export const POST_DIR = join(process.cwd(), 'contents', 'posts');
 
-export const TITLE = `${AUTHOR}'s blog`;
+export const AUTH_GITHUB_CLIENT_ID = withoutEmpty(
+  env.AUTH_GITHUB_CLIENT_ID,
+  'Not found AUTH_GITHUB_CLIENT_ID in env',
+);
 
-export const BASE_URL = `${DEV ? 'http' : 'https'}://${DOMAIN}`;
-
-export const POST_DIR = join(process.cwd(), 'posts');
+export const AUTH_GITHUB_CLIENT_SECRET = withoutEmpty(
+  env.AUTH_GITHUB_CLIENT_SECRET,
+  'Not found AUTH_GITHUB_CLIENT_SECRET in env',
+);

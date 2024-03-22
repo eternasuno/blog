@@ -1,36 +1,32 @@
 import { promises as fs } from 'fs';
 import { join } from 'path';
-import { formatISO } from 'date-fns';
 import matter, { type GrayMatterFile } from 'gray-matter';
 import { unstable_cache } from 'next/cache';
 import { cache } from 'react';
-import { DEV, POST_DIR } from './config';
+import { POST_DIR } from './config';
 
 export type Post = {
-  content: string;
-  date: string;
-  excerpt: string;
-  slug: string;
-  tags: string[];
   title: string;
+  slug: string;
+  date: Date;
+  tags: string[];
+  excerpt: string;
+  content: string;
 };
 
 export const getSlugs = async () =>
   (await fs.readdir(POST_DIR))
-    .filter((filename) => filename.lastIndexOf('.md') > 0)
-    .filter((filename) => DEV || filename.lastIndexOf('.draft.md') < 0)
-    .map((filename) => filename.replace(/\.md$/, ''));
+    .map((filename) => filename.replace(/\.md$/, ''))
+    .sort((a, b) => (b > a ? 1 : -1));
 
 export const getPostBySlug = unstable_cache(
   cache(async (slug: string) => {
+    const [year, month, day] = slug.split('-', 3);
+    const date = new Date(Number(year), Number(month) - 1, Number(day));
+
     const path = join(POST_DIR, `${slug}.md`);
     const fileContent = await fs.readFile(path, 'utf-8');
-
-    const {
-      data: { title, date, tags },
-      excerpt,
-      content,
-    } = matter(fileContent, {
+    const { data, excerpt, content } = matter(fileContent, {
       // @ts-ignore
       excerpt: (file: GrayMatterFile<typeof fileContent>, { excerpt_separator }): void => {
         const [excerpt, rest] = file.content.split(excerpt_separator, 2);
@@ -44,26 +40,23 @@ export const getPostBySlug = unstable_cache(
       excerpt_separator: '<!-- excerpt -->',
     });
 
-    return {
-      content,
-      date: date || formatISO(new Date()),
-      excerpt,
-      slug,
-      tags: tags || [],
-      title: title || slug,
-    } as Post;
+    return { ...data, slug, date, excerpt, content } as Post;
   }),
-  ['post'],
+  ['posts'],
 );
 
 export const getPosts = async () =>
-  (await Promise.all((await getSlugs()).map((slug) => getPostBySlug(slug)))).sort(
-    (post1, post2) => (post1.date > post2.date ? -1 : 1),
-  );
+  Promise.all((await getSlugs()).map((slug) => getPostBySlug(slug)));
 
 export const getTags = async () =>
   Array.from(
-    new Set((await getPosts()).reduce<string[]>((tags, post) => tags.concat(post.tags), [])),
+    (await getPosts()).reduce<Set<string>>((tags, post) => {
+      for (const tag of post.tags) {
+        tags.add(tag);
+      }
+
+      return tags;
+    }, new Set()),
   );
 
 export const getPostsByTag = async (tag: string) =>

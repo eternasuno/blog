@@ -35,6 +35,6 @@
     "**/*.tsx",
     "**/*.ts",
     "next-env.d.ts",
-    "tailwind.config.js"
+    "tailwind.config.ts"
   ]
 }

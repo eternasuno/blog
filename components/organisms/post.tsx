@@ -1,15 +1,13 @@
 import Link from '../atoms/link';
-import Prose from '../atoms/prose';
 import Strong from '../atoms/strong';
 import Tag from '../atoms/tag';
 import Time from '../atoms/time';
-import Markdown from '../molecules/markdown';
 import MDProse from '../molecules/md-prose';
 
 type Props = {
   slug: string;
   title: string;
-  date: string;
+  date: Date;
   tags: string[];
   excerpt: string;
 };

@@ -1,7 +1,7 @@
 import Container from '@/components/atoms/container';
 import Footer from '@/components/organisms/footer';
 import Header from '@/components/organisms/header';
-import { AUTHOR, BASE_URL } from '@/libs/config';
+import { BASE_URL, CREATOR, DESCRIPTION, TITLE } from '@/libs/config';
 import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
 
@@ -22,11 +22,11 @@ const Layout = async ({ children }: { children: ReactNode }) => (
 
 export const metadata: Metadata = {
   alternates: { canonical: '/', types: { 'application/rss+xml': '/rss' } },
-  appleWebApp: { capable: true, statusBarStyle: 'black-translucent', title: AUTHOR },
-  creator: AUTHOR,
-  description: `${AUTHOR}'s blog.`,
+  appleWebApp: { capable: true, statusBarStyle: 'black-translucent', title: TITLE },
+  creator: CREATOR,
+  description: DESCRIPTION,
   metadataBase: new URL(BASE_URL),
-  title: { default: AUTHOR, template: `%s | ${AUTHOR}` },
+  title: { default: TITLE, template: `%s | ${CREATOR}` },
 };
 
 export default Layout;
