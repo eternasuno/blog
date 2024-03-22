@@ -34,22 +34,14 @@ collections:
         - { label: Creator, name: creator, widget: string }
         - { label: Description, name: description, widget: string }
         - { label: Host, name: host, widget: string }
-        - { label: Tags, name: tags, widget: list, min: 1 }
   - name: posts
     label: Posts
     folder: contents/posts
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{fields.slug}}"
-    preview_path: "{{dirname}}/{{slug}}"
+    preview_path: "posts/{{slug}}"
     fields:
       - { label: Title, name: title, widget: string }
       - { label: Slug, name: slug, widget: string }
-      - label: Tags
-        name: tags
-        widget: relation
-        collection: metadata
-        value_field: tags
-        search_fields: [tags]
-        multiple: true
-        min: 1
+      - { label: Tags, name: tags, widget: list, min: 1 }
       - { label: Content, name: body, widget: markdown }

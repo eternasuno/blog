@@ -2,6 +2,5 @@
   "title": "eternasuno's blog",
   "creator": "eternasuno",
   "description": "World is trash, and so am I.",
-  "host": "eterna-suno.vercel.app",
-  "tags": ["algorithm", "日本語"]
+  "host": "eterna-suno.vercel.app"
 }
