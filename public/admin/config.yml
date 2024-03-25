@@ -4,6 +4,7 @@ backend:
   branch: main
   base_url: https://eterna-suno.vercel.app
   squash_merges: true
+  preview_context: Vercel
   commit_messages:
     create: "[Decap] Create {{collection}} {{slug}}"
     update: "[Decap] Update {{collection}} {{slug}}"
@@ -39,7 +40,6 @@ collections:
     folder: contents/posts
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{fields.slug}}"
-    preview_path: "posts/{{slug}}"
     fields:
       - { label: Title, name: title, widget: string }
       - { label: Slug, name: slug, widget: string }
