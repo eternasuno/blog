@@ -10,11 +10,19 @@ Markdown是一种轻量级标记语言，排版语法简洁，让人们更多地
 
 要创建标题，请在单词或短语前面添加井号 (#) 。# 的数量代表了标题的级别。
 
-| **Markdown语法**        | **预览效果**              |
-| :--------------------: | :--------------------:   |
-| # Heading level 1      | <h1>Heading level 1</h1> |
-| ## Heading level 2     | <h2>Heading level 2</h2> |
-| ### Heading level 3    | <h3>Heading level 3</h3> |
+```markdown
+# Heading level 1
+
+## Heading level 2 
+
+### Heading level 3
+``` 
+
+# Heading level 1
+
+## Heading level 2 
+
+### Heading level 3
 
 ## 粗体
 
